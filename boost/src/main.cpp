@@ -10,10 +10,12 @@ using namespace std;
 
 int testNoncopyable();
 int testLexicalcase();
+int testScopedPtr();
 
 int main(int argc, char* argv[])
 {
   //testNoncopyable(argc, argv);
-  testLexicalcase();
+  //testLexicalcase();
+  testScopedPtr();
   return 0;
 }
