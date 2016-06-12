@@ -9,3 +9,5 @@ all: test_http
 test_http:
 	$(CXX) $(CFLAGS) test_http.cpp -lrt $(LIBEVENT_LIB_PATH)/libevent.a 
 
+clean:
+	rm -rf *.out *.o
