@@ -14,9 +14,25 @@ using namespace std;
 #include "boost/lambda/lambda.hpp"
 #include "boost/lambda/bind.hpp"
 
+int f(int a, int b) { return a + b; }
+int g(int a, int b, int c) { return a + b * c; }
+typedef int (*f_type)(int a, int b);
+typedef int (*g_type)(int a, int b, int c);
+
 int main()
 {
   using namespace boost::lambda;
+
+  // bind simple function
+  cout << bind(f, 1, 2)() << endl;
+  cout << bind(g, 1, 2, 3)() << endl;
+
+  // placeholders
+  cout << bind(f, _1, 2)(1) << endl;
+  // cout << bind(f, _2, 2)(1) << endl;  // error
+  cout << bind(f, _2, 2)(1, 2) << endl;
+  cout << bind(g, _3, _2, _2)(1,2,3) << endl;
+
   typedef std::map<int,std::string> type;
   type keys_and_values;
   keys_and_values[3]="Less than pi";
