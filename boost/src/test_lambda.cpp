@@ -8,3 +8,12 @@
 #include <iostream>
 using namespace std;
 
+#include "boost/lambda/lambda.hpp"
+#include "boost/function.hpp"
+
+int main()
+{
+  using namespace boost::lambda;
+  (std::cout << _1 << " " << _2 << " " << _3 << " ")("Hello", "friend", "my");
+  return 0;
+}
