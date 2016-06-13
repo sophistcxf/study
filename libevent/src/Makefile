@@ -7,7 +7,7 @@ CFLAGS=-g -I $(LIBEVENT_INCLUDE_PATH)
 all: test_http
 
 test_http:
-	$(CXX) $(CFLAGS) test_http.cpp -lrt $(LIBEVENT_LIB_PATH)/libevent.a 
+	$(CXX) $(CFLAGS) test_http.cpp -lrt -lpthread $(LIBEVENT_LIB_PATH)/libevent.a 
 
 clean:
 	rm -rf *.out *.o
