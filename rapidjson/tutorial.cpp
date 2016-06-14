@@ -4,6 +4,7 @@
 #include "rapidjson/document.h"     // rapidjson's DOM-style API
 #include "rapidjson/prettywriter.h" // for stringify JSON
 #include <cstdio>
+#include <string>
 
 using namespace rapidjson;
 using namespace std;
@@ -135,6 +136,12 @@ int main(int, char*[]) {
     }
     // Variable 'buffer' is unusable now but 'author' has already made a copy.
     document.AddMember("author", author, document.GetAllocator());
+    const char test[] = "abc";
+    document.AddMember("test", test, document.GetAllocator());
+    const char* test2 = "cdef";
+    document.AddMember("cdef", rapidjson::GenericStringRef<char>(test2, strlen(test2)), document.GetAllocator());
+    char test3[128] = "abcdef";
+    document.AddMember("test3", test3, document.GetAllocator());
 
     assert(author.IsNull());        // Move semantic for assignment. After this variable is assigned as a member, the variable becomes null.
 
