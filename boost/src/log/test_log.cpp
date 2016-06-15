@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 #include <string>
 using namespace std;
 
@@ -45,13 +46,17 @@ namespace keywords = boost::log::keywords;
 
 class Logger
 {
+  struct Filter
+  {
+    bool operator()(const attribute_value_set& set)
+    {
+      return set["Name"].extract<std::string>() == name && set["Severity"].extract<int>() >= level; 
+    }
+    std::string name;
+    unsigned int level;
+  };
 public:
-  Logger(unsigned int level = 0, std::string path = "./log", unsigned int size = 50, bool daily_rolling = true, std::string format = ""); 
-  void setLevel(unsigned int level) { level_ = level; }
-  void setPath(std::string path); 
-  void setMaxSize(unsigned int size) { max_size_ = size; }
-  void setDailyRolling(bool daily_rolling) { daily_rolling_ = daily_rolling; }
-  void setFormat(std::string format) { format_ = format; }
+  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 50, bool daily_rolling = true, std::string format = ""); 
   void trace(const char* str_format, ...);
   void info(const char* str_format, ...);
   void debug(const char* str_format, ...);
@@ -61,30 +66,56 @@ public:
 private:
   typedef log::sinks::synchronous_sink< log::sinks::text_ostream_backend > text_sink;
   boost::shared_ptr<text_sink> sink_;
-  unsigned int level_;
-  std::string path_;
-  unsigned int max_size_;
-  bool daily_rolling_;
+  sources::severity_logger<int> logger_; 
+  Filter filter_;
   std::string format_;
-  std::string name_;
 };
 
-Logger::Logger(unsigned int level, std::string path, unsigned int size, bool daily_rolling, std::string format) :
-  level_(level), path_(path), max_size_(size), daily_rolling_(daily_rolling), format_(format) 
+Logger::Logger(std::string name, unsigned int level, std::string path, unsigned int size, bool daily_rolling, std::string format) :
+  format_(format) 
 {
-  sink_ = boost::make_shared<Logger::text_sink>();
-}
-
-void Logger::setPath(std::string path)
-{
-  path_ = path;
-  sink_->flush();
-  sink_->locked_backend()->add_stream(boost::shared_ptr<std::ostream>(boost::make_shared<ofstream>(path.c_str(), ios_base::out)));
+  sink_ = boost::make_shared<Logger::text_sink>(); 
+  filter_.name = name;
+  filter_.level = level;
+  sink_->set_filter(filter_);
+  logger_.add_attribute("Name", attributes::constant<std::string>(name));
+  boost::shared_ptr<log::sinks::text_file_backend> backend;
+  ostringstream oss;
+  if (daily_rolling) {
+    oss << path << "_%Y%m%d_%H%M%S_%N.log";
+    backend = boost::make_shared<log::sinks::text_file_backend>(
+        log::keywords::file_name = oss.str(),
+        log::keywords::rotation_size = size,
+        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(12, 0, 0)
+        );
+  } else {
+    oss << path << "_%N.log";
+    backend = boost::make_shared<log::sinks::text_file_backend>(
+        log::keywords::file_name = oss.str(),
+        log::keywords::rotation_size = size
+        );
+  }
+  log::core::get()->add_sink(sink_);
 }
 
 bool only_warnings(const attribute_value_set& set)
 {
-  return set["Severity"].extract<int>() > 0;
+  return set["Severity"].extract<int>() > 0 && set["Name"].extract<std::string>() == "Lisi";
+}
+
+class OnlyMe
+{
+public:
+  bool operator ()(const attribute_value_set& set)
+  {
+    return set["Name"].extract<std::string>() == name;
+  }
+  std::string name;
+};
+
+bool only_me(const attribute_value_set& set)
+{
+  return set["Name"].extract<std::string>() == "Zhangsan";
 }
 
 void severity_and_message(const record_view &view, formatting_ostream &os)
@@ -138,12 +169,15 @@ void fun1()
   boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
   boost::shared_ptr<std::ostream> stream(&std::clog, boost::null_deleter());
   sink->locked_backend()->add_stream(stream);
-  sink->locked_backend()->add_stream(boost::shared_ptr<std::ostream>(boost::make_shared<ofstream>("log.txt", ios_base::out)));
+  sink->locked_backend()->add_stream(boost::shared_ptr<std::ostream>(boost::make_shared<ofstream>("sink.log", ios_base::out)));
   sink->set_filter(&only_warnings);
   sink->set_formatter(&severity_and_message);
   typedef log::sinks::synchronous_sink<log::sinks::text_ostream_backend> s_text_sink;
   boost::shared_ptr<s_text_sink> s_sink = boost::make_shared<s_text_sink>();
-  s_sink->locked_backend()->add_stream(boost::shared_ptr<std::ostream>(&std::cout, boost::null_deleter()));
+  s_sink->locked_backend()->add_stream(boost::shared_ptr<std::ostream>(boost::make_shared<ofstream>("s_sink.log", ios_base::out)));
+  OnlyMe zhangsan;
+  zhangsan.name = "Zhangsan";
+  s_sink->set_filter(zhangsan);
   log::core::get()->add_sink(s_sink);
   log::core::get()->add_sink(sink);
   log::core::get()->add_global_attribute("LineCounter", attributes::counter<int>());
@@ -153,6 +187,7 @@ void fun1()
   attributes::mutable_constant<int> m_const(-5);
   lg.add_attribute("Mutable constant", m_const);
   lg.add_attribute("Timer", attributes::timer());
+  lg.add_attribute("Name", attributes::constant<std::string>("Zhangsan"));
   BOOST_LOG(lg) << "note";
   BOOST_LOG_SEV(lg, 0) << "sev 0";
   BOOST_LOG_SEV(lg, 1) << "sev 1";
@@ -192,6 +227,6 @@ void fun3()
 
 int main()
 {
-  fun1();
+  fun3();
   return 0;
 }
