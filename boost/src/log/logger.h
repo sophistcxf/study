@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
+#include <stdarg.h>
 using namespace std;
 
 #include <boost/date_time/posix_time/posix_time_types.hpp>
@@ -49,7 +50,7 @@ namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 
 
-class Logger
+class LoggerEx
 {
   static std::string LEVEL_HANDLER[6];
   struct Filter
@@ -65,7 +66,7 @@ class Logger
   };
   struct Formatter
   {
-    Formatter() : format("%d|%s|%p|%t|%s") {}
+    Formatter() : format("%d|%s|%p|%t|%m") {}
     void operator()(logging::record_view const& rec, logging::formatting_ostream& strm)
     {
       std::string temp = format;
@@ -94,50 +95,57 @@ class Logger
     std::string format; 
   };
 public:
-  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 1024, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%m"); 
-  void trace(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 0) << str_format; }
-  void info(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 1) << str_format; }
-  void debug(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 2) << str_format; }
-  void warn(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 3) << str_format; }
-  void error(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 4) << str_format; }
-  void fatal(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 5) << str_format; }
+  LoggerEx(const std::string& name, unsigned int level = 0, const std::string& path = "./log", unsigned long long size = 0, bool daily_rolling = true, const std::string& format = "%d|%s|%p|%t|%m")
+  {
+    initialize(name, level, path, size, daily_rolling, format);
+  }
+  void initialize(const std::string& name, unsigned int level = 0, const std::string& path = "./log", unsigned long long size = 0, bool daily_rolling = true, const std::string& format = "%d|%s|%p|%t|%m"); 
+
+#define MSG_FORMAT(level)                                             \
+  do {                                                                \
+    va_list args;                                                     \
+    va_start(args, str_format);                                       \
+    BOOST_LOG_SEV(logger_, level) << format_msg(str_format, args);    \
+    va_end(args);                                                     \
+  } while(false);
+
+  void trace(const char* str_format, ...) 
+  { 
+    MSG_FORMAT(0)
+  }
+  void debug(const char* str_format, ...) 
+  {
+    MSG_FORMAT(1)
+  }
+  void info(const char* str_format, ...) 
+  {
+    MSG_FORMAT(2)
+  }
+  void warn(const char* str_format, ...)
+  {
+    MSG_FORMAT(3)
+  }
+  void error(const char* str_format, ...)
+  { 
+    MSG_FORMAT(4)
+  }
+  void fatal(const char* str_format, ...)
+  {
+    MSG_FORMAT(5)
+  }
 private:
+  std::string format_msg(const char* fmt, va_list& args)
+  {
+    va_list args2;
+    va_copy(args2, args);
+    vector<char> buf(vsnprintf(NULL, 0, fmt, args) + 1);
+    int len = vsnprintf(&buf[0], buf.size(), fmt, args2);
+    va_end(args2);
+    return std::string(&buf[0], len);
+  }
   typedef log::sinks::synchronous_sink< log::sinks::text_file_backend > text_sink;
   boost::shared_ptr<text_sink> sink_;
   sources::severity_logger<int> logger_; 
   Filter filter_;
   Formatter formatter_;
 };
-
-std::string Logger::LEVEL_HANDLER[6] = {"TRACE", "INFO", "WARN", "ERROR", "FATAL"};
-
-Logger::Logger(std::string name, unsigned int level, std::string path, unsigned int size, bool daily_rolling, std::string format)
-{
-  boost::shared_ptr<log::sinks::text_file_backend> backend;
-  ostringstream oss;
-  if (daily_rolling) {
-    oss << path << "_%Y%m%d_%H%M%S.log";
-    backend = boost::make_shared<log::sinks::text_file_backend>(
-        log::keywords::auto_flush = true,
-        log::keywords::file_name = oss.str(),
-        log::keywords::open_mode = (std::ios::out | std::ios::app),
-        log::keywords::rotation_size = size,
-        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(12, 30, 0)
-        );
-  } else {
-    oss << path << "_%N.log";
-    backend = boost::make_shared<log::sinks::text_file_backend>(
-        log::keywords::file_name = oss.str(),
-        log::keywords::open_mode = (std::ios::out | std::ios::app),
-        log::keywords::rotation_size = size
-        );
-  }
-  sink_ = boost::make_shared<Logger::text_sink>(backend); 
-  filter_.name = name;
-  filter_.level = level;
-  formatter_.format = format;
-  sink_->set_filter(filter_);
-  logger_.add_attribute("Name", attributes::constant<std::string>(name));
-  sink_->set_formatter(formatter_);
-  log::core::get()->add_sink(sink_);
-}
