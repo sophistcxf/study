@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <time.h>
 using namespace std;
 
 #include <boost/date_time/posix_time/posix_time_types.hpp>
@@ -33,11 +34,13 @@ using namespace std;
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/console.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <iostream>
 #include <fstream>
 
 using namespace boost;
 using namespace boost::log;
+using namespace boost::algorithm;
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace expr = boost::log::expressions;
@@ -61,23 +64,39 @@ class Logger
   };
   struct Formatter
   {
-    Formatter() : delimiter("|") {}
+    Formatter() : format("%d|%s|%p|%t|%s") {}
     void operator()(logging::record_view const& rec, logging::formatting_ostream& strm)
     {
+      std::string temp = format;
+      struct tm t;
+      time_t time = ::time(NULL);
+      localtime_r(&time, &t);
+      char timestamp[24] = {0};
+      strftime(timestamp, 24, "%Y-%m-%d %H:%M:%S", &t); 
+      replace_all(temp, "%d", std::string(timestamp));
+      replace_all(temp, "%s", LEVEL_HANDLER[*rec.attribute_values()["Severity"].extract<int>()]);
+      replace_all(temp, "%m", *(rec.attribute_values()["Message"].extract<std::string>()));
+      strm << temp;
     }
-    std::string delimiter;
-    
+    /*
+     * %d 时间戳 YYYY-mm-dd HH:MM:SS
+     * %s Severity
+     * %p pid
+     * %t tid
+     * %m message
+     */
+    std::string format; 
   };
 public:
-  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 50, bool daily_rolling = true, std::string format = ""); 
-  void trace(const char* str_format, ...);
-  void info(const char* str_format, ...);
+  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 50, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%s"); 
+  void trace(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 0) << str_format; }
+  void info(const char* str_format, ...) { }
   void debug(const char* str_format, ...);
   void warn(const char* str_format, ...);
   void error(const char* str_format, ...);
   void fatal(const char* str_format, ...);
 private:
-  typedef log::sinks::synchronous_sink< log::sinks::text_ostream_backend > text_sink;
+  typedef log::sinks::synchronous_sink< log::sinks::text_file_backend > text_sink;
   boost::shared_ptr<text_sink> sink_;
   sources::severity_logger<int> logger_; 
   Filter filter_;
@@ -86,22 +105,16 @@ private:
 
 std::string Logger::LEVEL_HANDLER[6] = {"TRACE", "INFO", "WARN", "ERROR", "FATAL"};
 
-Logger::Logger(std::string name, unsigned int level, std::string path, unsigned int size, bool daily_rolling, std::string format) :
-  format_(format) 
+Logger::Logger(std::string name, unsigned int level, std::string path, unsigned int size, bool daily_rolling, std::string format)
 {
-  sink_ = boost::make_shared<Logger::text_sink>(); 
-  filter_.name = name;
-  filter_.level = level;
-  sink_->set_filter(filter_);
-  logger_.add_attribute("Name", attributes::constant<std::string>(name));
   boost::shared_ptr<log::sinks::text_file_backend> backend;
   ostringstream oss;
   if (daily_rolling) {
-    oss << path << "_%Y%m%d_%H%M%S_%N.log";
+    oss << path << "_%Y%m%d_%N.log";
     backend = boost::make_shared<log::sinks::text_file_backend>(
         log::keywords::file_name = oss.str(),
         log::keywords::rotation_size = size,
-        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(12, 0, 0)
+        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(11, 40, 0)
         );
   } else {
     oss << path << "_%N.log";
@@ -110,6 +123,12 @@ Logger::Logger(std::string name, unsigned int level, std::string path, unsigned 
         log::keywords::rotation_size = size
         );
   }
+  sink_ = boost::make_shared<Logger::text_sink>(backend); 
+  filter_.name = name;
+  filter_.level = level;
+  formatter_.format = format;
+  sink_->set_filter(filter_);
+  logger_.add_attribute("Name", attributes::constant<std::string>(name));
   sink_->set_formatter(formatter_);
   log::core::get()->add_sink(sink_);
 }

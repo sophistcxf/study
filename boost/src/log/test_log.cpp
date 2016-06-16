@@ -5,6 +5,45 @@
   > Created Time: Mon 13 Jun 2016 02:35:42 PM CST
  ************************************************************************/
 
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <string>
+using namespace std;
+
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/log/support/date_time.hpp>
+#include <boost/log/common.hpp>
+#include <boost/log/sinks.hpp>
+#include <boost/log/sources/logger.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/attributes.hpp>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/core/null_deleter.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/smart_ptr/shared_ptr.hpp>
+#include <boost/smart_ptr/make_shared_object.hpp>
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sinks/sync_frontend.hpp>
+#include <boost/log/sinks/text_ostream_backend.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/console.hpp>
+#include <iostream>
+#include <fstream>
+
+using namespace boost;
+using namespace boost::log;
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace expr = boost::log::expressions;
+namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
+
 bool only_warnings(const attribute_value_set& set)
 {
   return set["Severity"].extract<int>() > 0 && set["Name"].extract<std::string>() == "Lisi";
@@ -33,7 +72,7 @@ void severity_and_message(const record_view &view, formatting_ostream &os)
         view.attribute_values()["Constant"].extract<std::string>() << " : " <<
         view.attribute_values()["Mutable constant"].extract<int>() << " : " <<
         view.attribute_values()["Timer"].extract<int>() << " : " <<
-        view.attribute_values()["Timestamp"].extract<std::string>();
+        view.attribute_values()["Timestamp"].extract<std::string>() << " : test";
 }
 
 void init()
@@ -94,7 +133,7 @@ void fun1()
   attributes::mutable_constant<int> m_const(-5);
   lg.add_attribute("Mutable constant", m_const);
   lg.add_attribute("Timer", attributes::timer());
-  lg.add_attribute("Name", attributes::constant<std::string>("Zhangsan"));
+  lg.add_attribute("Name", attributes::constant<std::string>("Lisi"));
   BOOST_LOG(lg) << "note";
   BOOST_LOG_SEV(lg, 0) << "sev 0";
   BOOST_LOG_SEV(lg, 1) << "sev 1";
@@ -135,6 +174,6 @@ void fun3()
 
 int main()
 {
-  fun3();
+  fun1();
   return 0;
 }
