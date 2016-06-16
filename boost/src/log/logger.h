@@ -88,7 +88,7 @@ class Logger
     std::string format; 
   };
 public:
-  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 50, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%s"); 
+  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 1024, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%s"); 
   void trace(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 0) << str_format; }
   void info(const char* str_format, ...) { }
   void debug(const char* str_format, ...);
@@ -110,16 +110,19 @@ Logger::Logger(std::string name, unsigned int level, std::string path, unsigned 
   boost::shared_ptr<log::sinks::text_file_backend> backend;
   ostringstream oss;
   if (daily_rolling) {
-    oss << path << "_%Y%m%d_%N.log";
+    oss << path << "_%Y%m%d_%H%M%S.log";
     backend = boost::make_shared<log::sinks::text_file_backend>(
+        log::keywords::auto_flush = true,
         log::keywords::file_name = oss.str(),
+        log::keywords::open_mode = (std::ios::out | std::ios::app),
         log::keywords::rotation_size = size,
-        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(11, 40, 0)
+        log::keywords::time_based_rotation = log::sinks::file::rotation_at_time_point(12, 30, 0)
         );
   } else {
     oss << path << "_%N.log";
     backend = boost::make_shared<log::sinks::text_file_backend>(
         log::keywords::file_name = oss.str(),
+        log::keywords::open_mode = (std::ios::out | std::ios::app),
         log::keywords::rotation_size = size
         );
   }

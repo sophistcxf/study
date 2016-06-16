@@ -12,10 +12,13 @@ using namespace std;
 
 int main()
 {
-  Logger logger("Cuixiangfei", 0, "./cxf.log", 50, true);
+  //Logger logger("Cuixiangfei", 0, "./cxf.log", 1024 * 1024 * 1024, true);
+  Logger logger("Cuixiangfei", 0, "./cxf.log", 1024 * 1024 * 1024, true);
+  int i = 0;
   while (true) {
     logger.trace("Trace");
     sleep(1);
+ //   if (i++ == 10) break
   }
   return 0;
 }
