@@ -13,7 +13,7 @@ using namespace std;
 int main()
 {
   //Logger logger("Cuixiangfei", 0, "./cxf.log", 1024 * 1024 * 1024, true);
-  Logger logger("Cuixiangfei", 0, "./cxf.log", 1024 * 1024 * 1024, true);
+  Logger logger("Cuixiangfei", 0, "./cxf.log", 1024 * 1024 * 1024, true, "%d | %t | %s");
   int i = 0;
   while (true) {
     logger.trace("Trace");

@@ -35,6 +35,7 @@ using namespace std;
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/console.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/thread.hpp>
 #include <iostream>
 #include <fstream>
 
@@ -76,6 +77,11 @@ class Logger
       replace_all(temp, "%d", std::string(timestamp));
       replace_all(temp, "%s", LEVEL_HANDLER[*rec.attribute_values()["Severity"].extract<int>()]);
       replace_all(temp, "%m", *(rec.attribute_values()["Message"].extract<std::string>()));
+      ostringstream oss;
+      oss << boost::this_thread::get_id();
+      replace_all(temp, "%t", oss.str().c_str()); 
+      oss << getpid();
+      replace_all(temp, "%p", oss.str().c_str()); 
       strm << temp;
     }
     /*
@@ -88,13 +94,13 @@ class Logger
     std::string format; 
   };
 public:
-  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 1024, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%s"); 
+  Logger(std::string name, unsigned int level = 0, std::string path = "./log", unsigned int size = 1024, bool daily_rolling = true, std::string format = "%d|%s|%p|%t|%m"); 
   void trace(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 0) << str_format; }
-  void info(const char* str_format, ...) { }
-  void debug(const char* str_format, ...);
-  void warn(const char* str_format, ...);
-  void error(const char* str_format, ...);
-  void fatal(const char* str_format, ...);
+  void info(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 1) << str_format; }
+  void debug(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 2) << str_format; }
+  void warn(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 3) << str_format; }
+  void error(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 4) << str_format; }
+  void fatal(const char* str_format, ...) { BOOST_LOG_SEV(logger_, 5) << str_format; }
 private:
   typedef log::sinks::synchronous_sink< log::sinks::text_file_backend > text_sink;
   boost::shared_ptr<text_sink> sink_;

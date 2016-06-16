@@ -1,21 +1,16 @@
 /*************************************************************************
-  > File Name: main.cpp
+  > File Name: test_to_posix_string.cpp
   > Author: xiangfei.cui
   > Mail: xiangfei.cui@alibaba-inc.com
-  > Created Time: Thu 26 May 2016 10:12:22 PM CST
+  > Created Time: Wed 15 Jun 2016 10:12:11 PM CST
  ************************************************************************/
 
 #include <iostream>
 using namespace std;
+#include <boost/date_time/local_time/local_time.hpp>
 
-int testNoncopyable();
-int testLexicalcase();
-int testScopedPtr();
-
-int main(int argc, char* argv[])
+int main()
 {
-  //testNoncopyable(argc, argv);
-  //testLexicalcase();
-  testScopedPtr();
+  cout << b
   return 0;
 }
