@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/geos/!svn/ver/3650/trunk/include/geos/planargraph
+END
+Subgraph.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/Subgraph.h
+END
+PlanarGraph.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/PlanarGraph.h
+END
+DirectedEdgeStar.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/DirectedEdgeStar.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/3482/trunk/include/geos/planargraph/Makefile.am
+END
+NodeMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/NodeMap.h
+END
+Edge.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/Edge.h
+END
+GraphComponent.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/GraphComponent.h
+END
+Node.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/Node.h
+END
+DirectedEdge.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3650/trunk/include/geos/planargraph/DirectedEdge.h
+END

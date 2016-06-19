@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/geos/!svn/ver/4078/trunk/include/geos/geom/prep
+END
+PreparedPolygonContains.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygonContains.h
+END
+PreparedPolygon.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygon.h
+END
+PreparedPolygonPredicate.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygonPredicate.h
+END
+PreparedPoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/geos/!svn/ver/4078/trunk/include/geos/geom/prep/PreparedPoint.h
+END
+PreparedPolygonCovers.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygonCovers.h
+END
+AbstractPreparedPolygonContains.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/AbstractPreparedPolygonContains.h
+END
+PreparedGeometry.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedGeometry.h
+END
+PreparedPolygonIntersects.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygonIntersects.h
+END
+BasicPreparedGeometry.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/BasicPreparedGeometry.h
+END
+PreparedLineString.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedLineString.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3482/trunk/include/geos/geom/prep/Makefile.am
+END
+PreparedLineStringIntersects.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/geos/!svn/ver/3565/trunk/include/geos/geom/prep/PreparedLineStringIntersects.h
+END
+PreparedGeometryFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedGeometryFactory.h
+END
+PreparedPolygonContainsProperly.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/geos/!svn/ver/3650/trunk/include/geos/geom/prep/PreparedPolygonContainsProperly.h
+END

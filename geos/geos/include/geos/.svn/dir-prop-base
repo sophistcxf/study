@@ -1,0 +1,11 @@
+K 10
+svn:ignore
+V 71
+Makefile.in
+Makefile
+version.h
+platform.h
+platform.h.disabled
+stamp-h2
+
+END

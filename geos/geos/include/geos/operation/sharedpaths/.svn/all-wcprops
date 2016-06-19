@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3565/trunk/include/geos/operation/sharedpaths
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3482/trunk/include/geos/operation/sharedpaths/Makefile.am
+END
+SharedPathsOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/geos/!svn/ver/3565/trunk/include/geos/operation/sharedpaths/SharedPathsOp.h
+END

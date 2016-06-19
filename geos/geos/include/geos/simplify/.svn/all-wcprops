@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/geos/!svn/ver/3650/trunk/include/geos/simplify
+END
+DouglasPeuckerLineSimplifier.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/geos/!svn/ver/3650/trunk/include/geos/simplify/DouglasPeuckerLineSimplifier.h
+END
+TaggedLineString.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3650/trunk/include/geos/simplify/TaggedLineString.h
+END
+TaggedLinesSimplifier.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3650/trunk/include/geos/simplify/TaggedLinesSimplifier.h
+END
+TaggedLineStringSimplifier.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/geos/!svn/ver/3627/trunk/include/geos/simplify/TaggedLineStringSimplifier.h
+END
+DouglasPeuckerSimplifier.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/geos/!svn/ver/3650/trunk/include/geos/simplify/DouglasPeuckerSimplifier.h
+END
+LineSegmentIndex.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3650/trunk/include/geos/simplify/LineSegmentIndex.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3482/trunk/include/geos/simplify/Makefile.am
+END
+TopologyPreservingSimplifier.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/geos/!svn/ver/3650/trunk/include/geos/simplify/TopologyPreservingSimplifier.h
+END
+TaggedLineSegment.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/simplify/TaggedLineSegment.h
+END

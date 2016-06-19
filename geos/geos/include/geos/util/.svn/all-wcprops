@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/geos/!svn/ver/3990/trunk/include/geos/util
+END
+IllegalStateException.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3565/trunk/include/geos/util/IllegalStateException.h
+END
+math.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/geos/!svn/ver/3650/trunk/include/geos/util/math.h
+END
+AssertionFailedException.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/util/AssertionFailedException.h
+END
+IllegalArgumentException.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3990/trunk/include/geos/util/IllegalArgumentException.h
+END
+TopologyException.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/util/TopologyException.h
+END
+CoordinateArrayFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/util/CoordinateArrayFilter.h
+END
+GEOSException.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/util/GEOSException.h
+END
+Interrupt.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/geos/!svn/ver/3744/trunk/include/geos/util/Interrupt.h
+END
+Assert.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/geos/!svn/ver/3650/trunk/include/geos/util/Assert.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/geos/!svn/ver/3647/trunk/include/geos/util/Makefile.am
+END
+UniqueCoordinateArrayFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/geos/!svn/ver/3650/trunk/include/geos/util/UniqueCoordinateArrayFilter.h
+END
+Machine.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/geos/!svn/ver/3565/trunk/include/geos/util/Machine.h
+END
+GeometricShapeFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/util/GeometricShapeFactory.h
+END
+UnsupportedOperationException.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3990/trunk/include/geos/util/UnsupportedOperationException.h
+END
