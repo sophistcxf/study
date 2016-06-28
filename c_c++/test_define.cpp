@@ -24,6 +24,11 @@ int main()
 #ifdef WIN32
   char ch = POUND_AT(a);
 #endif
+
+  // predefined macros
+  cout << __FILE__ << endl;
+  cout << __cplusplus << endl;
+
   int token10 = 10;
   paster(10);
   return 0;
