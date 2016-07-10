@@ -34,6 +34,8 @@ struct proto* pr;
 
 void readloop()
 {
+  // 创建原始套接字，并指定协议为ICMP
+  // 在SOCK_RAW下，是否还有别的协议？
   sockfd = socket(pr->sasend->sa_family, SOCK_RAW, pr->icmpproto);
   if (sockfd < 0) {
     err_quit("create socket error, family=%d, type=%d, protocol=%d", pr->sasend->sa_family, SOCK_RAW, pr->icmpproto);
@@ -71,6 +73,9 @@ void readloop()
   }
 }
 
+/*
+ * 自行解析从数据链路层收到的ip报文
+ */
 void proc_v4(char* ptr, ssize_t len, struct msghdr* msg, struct timeval* tvrecv)
 {
   struct ip* ip = (struct ip*)ptr;
