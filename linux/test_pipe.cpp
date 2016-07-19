@@ -46,8 +46,33 @@ int test3()
   return 0;
 }
 
+int test4()
+{
+  int pipefd[2];
+  if (pipe(pipefd) == -1) return -1;
+  if (fork() > 0) {
+    // child process
+    close(pipefd[0]);
+    int i = 0;
+    while (true) {
+      char write_buf[128] = {0};
+      snprintf(write_buf, 127, "This is %d\n", i++); 
+      write(pipefd[1], write_buf, strlen(write_buf) + 1);
+      sleep(1);
+    }
+  } else {
+    // parent process
+    close(pipefd[1]);
+    while (true) {
+      char read_buf[128] = {0};
+      read(pipefd[0], read_buf, sizeof(read_buf));
+      printf("%s", read_buf);
+    }
+  }
+}
+
 int main()
 {
-  test3();
+  test4();
   return 0;
 }
