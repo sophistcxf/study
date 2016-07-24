@@ -5,10 +5,16 @@
   > Created Time: Tue 19 Jul 2016 09:36:52 PM CST
  ************************************************************************/
 
+#define _GNU_SOURCE 
+
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <cstring>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/utsname.h>
 using namespace std;
 
 int test1()
@@ -71,8 +77,22 @@ int test4()
   }
 }
 
+// pipe size
+int test5()
+{
+  int pipefd[2];
+  if (pipe(pipefd) == -1) return -1;
+  struct utsname kernel_info;
+  if (uname(&kernell_info) < 0) return -1;
+
+  int ret = fcntl(pipefd[1], F_GETPIPE_SZ);  
+  if (ret < 0) return -1;
+  printf("PIPESIZE: %d\n", ret);
+  return 0;
+}
+
 int main()
 {
-  test4();
+  test5();
   return 0;
 }
