@@ -10,7 +10,7 @@
 using namespace std;
 
 #define COLOR_NONE          "\033[m"  
-#define COLOR_RED           "\033[0;32;31m"  
+#define COLOR_RED           "\033[1;32;31m"  
 #define COLOR_LIGHT_RED     "\033[1;31m"  
 #define COLOR_GREEN         "\033[0;32m"  
 #define COLOR_LIGHT_GREEN   "\033[1;32m"  

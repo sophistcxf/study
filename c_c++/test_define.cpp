@@ -16,6 +16,15 @@ using namespace std;
 #define POUND_AT(x) (#@x)
 #endif
 
+string get_version()
+{
+#ifdef DEBUG
+  return "debug_1.0.0";
+#else
+  return "release_1.0.0";
+#endif
+}
+
 #define paster( n ) printf( "token"#n" = %d\n", token##n)
 
 int main()
