@@ -1,0 +1,7 @@
+x = foo
+y = $(x) bar
+x = xyz
+
+all:
+	@echo $(x)
+	@echo $(y)
