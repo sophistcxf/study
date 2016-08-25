@@ -85,6 +85,7 @@ int post(const std::string& host, const std::string& port, const std::string& pa
 
 int main(int argc, char* argv[])
 {
+  // 向有道词典请求
   std::string host = "dict.youdao.com";   
   std::string port = "80";
   std::string page = "/w/hello/";
