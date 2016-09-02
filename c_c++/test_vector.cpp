@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 
@@ -26,7 +27,25 @@ void test_erase()
     cout << v[i] << endl;
 }
 
+bool compare(int n1, int n2)
+{
+  return n1 < n2;
+}
+
+void test_compare()
+{
+  vector<int> vec;
+  vec.push_back(10);
+  vec.push_back(3);
+  vec.push_back(5);
+  vec.push_back(6);
+  vec.push_back(10);
+  std::stable_sort(vec.begin(), vec.end(), compare);
+  for (int i = 0; i < vec.size(); ++i)
+    cout << vec[i] << endl;
+}
+
 int main()
 {
-  test_erase();
+  test_compare();
 }

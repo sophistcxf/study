@@ -26,9 +26,9 @@ int main()
   memset((char*)aio.aio_buf, 0, 30);
   aio.aio_nbytes = 30;
   aio.aio_reqprio = 0;
-  if (aio_read(&aio) < 0) {
-    printf("read fail.\n");
-  }
+  if (aio_read(&aio) < 0) 
+    printf("aio_read(&aio) fail.\n");
+
   printf("aio_read end.\n");
   //sleep(5);
   while (true) {
@@ -42,12 +42,10 @@ int main()
       sleep(1);
       continue;
     }
-    else if (rlt == -1) {
+    else if (rlt == -1) 
       printf("aio_read error.\n");
-    }
-    else {
+    else 
       printf("aio_read error.\n");
-    }
   }
   return 0;
 }
