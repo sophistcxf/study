@@ -14,5 +14,8 @@ TARGETS=$(TEST_LOG) $(TUTORIAL_FMT_STREAM) $(TEST_TRIVIAL_LOGGING) $(LOGGER)
 adjacency_list_struct:
 	g++ -o adjacency_list_struct $(INCLUDE_PATH) $(CFLAGS) adjacency_list_struct.cpp $(LIB_PATH) -lboost_log -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
 
+bfs:
+	g++ -o bfs $(INCLUDE_PATH) $(CFLAGS) bfs.cpp $(LIB_PATH) -lboost_log -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
+
 clean:
 	rm -f $(TARGETS)

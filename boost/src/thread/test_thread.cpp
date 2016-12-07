@@ -11,6 +11,9 @@ using namespace std;
 #include <boost/thread.hpp>
 #include <iostream>
 
+void test1();
+void test2();
+
 void thread()
 {
   for (int i = 0; i < 5; ++i)
@@ -20,8 +23,26 @@ void thread()
   }
 }
 
+void thread_cb_2(int i, float* f)
+{
+  cout << i << "\t" << *f << endl;
+}
+
 int main()
 {
+  test2();
+}
+
+void test1()
+{
   boost::thread t(thread);
+  sleep(10);
+}
+
+void test2()
+{
+  float* f = new float;
+  *f = 10.0;
+  boost::thread t(thread_cb_2, 0, f);
   t.join();
 }

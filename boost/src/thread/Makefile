@@ -17,5 +17,8 @@ $(TEST_THREADPOOL):
 $(TEST_THREAD):
 	g++ -o $(TEST_THREAD) $(INCLUDE_PATH) $(CFLAGS) $(TEST_THREAD).cpp $(LIB_PATH) -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
 
+test_mutex:
+	g++ -o test_mutex $(INCLUDE_PATH) $(CFLAGS) test_mutex.cpp $(LIB_PATH) -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
+
 clean:
 	rm -f $(TARGETS)
