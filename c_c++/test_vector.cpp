@@ -18,7 +18,7 @@ void test_erase()
 
   for (vector<int>::iterator iter = v.begin(); iter != v.end(); ) {
     if (*iter == 2 || *iter == 5 || *iter == 9)
-      v.erase(iter++);
+      iter = v.erase(iter);
     else
       iter++;
   }
@@ -47,5 +47,5 @@ void test_compare()
 
 int main()
 {
-  test_compare();
+  test_erase();
 }
