@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/geos/!svn/ver/3829/trunk/include/geos/linearref
+END
+LengthIndexedLine.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LengthIndexedLine.h
+END
+LinearGeometryBuilder.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LinearGeometryBuilder.h
+END
+LocationIndexOfLine.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3760/trunk/include/geos/linearref/LocationIndexOfLine.h
+END
+LocationIndexOfPoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LocationIndexOfPoint.h
+END
+LocationIndexedLine.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LocationIndexedLine.h
+END
+LinearLocation.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LinearLocation.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3829/trunk/include/geos/linearref/Makefile.am
+END
+LinearIterator.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LinearIterator.h
+END
+ExtractLineByLocation.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3565/trunk/include/geos/linearref/ExtractLineByLocation.h
+END
+LengthIndexOfPoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LengthIndexOfPoint.h
+END
+LengthLocationMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3565/trunk/include/geos/linearref/LengthLocationMap.h
+END

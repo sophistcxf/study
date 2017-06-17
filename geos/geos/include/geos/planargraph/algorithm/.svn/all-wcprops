@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3565/trunk/include/geos/planargraph/algorithm
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/geos/!svn/ver/3482/trunk/include/geos/planargraph/algorithm/Makefile.am
+END
+ConnectedSubgraphFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/geos/!svn/ver/3565/trunk/include/geos/planargraph/algorithm/ConnectedSubgraphFinder.h
+END

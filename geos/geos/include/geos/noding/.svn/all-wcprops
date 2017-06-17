@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/geos/!svn/ver/3810/trunk/include/geos/noding
+END
+IteratedNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/3650/trunk/include/geos/noding/IteratedNoder.h
+END
+SegmentString.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/3565/trunk/include/geos/noding/SegmentString.h
+END
+BasicSegmentString.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3565/trunk/include/geos/noding/BasicSegmentString.h
+END
+IntersectionFinderAdder.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3650/trunk/include/geos/noding/IntersectionFinderAdder.h
+END
+MCIndexSegmentSetMutualIntersector.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/geos/!svn/ver/3650/trunk/include/geos/noding/MCIndexSegmentSetMutualIntersector.h
+END
+SinglePassNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/noding/SinglePassNoder.h
+END
+FastNodingValidator.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/noding/FastNodingValidator.h
+END
+NodedSegmentString.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3650/trunk/include/geos/noding/NodedSegmentString.h
+END
+SegmentNodeList.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentNodeList.h
+END
+SegmentPointComparator.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3565/trunk/include/geos/noding/SegmentPointComparator.h
+END
+IntersectionAdder.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3650/trunk/include/geos/noding/IntersectionAdder.h
+END
+Noder.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/geos/!svn/ver/3565/trunk/include/geos/noding/Noder.h
+END
+SegmentNode.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentNode.h
+END
+MCIndexNoder.inl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/3565/trunk/include/geos/noding/MCIndexNoder.inl
+END
+FastSegmentSetIntersectionFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/geos/!svn/ver/3565/trunk/include/geos/noding/FastSegmentSetIntersectionFinder.h
+END
+SingleInteriorIntersectionFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/geos/!svn/ver/3650/trunk/include/geos/noding/SingleInteriorIntersectionFinder.h
+END
+NodableSegmentString.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3650/trunk/include/geos/noding/NodableSegmentString.h
+END
+MCIndexNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3650/trunk/include/geos/noding/MCIndexNoder.h
+END
+OrientedCoordinateArray.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3590/trunk/include/geos/noding/OrientedCoordinateArray.h
+END
+SimpleNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/noding/SimpleNoder.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/geos/!svn/ver/3593/trunk/include/geos/noding/Makefile.am
+END
+GeometryNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/3810/trunk/include/geos/noding/GeometryNoder.h
+END
+ScaledNoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/noding/ScaledNoder.h
+END
+SegmentIntersectionDetector.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentIntersectionDetector.h
+END
+NodingValidator.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/noding/NodingValidator.h
+END
+SegmentIntersector.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentIntersector.h
+END
+SegmentStringUtil.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentStringUtil.h
+END
+Octant.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/geos/!svn/ver/3650/trunk/include/geos/noding/Octant.h
+END
+SegmentSetMutualIntersector.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3650/trunk/include/geos/noding/SegmentSetMutualIntersector.h
+END

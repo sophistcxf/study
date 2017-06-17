@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/geos/!svn/ver/3650/trunk/include/geos/index/sweepline
+END
+SweepLineEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3650/trunk/include/geos/index/sweepline/SweepLineEvent.h
+END
+SweepLineInterval.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/geos/!svn/ver/3650/trunk/include/geos/index/sweepline/SweepLineInterval.h
+END
+SweepLineOverlapAction.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/geos/!svn/ver/3650/trunk/include/geos/index/sweepline/SweepLineOverlapAction.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3482/trunk/include/geos/index/sweepline/Makefile.am
+END
+SweepLineIndex.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3650/trunk/include/geos/index/sweepline/SweepLineIndex.h
+END

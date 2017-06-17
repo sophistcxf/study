@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/geos/!svn/ver/3960/trunk/include/geos/geom/util
+END
+PolygonExtracter.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3960/trunk/include/geos/geom/util/PolygonExtracter.h
+END
+GeometryCombiner.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/GeometryCombiner.h
+END
+PointExtracter.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3960/trunk/include/geos/geom/util/PointExtracter.h
+END
+ComponentCoordinateExtracter.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/geos/!svn/ver/3960/trunk/include/geos/geom/util/ComponentCoordinateExtracter.h
+END
+GeometryExtracter.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3758/trunk/include/geos/geom/util/GeometryExtracter.h
+END
+GeometryTransformer.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/GeometryTransformer.h
+END
+LinearComponentExtracter.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3960/trunk/include/geos/geom/util/LinearComponentExtracter.h
+END
+SineStarFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3565/trunk/include/geos/geom/util/SineStarFactory.h
+END
+GeometryEditor.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/GeometryEditor.h
+END
+GeometryEditorOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/GeometryEditorOperation.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3482/trunk/include/geos/geom/util/Makefile.am
+END
+ShortCircuitedGeometryVisitor.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/ShortCircuitedGeometryVisitor.h
+END
+CoordinateOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/geom/util/CoordinateOperation.h
+END

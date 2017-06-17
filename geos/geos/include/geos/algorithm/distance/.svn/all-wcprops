@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/geos/!svn/ver/3657/trunk/include/geos/algorithm/distance
+END
+DiscreteHausdorffDistance.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/geos/!svn/ver/3650/trunk/include/geos/algorithm/distance/DiscreteHausdorffDistance.h
+END
+PointPairDistance.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/geos/!svn/ver/3657/trunk/include/geos/algorithm/distance/PointPairDistance.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/geos/!svn/ver/3482/trunk/include/geos/algorithm/distance/Makefile.am
+END
+DistanceToPoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3650/trunk/include/geos/algorithm/distance/DistanceToPoint.h
+END

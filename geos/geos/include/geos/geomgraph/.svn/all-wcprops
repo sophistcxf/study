@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/geos/!svn/ver/4141/trunk/include/geos/geomgraph
+END
+EdgeIntersection.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/EdgeIntersection.h
+END
+EdgeEnd.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/geos/!svn/ver/4118/trunk/include/geos/geomgraph/EdgeEnd.h
+END
+PlanarGraph.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/PlanarGraph.h
+END
+EdgeList.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/EdgeList.h
+END
+DirectedEdgeStar.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/DirectedEdgeStar.h
+END
+DirectedEdge.inl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/DirectedEdge.inl
+END
+Edge.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/Edge.h
+END
+Depth.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/Depth.h
+END
+Position.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/Position.h
+END
+TopologyLocation.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/TopologyLocation.h
+END
+GeometryGraph.inl
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/4017/trunk/include/geos/geomgraph/GeometryGraph.inl
+END
+DirectedEdge.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/DirectedEdge.h
+END
+EdgeNodingValidator.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/EdgeNodingValidator.h
+END
+GeometryGraph.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/geos/!svn/ver/4141/trunk/include/geos/geomgraph/GeometryGraph.h
+END
+NodeFactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/NodeFactory.h
+END
+Label.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/Label.h
+END
+Quadrant.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/Quadrant.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/3482/trunk/include/geos/geomgraph/Makefile.am
+END
+NodeMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/NodeMap.h
+END
+GraphComponent.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/GraphComponent.h
+END
+EdgeRing.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/EdgeRing.h
+END
+EdgeEndStar.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/4118/trunk/include/geos/geomgraph/EdgeEndStar.h
+END
+Node.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/geos/!svn/ver/3650/trunk/include/geos/geomgraph/Node.h
+END
+EdgeIntersectionList.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/geos/!svn/ver/3565/trunk/include/geos/geomgraph/EdgeIntersectionList.h
+END

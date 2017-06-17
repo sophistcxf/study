@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/geos/!svn/ver/3650/trunk/include/geos/operation/union
+END
+PointGeometryUnion.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3565/trunk/include/geos/operation/union/PointGeometryUnion.h
+END
+CascadedUnion.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3482/trunk/include/geos/operation/union/CascadedUnion.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/geos/!svn/ver/3482/trunk/include/geos/operation/union/Makefile.am
+END
+GeometryListHolder.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/3565/trunk/include/geos/operation/union/GeometryListHolder.h
+END
+UnaryUnionOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/geos/!svn/ver/3609/trunk/include/geos/operation/union/UnaryUnionOp.h
+END
+CascadedPolygonUnion.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/geos/!svn/ver/3650/trunk/include/geos/operation/union/CascadedPolygonUnion.h
+END

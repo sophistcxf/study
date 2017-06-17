@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/geos/!svn/ver/4203/trunk/include/geos/index/strtree
+END
+AbstractNode.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/3650/trunk/include/geos/index/strtree/AbstractNode.h
+END
+ItemDistance.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/4184/trunk/include/geos/index/strtree/ItemDistance.h
+END
+ItemBoundable.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3650/trunk/include/geos/index/strtree/ItemBoundable.h
+END
+Boundable.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/geos/!svn/ver/3650/trunk/include/geos/index/strtree/Boundable.h
+END
+AbstractSTRtree.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/index/strtree/AbstractSTRtree.h
+END
+SIRtree.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/3650/trunk/include/geos/index/strtree/SIRtree.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/geos/!svn/ver/4197/trunk/include/geos/index/strtree/Makefile.am
+END
+Interval.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3986/trunk/include/geos/index/strtree/Interval.h
+END
+GeometryItemDistance.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/4184/trunk/include/geos/index/strtree/GeometryItemDistance.h
+END
+BoundablePair.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/4203/trunk/include/geos/index/strtree/BoundablePair.h
+END
+STRtree.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/geos/!svn/ver/4203/trunk/include/geos/index/strtree/STRtree.h
+END

@@ -1,0 +1,19 @@
+<html>
+<head>
+<!-- 定义一个css样式 -->
+<style type="text/css">
+  .intro {color:blue;}
+  .important {color:green;}
+  #p3 {color:red; width:20px; height:20px}
+</style>
+</head>
+
+<body>
+<h1 class="intro" id="header">Header 1</h1>
+  <p id="p1">A paragraph.</p>
+  <p class="important" id="p2">Note that this is an important paragraph.</p>
+  <p id="p3">I'm p3</p>
+  <!-- 样式是无效的，只有p3可以使用#p3 -->
+  <p class="p3" id="p4">I'm p4</p>
+</body>
+</html>

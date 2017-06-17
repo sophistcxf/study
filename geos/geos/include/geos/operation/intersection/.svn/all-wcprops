@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/4082/trunk/include/geos/operation/intersection
+END
+RectangleIntersection.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/geos/!svn/ver/4021/trunk/include/geos/operation/intersection/RectangleIntersection.h
+END
+RectangleIntersectionBuilder.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/geos/!svn/ver/4021/trunk/include/geos/operation/intersection/RectangleIntersectionBuilder.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/geos/!svn/ver/4021/trunk/include/geos/operation/intersection/Makefile.am
+END
+Rectangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/geos/!svn/ver/4021/trunk/include/geos/operation/intersection/Rectangle.h
+END

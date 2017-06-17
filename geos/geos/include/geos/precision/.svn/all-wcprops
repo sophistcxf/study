@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/geos/!svn/ver/4204/trunk/include/geos/precision
+END
+CommonBitsOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/geos/!svn/ver/3650/trunk/include/geos/precision/CommonBitsOp.h
+END
+MinimumClearance.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/geos/!svn/ver/4204/trunk/include/geos/precision/MinimumClearance.h
+END
+CommonBits.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/geos/!svn/ver/3650/trunk/include/geos/precision/CommonBits.h
+END
+CommonBitsRemover.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/geos/!svn/ver/3650/trunk/include/geos/precision/CommonBitsRemover.h
+END
+SimpleGeometryPrecisionReducer.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/geos/!svn/ver/3650/trunk/include/geos/precision/SimpleGeometryPrecisionReducer.h
+END
+PrecisionReducerCoordinateOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/geos/!svn/ver/3810/trunk/include/geos/precision/PrecisionReducerCoordinateOperation.h
+END
+EnhancedPrecisionOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/geos/!svn/ver/3650/trunk/include/geos/precision/EnhancedPrecisionOp.h
+END
+GeometryPrecisionReducer.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/geos/!svn/ver/4091/trunk/include/geos/precision/GeometryPrecisionReducer.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/geos/!svn/ver/4203/trunk/include/geos/precision/Makefile.am
+END
