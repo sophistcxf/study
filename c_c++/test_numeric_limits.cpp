@@ -7,9 +7,10 @@
 
 #include <iostream>
 #include <limits>
+#include <time.h>
 using namespace std;
 
-int main()
+void test1()
 {
   cout << std::numeric_limits<int>::max() << "\t" << std::numeric_limits<int>::min() << endl;
   cout << std::numeric_limits<unsigned>::max() << "\t" << std::numeric_limits<unsigned>::min() << endl;
@@ -17,4 +18,29 @@ int main()
   cout << std::numeric_limits<double>::max() << "\t" << std::numeric_limits<double>::min() << endl;
   if (std::numeric_limits<float>::min() < 0)
   cout << "dd";
+}
+
+// 测试max的性能
+void test2()
+{
+	unsigned count = 10 * 100 * 100 * 100;
+	std::cout << time(NULL) << std::endl;
+	for (unsigned i = 0; i < count; ++i)
+	{
+		unsigned temp = 0xFFFFFFFF;
+		std::cerr << temp << std::endl;
+	}
+	std::cout << time(NULL) << std::endl;
+	for (unsigned i = 0; i < count; ++i)
+	{
+		unsigned temp = std::numeric_limits<unsigned>::max();
+		std::cerr << temp << std::endl;
+	}
+	std::cout << time(NULL) << std::endl;
+}
+
+int main()
+{
+//	test1();
+	test2();
 }

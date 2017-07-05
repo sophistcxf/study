@@ -27,8 +27,15 @@ string get_version()
 
 #define paster( n ) printf( "token"#n" = %d\n", token##n)
 
+void f1()
+{
+	std::cout << __FUNCTION__ << std::endl;
+}
+
 int main()
 {
+	std::cout << __FUNCTION__ << std::endl;
+	f1();
   cout << POUND_SIGN(hello world) << endl;
 #ifdef WIN32
   char ch = POUND_AT(a);
