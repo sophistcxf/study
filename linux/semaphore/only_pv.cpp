@@ -71,15 +71,13 @@ static int semaphore_v()
 int main(int argc, char* argv[])
 {
     setvbuf(stdout, NULL, _IONBF, 0);
-	char message = 'X';
-	int i = 0;
 	sem_id = semget((key_t)1234, 2, 0666 | IPC_CREAT);
+    char message = 'X';
     if (sem_id == -1)
     {
         fprintf(stderr, "Failed semget\n");
         exit(1);
     }
-
 	if (argc > 1)
 	{
 		if (!set_semvalue())
@@ -90,24 +88,22 @@ int main(int argc, char* argv[])
 		message = argv[1][0];
 		sleep(2);
 	}
-	for (i = 0; i < 10; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
-		if (!semaphore_p())
-		{
-			exit(EXIT_FAILURE);
-		}
+        if (argc > 1)
+        {
+            if (!semaphore_v())
+                exit(EXIT_FAILURE);
+        }
+        else
+        {
+            if (!semaphore_p())
+                exit(EXIT_FAILURE);
+        }
 		printf("%c", message);
-		fflush(stdout);
-		sleep(rand() % 3);
-		printf("%c", message);
-		fflush(stdout);
-		if (!semaphore_v())
-			exit(EXIT_FAILURE);
-		sleep(rand() % 2);
+		sleep(1);
 	}
-	sleep(10);
 	printf("\n%d - finished\n", getpid());
-
 	if (argc > 1)
 	{
 		sleep(3);
