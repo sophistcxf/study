@@ -31,6 +31,11 @@ static int set_semvalue()
 	return 1;
 }
 
+static int get_semvalue()
+{
+    return semctl(sem_id, 1, GETVAL);
+}
+
 static void del_semvalue()
 {
 	// 删除信号量
@@ -92,15 +97,16 @@ int main(int argc, char* argv[])
 	{
         if (argc > 1)
         {
-            if (!semaphore_v())
+            if (!semaphore_p())
                 exit(EXIT_FAILURE);
         }
         else
         {
-            if (!semaphore_p())
+            if (!semaphore_v())
                 exit(EXIT_FAILURE);
         }
-		printf("%c", message);
+        printf("sema value: %d\n", get_semvalue());
+		printf("%c\n", message);
 		sleep(1);
 	}
 	printf("\n%d - finished\n", getpid());

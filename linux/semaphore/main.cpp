@@ -25,7 +25,7 @@ static int semaphore_v();
 static int set_semvalue()
 {
 	union semun sem_union;
-	sem_union.val = 1;
+	sem_union.val = 0;
 	if (semctl(sem_id, 1, SETVAL, sem_union) == -1)
 		return 0;
 	return 1;
@@ -44,7 +44,7 @@ static int semaphore_p()
 	// 对信号
 	struct sembuf sem_b;
 	sem_b.sem_num = 1;
-	sem_b.sem_op = -1;
+	sem_b.sem_op = 0;
 	sem_b.sem_flg = SEM_UNDO;
 	if (semop(sem_id, &sem_b, 1) == -1)
 	{
@@ -58,7 +58,7 @@ static int semaphore_v()
 {
 	struct sembuf sem_b;
 	sem_b.sem_num = 1;
-	sem_b.sem_op = 1;
+	sem_b.sem_op = 0;
 	sem_b.sem_flg = SEM_UNDO;
 	if(semop(sem_id, &sem_b, 1) == -1)
 	{
