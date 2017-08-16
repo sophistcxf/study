@@ -35,6 +35,15 @@ def test1():
     transformed = fitted.transform(X)
     print "transformed:\n", transformed
 
+    # 根据transforme计算inertia
+    '''
+    dist_sum = 0.0
+    for i in range(0, len(transformed)):
+        dist_sum += pow(min(transformed[i]), 2)
+    print "dist_sum=", dist_sum
+    print abs(fitted.inertia_-dist_sum) < 0.000001
+    '''
+
 if __name__ == "__main__":
     test1()
     pass
