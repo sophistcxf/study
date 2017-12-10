@@ -27,8 +27,21 @@ string get_version()
 
 #define paster( n ) printf( "token"#n" = %d\n", token##n)
 
+#ifdef TEST_ERROR
+#error ERROR, DO NOT define TEST_ERROR
+// 也就是说，碰到#error后会停车编译，但不会停车预处理
+#error I will be printed as well.
+#endif
+
+void f1()
+{
+	std::cout << __FUNCTION__ << std::endl;
+}
+
 int main()
 {
+	std::cout << __FUNCTION__ << std::endl;
+	f1();
   cout << POUND_SIGN(hello world) << endl;
 #ifdef WIN32
   char ch = POUND_AT(a);

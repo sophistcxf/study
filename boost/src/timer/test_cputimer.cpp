@@ -14,10 +14,17 @@ int main()
 {
   boost::timer::cpu_timer timer;
 
-  for (int i = 0; i < 1000000; ++i)
+  for (int i = 0; i < 10000000; ++i)
     std::pow(1.234, i);
 
   boost::timer::cpu_times times = timer.elapsed();
+  std::cout << times.wall << '\n';
+  std::cout << times.user << '\n';
+  std::cout << times.system << '\n';
+  timer.stop();
+  timer.resume();
+  sleep(2);
+  times = timer.elapsed();
   std::cout << times.wall << '\n';
   std::cout << times.user << '\n';
   std::cout << times.system << '\n';

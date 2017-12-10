@@ -1,0 +1,11 @@
+<root>
+  <a>hello</a>
+  <b>b</b>
+  <c>
+    <c1>c1</c1>
+    <c1>c12</c1>
+  </c>
+</root>
+<b>b</b>
+<c>c1</c>
+<c>c2</c>
