@@ -8,6 +8,7 @@ sns.set(style="ticks")
 # Create a dataset with many short random walks
 rs = np.random.RandomState(4)
 pos = rs.randint(-1, 2, (20, 5)).cumsum(axis=1)
+#pos每列元素分别减去同行第一行，np.newaxis实现了转置
 pos -= pos[:, 0, np.newaxis]
 step = np.tile(range(5), 20)
 walk = np.repeat(range(20), 5)
