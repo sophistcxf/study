@@ -15,6 +15,9 @@ using namespace std;
 #include <boost/iostreams/device/file.hpp>
 #include <boost/iostreams/copy.hpp>
 
+// 使用gzip压缩，解压 
+void test1();
+
 int main()
 {
   try {
@@ -44,4 +47,9 @@ int main()
   }  
 
   return 0;
+}
+
+void test1()
+{
+    
 }
