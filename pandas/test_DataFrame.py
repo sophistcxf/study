@@ -16,4 +16,20 @@ def constructDataFrame():
     df2 = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
                     columns=['a','b','c','d','e'])
 
+def ddlDataFrame():
+    df = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
+                    columns=['a','b','c','d','e'])
+    # 这个取列的方法挺奇怪
+    df2 = df[['a','b']] 
+
+    df.a
+
+    # [:,1]和[:,[2,4]]的输出结果的“格式”是不一样的
+    df.iloc[:,1]
+    # 取出c,e列
+    df.iloc[:,[2,4]]
+    df.iloc[:, lambda df:[1,2]]
+
+
 constructDataFrame()
+ddlDataFrame()
