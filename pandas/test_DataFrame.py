@@ -36,6 +36,11 @@ def write_to_file(df):
     df.to_json('df.json')
     df.to_html('df.html')
 
+def df2array(df):
+    arr = df.values 
+    return arr
+
 df = constructDataFrame()
 #ddlDataFrame()
-write_to_file(df)
+#write_to_file(df)
+print df2array(df)
