@@ -15,6 +15,7 @@ def constructDataFrame():
 
     df2 = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
                     columns=['a','b','c','d','e'])
+    return df
 
 def ddlDataFrame():
     df = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
@@ -30,6 +31,11 @@ def ddlDataFrame():
     df.iloc[:,[2,4]]
     df.iloc[:, lambda df:[1,2]]
 
+def write_to_file(df):
+    df.to_csv('df.csv', sep=',', header=True, index=False)
+    df.to_json('df.json')
+    df.to_html('df.html')
 
-constructDataFrame()
-ddlDataFrame()
+df = constructDataFrame()
+#ddlDataFrame()
+write_to_file(df)
