@@ -3,11 +3,30 @@ import matplotlib.pyplot as plt
  
 from sklearn.datasets import load_iris
 from sklearn.tree import DecisionTreeClassifier
- 
-# Parameters
-n_classes = 3
-plot_colors = "bry"
-plot_step = 0.02
+from sklearn.tree import _tree
+
+def tree_to_code(tree, feature_names):
+    tree_ = tree.tree_
+    feature_name = [
+        feature_names[i] if i != _tree.TREE_UNDEFINED else "undefined!"
+        for i in tree_.feature
+    ]
+    print "def tree({}):".format(", ".join(feature_names))
+
+    def recurse(node, depth):
+        indent = "  " * depth
+        if tree_.feature[node] != _tree.TREE_UNDEFINED:
+            name = feature_name[node]
+            threshold = tree_.threshold[node]
+            print "{}if {} <= {}:".format(indent, name, threshold)
+            recurse(tree_.children_left[node], depth + 1)
+            print "{}else:  # if {} > {}".format(indent, name, threshold)
+            recurse(tree_.children_right[node], depth + 1)
+        else:
+            print "{}return {}".format(indent, tree_.value[node].tolist())
+
+    recurse(0, 1) 
+
  
 # Load data
 iris = load_iris()
@@ -21,30 +40,8 @@ for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3],
     # Train
     clf = DecisionTreeClassifier().fit(X, y)
  
-    # Plot the decision boundary
-    plt.subplot(2, 3, pairidx + 1)
- 
-    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
-                         np.arange(y_min, y_max, plot_step))
- 
-    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-    cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired)
- 
-    plt.xlabel(iris.feature_names[pair[0]])
-    plt.ylabel(iris.feature_names[pair[1]])
-    plt.axis("tight")
- 
-    # Plot the training points
-    for i, color in zip(range(n_classes), plot_colors):
-        idx = np.where(y == i)
-        plt.scatter(X[idx, 0], X[idx, 1], c=color, label=iris.target_names[i],
-                    cmap=plt.cm.Paired)
- 
-    plt.axis("tight")
- 
-plt.suptitle("Decision surface of a decision tree using paired features")
-plt.legend()
-plt.show()
+    print "score: %f" % clf.score(X, y)
+
+    tree_to_code(clf, ["fea1", "fea2"])
+
+    exit(0)
