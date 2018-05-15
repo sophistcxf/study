@@ -67,6 +67,39 @@ def SimpleTraining():
     
     print(sess.run(y_pred))
 
+def SimpleTraining2():
+    '''
+    使用compute_gradients计算梯度，然后再使用apply_gradients应用梯度，这样可以在计算梯度后对梯度进行处理
+    如果中间不处理，其效果与optimizer.minimize一样
+    '''
+    x = tf.constant([[1], [2], [3], [4]], dtype=tf.float32)
+    y_true = tf.constant([[0], [-1], [-2], [-3]], dtype=tf.float32)
+
+    linear_model = tf.layers.Dense(units=1)
+    y_pred = linear_model(x)
+
+    sess = tf.Session()
+    init = tf.global_variables_initializer()
+    sess.run(init)
+    print(sess.run(y_pred))
+
+    # 使用mean square error作为loss
+    loss = tf.losses.mean_squared_error(labels=y_true, predictions=y_pred)
+
+    optimizer = tf.train.GradientDescentOptimizer(0.01)
+    grads_and_vars = optimizer.compute_gradients(loss)
+    train = optimizer.apply_gradients(grads_and_vars)
+
+    for i in range(1000):
+        # train is an op, not a tensor, it doesn't return a value when run
+        _, loss_value = sess.run((train, loss))
+        print(loss_value)
+
+    writer = tf.summary.FileWriter("/tmp/graph/", sess.graph)
+    writer.close()
+    
+    print(sess.run(y_pred))
+
 def Tensor():
     sess = tf.Session()
     my_image = tf.zeros([10, 299, 299, 3])
@@ -120,6 +153,7 @@ def SaveRestore():
 
 
 #SimpleTraining()
+SimpleTraining2()
 #Tensor()
 #Variable()
-SaveRestore()
+#SaveRestore()
