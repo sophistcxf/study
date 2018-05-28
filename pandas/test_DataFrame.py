@@ -63,8 +63,21 @@ def merge():
 def concat():
     pass
 
+def diff():
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
+    print df
+    # 默认计算同一列，每一行和上一行的差，因而第0行是NaN
+    print df.diff()
+    # 
+    print df.diff(axis=1)
+    # periods是减去当前行往前periods的行，不循环
+    print df.diff(periods=-1)
+    #
+    print df.diff(periods=2)
+
 #df = constructDataFrame()
 #ddlDataFrame()
 #write_to_file(df)
 #print df2array(df)
-join()
+#join()
+diff()
