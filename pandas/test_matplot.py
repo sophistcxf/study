@@ -67,10 +67,16 @@ def test_scatter():
     pd.scatter_matrix(df, alpha=0.2, figsize=(6, 6), diagonal='kde')
     plt.show()
 
+def test_series_bar():
+    ts = pd.Series(np.random.randn(10), index=pd.date_range('1/1/2000', periods=10))
+    ts.hist()
+    plt.show()
+
 #test_2()
 #test_plot_bar()
 #test_plot_DataFrame()
 #test_plot_df_bar()
 #test_hist()
 #test_df_box_plot()
-test_scatter()
+#test_scatter()
+test_series_bar()
