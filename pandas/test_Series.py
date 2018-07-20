@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def test_construct():
     ndarray = np.random.randn(5)
@@ -22,4 +23,27 @@ def test_construct():
     s = pd.Series(d, index=['a1','b1','c1','d1','e1'])
     print s
 
-test_construct()
+def test_plot():
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5}
+    s = pd.Series(d)
+    s.plot()
+    plt.show()
+
+def test_hist():
+    # 统计各个值的出现次数
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    s.hist()
+    plt.show()
+
+    '''
+    df3 = pd.DataFrame({'a': np.random.randn(1000) + 1, 'b': np.random.randn(1000)}, columns=['a', 'b'])
+    df3['a'].hist();
+    print df3['a']
+    plt.show()
+    '''
+
+#test_construct()
+#test_plot()
+test_hist()
+

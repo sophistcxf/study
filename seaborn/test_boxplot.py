@@ -22,7 +22,6 @@ def test2():
     c = np.arange(100,110,1)
 
     df = pd.DataFrame(np.concatenate((a, b, c)), columns=["x"])
-    print df
     
     sns.boxplot(x="x", data=df, palette="PRGn")
     sns.despine(offset=10, trim=True)

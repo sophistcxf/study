@@ -1,0 +1,5 @@
+name age occupation passwd
+zhangsan 20 gongren 111
+lisi 30  shifen
+wangwu  getihu 222
+

@@ -7,8 +7,11 @@ def constructDataFrame():
     #通过dict构造，每一列的元素个数必须一样，否则抛异常ValueError('arrays must all be same length')
     #index的大小要与行数一致，否则抛异常ValueError: Shape of passed values is (4, 2), indices imply (4, 1)，这个提示
     #信息很奇怪，先列后行
-    d = {'col1':[1,2], 'col2':[3,4], 'col3':[5,6], 'col4':[7,8]}
+    d = {'col1':[1,2], 'col2':[3,4], 'col3':[5,6], 'col4':["str",8]}
     df = pd.DataFrame(data=d, index=["row1", "row2"])
+
+    print df
+    print df.dtypes
 
     #如果不指定列名或行名，就由np.arange(n)给默认值
     df2 = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)))
@@ -17,8 +20,6 @@ def constructDataFrame():
                     columns=['a','b','c','d','e'])
 
     print df2.join(df3)
-
-    return df
 
 def ddlDataFrame():
     df = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
@@ -75,9 +76,16 @@ def diff():
     #
     print df.diff(periods=2)
 
-#df = constructDataFrame()
+def read_from_file():
+    fn = "text_lost.txt"
+    df = pd.read_csv(fn, sep=" ")
+    print df
+    print df.dtypes
+
+constructDataFrame()
 #ddlDataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
-diff()
+#diff()
+#read_from_file()
