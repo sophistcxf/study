@@ -6,4 +6,4 @@
 #########################################################################
 #!/bin/bash
 
-g++ test.cpp -o tutorial -lnlopt -lm
+g++ -g test.cpp -o tutorial -lnlopt -lm

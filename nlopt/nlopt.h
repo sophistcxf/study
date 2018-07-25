@@ -377,3 +377,4 @@ NLOPT_EXTERN(void) nlopt_set_stochastic_population(int pop) NLOPT_DEPRECATED;
 #endif /* __cplusplus */
 
 #endif
+:qa

@@ -117,8 +117,46 @@ void test2()
     
 }
 
+void test3()
+{
+    double lb[2] = {-1000, -10000 }; /* lower bounds */
+    double ub[2] = {1000, 1000};
+    nlopt_opt opt;
+
+    std::cout << HUGE_VAL;
+
+    //opt = nlopt_create(NLOPT_LN_COBYLA, 2); /* algorithm and dimensionality */
+    //opt = nlopt_create(NLOPT_GN_DIRECT, 2);
+    opt = nlopt_create(NLOPT_GN_DIRECT_L, 2);
+    nlopt_set_lower_bounds(opt, lb);
+    nlopt_set_upper_bounds(opt, ub);
+    nlopt_set_min_objective(opt, obj_func2, NULL);
+
+    nlopt_add_inequality_constraint(opt, cons_func21, NULL, 1e-8);
+    nlopt_add_inequality_constraint(opt, cons_func22, NULL, 1e-8);
+    nlopt_add_inequality_constraint(opt, cons_func23, NULL, 1e-8);
+
+    nlopt_set_xtol_rel(opt, 1e-4);
+    nlopt_set_maxtime(opt, 10);
+
+    /* 注意初始值不能超出[lb,ub]，否则返回 INVALID_ARGS 错误 */
+    double x[2] = { 2, 0 };  /* `*`some` `initial` `guess`*` */
+    double minf; /* `*`the` `minimum` `objective` `value,` `upon` `return`*` */
+    nlopt_result rlt = nlopt_optimize(opt, x, &minf);
+    if (rlt < 0) {
+        printf("nlopt failed! %d\n", rlt);
+    }
+    else {
+        printf("found minimum at f(%g,%g) = %0.10g\n", x[0], x[1], minf);
+    }
+
+    nlopt_destroy(opt);
+    
+}
+
 int main(int argc, char* argv[])
 {
     // test1()
-    test2();
+    //test2();
+    test3();
 }
