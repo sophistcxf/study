@@ -5,7 +5,7 @@ import pandas as pd
 
 def test_construct():
     ndarray = np.random.randn(5)
-    s = pd.Series(ndarray, index=['a','b','c','d','e'])
+    s = pd.Series(ndarray, index=['a','b','a','d','e'])
     print s
     # 可以像dict一样取索引
     print s['a']
@@ -18,8 +18,71 @@ def test_construct():
     s = pd.Series(d)
     print s
 
+    s['a'] = 10
+    print s
+    print d
+
     # value会变成NaN
     s = pd.Series(d, index=['a1','b1','c1','d1','e1'])
     print s
 
-test_construct()
+    d = ['a', 'b', 'c', 'd', 'e']
+    s = pd.Series(d)
+    print s
+
+    # 如果用二维数据构造Series呢？
+    # 以第一维axis来分
+    d = [['a','b','c'], ['a1','b1', 'c1']]
+    s = pd.Series(d)
+    print s
+
+def test_attributes():
+    d = [['a','b','c'], ['a1','b1', 'c1'], ['a2','b2','c2']]
+    s = pd.Series(d)
+    print s
+    
+    print s.T
+    print s.asobject
+    print s.axes
+    # type是buffer
+    print type(s.data)
+    print s.iat
+    print s.index
+    print s.ix
+    print s.loc
+    print s.ndim
+    print s.shape
+    print s.size
+    print s.strides
+    print s.values
+
+def test_methods():
+    d = [['1','2','3'], ['-1','-2', '-3'], ['4','5','6']]
+    s = pd.Series(d, index=['a','b','c'])
+    print s
+
+    # 当数据是中element不是scalar时，会报错
+    d1 = [-1, -2, 1, 2]
+    s1 = pd.Series(d1)
+    print s1
+    print s1.abs()
+
+    print s.add_prefix("prefix_")
+    print s.agg(['min', 'max'], 0)
+    # at按索引的值，iat按索引的位置，因而iat只能是数值
+    print s.at['b']
+    print s.iat[1]
+    # iloc的参数可以是integer如5，可以是list如[0,2]，可以是slice如1:3，可以是boolean array
+    print s.iloc[1:3]
+
+def test_combine():
+    d1 = ['a','b','c']
+    d2 = ['e','f','g','h']
+    s1 = pd.Series(d1)
+    s2 = pd.Series(d2)
+    print s1.append(s2)
+
+#test_construct()
+#test_attributes()
+#test_methods()
+test_combine()

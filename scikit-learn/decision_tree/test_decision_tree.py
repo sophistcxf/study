@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import _tree
+from sklearn.externals.six import StringIO
+import pydot
 
 def tree_to_code(tree, feature_names):
     tree_ = tree.tree_
@@ -40,8 +42,14 @@ for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3],
     # Train
     clf = DecisionTreeClassifier().fit(X, y)
  
+    dot_data = StringIO()
+    _tree.export_graphviz(clf, out_file=dot_data)
+    graph = pydot.graph_from_dot_data(dot_data.getvalue())
+    graph.write_png('iris_simple.png')
+
+
     print "score: %f" % clf.score(X, y)
 
-    tree_to_code(clf, ["fea1", "fea2"])
+    #tree_to_code(clf, ["fea1", "fea2"])
 
     exit(0)
