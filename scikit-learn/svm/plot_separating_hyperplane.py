@@ -46,7 +46,7 @@ Z = clf.decision_function(xy).reshape(XX.shape)
 the_shape("Z", Z)
 
 # plot decision boundary and margins
-ax.contour(XX, YY, Z, colors='k', levels=[-1, 0, 1], alpha=0.5,
+ax.contour(XX, YY, Z, colors='r', levels=[-1, 0, 1], alpha=0.5,
            linestyles=['--', '-', '--'])
 # plot support vectors
 ax.scatter(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], s=100,
