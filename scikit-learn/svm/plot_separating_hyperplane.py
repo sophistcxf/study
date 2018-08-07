@@ -1,3 +1,4 @@
+#!-*- coding=utf-8 -*-
 """
 =========================================
 SVM: Maximum margin separating hyperplane
@@ -42,11 +43,13 @@ the_shape("XX", XX)
 the_shape("YY", YY)
 xy = np.vstack([XX.ravel(), YY.ravel()]).T
 the_shape("xy", xy)
+# 使用 decision_function 对 30*30 网格上的值进行预测
 Z = clf.decision_function(xy).reshape(XX.shape)
 the_shape("Z", Z)
 
 # plot decision boundary and margins
-ax.contour(XX, YY, Z, colors='r', levels=[-1, 0, 1], alpha=0.5,
+# 画等高线，只画值为-1,0,1的三条等高线，0 即为分割平面
+ax.contour(XX, YY, Z, colors=['b','r','b'], levels=[-1, 0, 1], alpha=0.5,
            linestyles=['--', '-', '--'])
 # plot support vectors
 ax.scatter(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], s=100,

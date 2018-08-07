@@ -1,4 +1,4 @@
-from scipy.optimize import minimize, rosen, rosen_der
+from scipy.optimize import minimize
 
 def test1():
     fun = lambda x: (x[0] - 1)**2 + (x[1] - 2.5)**2
@@ -11,6 +11,7 @@ def test1():
 
     init = [2, 0]
     res = minimize(fun, init, method='SLSQP', bounds=bnds,constraints=cons)
+    help(minimize)
 
     print res.x
 
