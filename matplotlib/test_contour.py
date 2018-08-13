@@ -6,7 +6,7 @@ def test1():
     z = np.array([[1,5,3],[2,4,5],[2,1,4]])
     print z
     #plt.contourf(z)
-    plt.contour(z)
+    plt.contour(z, levels=[0,1,2,3,4,5], colors=["r",'g','b','y','c',"k"])
     plt.show()
 
 def test2():
