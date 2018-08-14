@@ -1,3 +1,4 @@
+#! -*- coding=utf-8 -*-
 """
 ==========================================
 Outlier detection with several methods.
@@ -73,6 +74,7 @@ ground_truth[-n_outliers:] = -1
 for i, offset in enumerate(clusters_separation):
     np.random.seed(42)
     # Data generation
+    # np.random.randn 生成满足标准正态分布的采样，- offset 即(x,y)向左移动，+offset 即(x,y)向右上移动
     X1 = 0.3 * np.random.randn(n_inliers // 2, 2) - offset
     X2 = 0.3 * np.random.randn(n_inliers // 2, 2) + offset
     X = np.r_[X1, X2]
@@ -90,8 +92,12 @@ for i, offset in enumerate(clusters_separation):
             clf.fit(X)
             scores_pred = clf.decision_function(X)
             y_pred = clf.predict(X)
+        # 取 per=25% 分位处的数，stats.scoreatpercentile 会对 scores_pred 按从小到大排序，取分位数
+        # 小的 value 即为异常值
         threshold = stats.scoreatpercentile(scores_pred,
                                             100 * outliers_fraction)
+
+        # y_pred 与 ground_truth 不相等，说明分错类了
         n_errors = (y_pred != ground_truth).sum()
         # plot the levels lines and the points
         if clf_name == "Local Outlier Factor":
