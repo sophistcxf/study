@@ -17,5 +17,8 @@ adjacency_list_struct:
 bfs:
 	g++ -o bfs $(INCLUDE_PATH) $(CFLAGS) bfs.cpp $(LIB_PATH) -lboost_log -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
 
+astar:
+	g++ -o astar $(INCLUDE_PATH) $(CFLAGS) astar_search.cpp $(LIB_PATH) -lboost_log -lboost_system -lboost_thread -lboost_filesystem -lpthread -lrt
+
 clean:
 	rm -f $(TARGETS)
