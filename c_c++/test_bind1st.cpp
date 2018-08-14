@@ -19,6 +19,7 @@ class my_binder1st : public std::unary_function<typename Operation::second_argum
 {
 public:
   Operation op;
+  // 记录其中一个参数
   typename Operation::first_argument_type value;
   // 构造函数中，用参数2对value赋值，用x对op赋值
   // op为二元functor, value为其一个参数
