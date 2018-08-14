@@ -28,14 +28,19 @@ http://www.linuxjournal.com/article/6391
 
 #define BT_BUF_SIZE 100
 
-    void
-myfunc3(void)
+void myfunc3(void)
 {
     int j, nptrs;
     void *buffer[BT_BUF_SIZE];
     char **strings;
 
     nptrs = backtrace(buffer, BT_BUF_SIZE);
+
+    printf("backtrace without backtrace_symbols\n");
+    for (unsigned i = 0; i < nptrs; ++i)
+        printf("%s\n", buffer[i]);
+    printf("==============================\n");
+
     printf("backtrace() returned %d addresses\n", nptrs);
 
     /* The call backtrace_symbols_fd(buffer, nptrs, STDOUT_FILENO)
@@ -53,8 +58,8 @@ myfunc3(void)
     free(strings);
 }
 
-    static void   /* "static" means don't export the symbol... */
-myfunc2(void)
+/* "static" means don't export the symbol... */
+static void myfunc2(void)
 {
     myfunc3();
 }
