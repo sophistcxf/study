@@ -77,10 +77,10 @@ private:
             safe_printf("param is null\n");
             return NULL;
         }
-        pthread_once_t key_once = PTHREAD_ONCE_INIT;
         pthread_once(&key_once, Test1::make_key);
         void* ptr;
-        if ((ptr = pthread_getspecific(Test1::key)) == NULL)
+        /* pthread_getspecific的参数不是引用，说明直接拿pthread_key_t的值作为key，而不是&pthread_key_t */
+        if ((ptr = get_current_thread_data()) == NULL)
         {
             ptr = param;
             /* 不同的线程对同一个key会绑定不同的ptr */
@@ -89,7 +89,7 @@ private:
                 cerr << "pthread_setspecific failed" << std::endl;
             }
         }
-        Object* obj = (Object*)pthread_getspecific(Test1::key);
+        Object* obj = (Object*)get_current_thread_data();
         assert(obj == param);
         while (!test_status(obj))
         {
@@ -101,7 +101,10 @@ private:
     }
     static void make_key()
     {
-        pthread_key_create(&Test1::key, Test1::destructor);
+        if (pthread_key_create(&Test1::key, Test1::destructor) == 0)
+        {
+            safe_printf("pthread_key_t is %d\n", Test1::key);
+        }
     }
     static bool test_status(const Object* obj)
     {
@@ -114,11 +117,19 @@ private:
         Object* obj = (Object*)param;
         delete obj; 
     }
+    static void* get_current_thread_data()
+    {
+        return pthread_getspecific(Test1::key);
+    }
 private:
+    /* pthread_key_t is a unsigned int */
     static pthread_key_t key;
+    /* pthread_once_t is a int */
+    static pthread_once_t key_once;
 };
 
 pthread_key_t Test1::key;
+pthread_once_t Test1::key_once = PTHREAD_ONCE_INIT;
 
 int main(int argc, char* argv[])
 {
