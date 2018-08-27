@@ -103,9 +103,18 @@ def test_hist():
     plt.show()
     '''
 
+def test_value_counts():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s
+    print s.value_counts() 
+    print s.value_counts(sort=True, ascending=True)
+    print s.value_counts(normalize=True)
+
 #test_construct()
 #test_plot()
-test_hist()
+#test_hist()
 #test_attributes()
 #test_methods()
 #test_combine()
+test_value_counts()

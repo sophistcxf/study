@@ -65,10 +65,19 @@ def concat():
     pass
 
 def groupby():
-    d = {'col1':['red',1,2], 'col2':['blue',3,4], 'col3':['red',5,6], 'col4':['blue',8,10], 'col5':['black',8,10], 'col6':['red',1,4]}
-    df = pd.DataFrame(data=d, index=["color", "row1", "row2"])
-    for key, grp in df.groupby(['color']):
-        print key,grp
+    d = {'color':['red','blue','red','blue','black','red'], 'count':[1,2,3,3,2,1], 'age':[20,25,25,20,30,30]}
+    df = pd.DataFrame(data=d)
+    for key, grp in df.groupby(["color"]):
+        print key
+        print grp
+
+    for key, grp in df.groupby(['color','count']):
+        print key
+        print grp
+
+    # groupby 返回 pandas.core.groupby.DataFrameGroupBy
+    gb = df.groupby(['color', 'count'])
+    print type(gb)
 
 def diff():
     df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
