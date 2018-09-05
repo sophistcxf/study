@@ -7,7 +7,6 @@ def output_mlp(mlp):
     print "intercepts_:", mlp.intercepts_
     print "loss_:", mlp.loss_
     print "n_outputs_:", mlp.n_outputs_
-    print "
     print "out_activation_:", mlp.out_activation_
     print "classes_:", mlp.classes_
 
@@ -26,7 +25,6 @@ def test2():
     X = [[0., 0.], [1., 1.]]
     y = [0, 1]
     clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3), random_state=1, activation='relu')
-    help(clf)
     clf.fit(X,y)
     test_sample = [[2., 2.], [-1., -2.]]
     print clf.predict(test_sample)
