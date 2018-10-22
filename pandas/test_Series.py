@@ -77,11 +77,24 @@ def test_methods():
     print s.iloc[1:3]
 
 def test_combine():
-    d1 = ['a','b','c']
-    d2 = ['e','f','g','h']
+    d1 = [0, 4,10]
+    d2 = [1, 2, 9, 11]
     s1 = pd.Series(d1)
     s2 = pd.Series(d2)
-    print s1.append(s2)
+    print s1
+    print s2
+    s3 = s1.combine(s2, func=lambda x1, x2: x1 if x1 > x2 else x2, fill_value=20)
+    print s3
+
+def test_combine_first():
+    d1 = [0, 4,10]
+    d2 = [1, 2, 9, 11]
+    s1 = pd.Series(d1)
+    s2 = pd.Series(d2)
+    print s1
+    print s2
+    s3 = s1.combine_first(s2)
+    print s3
 
 def test_plot():
     d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5}
@@ -138,4 +151,5 @@ def test_item():
 #test_value_counts()
 #test_transpose()
 #test_nunique()
-test_item()
+#test_item()
+test_combine_first()

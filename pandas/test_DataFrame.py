@@ -1,4 +1,4 @@
-#!-*- coding=utf-8 -*-
+#! -*- coding=utf-8 -*-
 import pandas as pd
 import numpy as np
 
@@ -22,22 +22,24 @@ def constructDataFrame():
     print df2.join(df3)
 
 def ddlDataFrame():
-    df = pd.DataFrame(np.random.randint(low=0, high=10, size=(3,5)),
-                    columns=['a','b','c','d','e'])
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36],
+                       'd': [11,22,33,44,55,66]})
     print df
     # 这个取列的方法挺奇怪
     df2 = df[['a','b']] 
 
-    df.a
-
     # [:,1]和[:,[2,4]]的输出结果的“格式”是不一样的
     df.iloc[:,1]
     # 取出c,e列
-    df.iloc[:,[2,4]]
+    df.iloc[:,[2,3]]
     df.iloc[:, lambda df:[1,2]]
 
     # 取出a>5的行
     print df[df.a>5]
+
+    df['a'] = df['a'] * 10
+
+    print df
 
 def write_to_file(df):
     df.to_csv('df.csv', sep=',', header=True, index=False)
@@ -91,13 +93,33 @@ def diff():
     #
     print df.diff(periods=2)
 
+def cumsum():
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
+    print df
+    print df.cumsum()
+
 def read_from_file():
     fn = "text_lost.txt"
     df = pd.read_csv(fn, sep=" ")
     print df
     print df.dtypes
 
-groupby()
+
+def apply():
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
+    print df
+    sum = df.apply(lambda x : x.sum())
+    print sum 
+    
+    print df.apply(lambda x : x.sum(), axis=1)
+
+    def fun(x):
+        x['a'] = x['c'] 
+    print df.apply(fun, axis=1)
+
+apply()
+#cumsum()
+#groupby()
 #constructDataFrame()
 #ddlDataFrame()
 #write_to_file(df)
