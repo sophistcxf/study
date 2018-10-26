@@ -142,6 +142,36 @@ def test_item():
     print s
     print s.item()
 
+def test_sort_index():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    s_sort_v = s.sort_values()
+    print s_sort_v
+    s_sort_i = s_sort_v.sort_index()
+    print s_sort_i
+
+def test_keys():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    keys = s.keys()
+    print keys
+    print list(keys)
+    values = s.values
+    print values
+
+def test_items():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    for index, value in s.items():
+        print index, value
+
+def to_frame():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    df = s.to_frame()
+    print df
+
+
 #test_construct()
 #test_plot()
 #test_hist()
@@ -152,4 +182,8 @@ def test_item():
 #test_transpose()
 #test_nunique()
 #test_item()
-test_combine_first()
+#test_combine_first()
+#test_sort_index()
+#test_keys()
+#test_items()
+to_frame()

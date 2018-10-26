@@ -100,10 +100,39 @@ def cumsum():
 
 def read_from_file():
     fn = "text_lost.txt"
+    # 如果没设置 names 和 header，则 header=0，以第0行作为标题
     df = pd.read_csv(fn, sep=" ")
+    print "pd.read_csv(fn, sep=" ")**************************************"
     print df
-    print df.dtypes
+    # 使用第2行（从0开始）作为数据的标题，且是数据的起始行
+    df = pd.read_csv(fn, sep=" ", header=2)
+    print "pd.read_csv(fn, sep=" ", header=2)***************************"
+    print df
+    # 使用第0行和第2行作为标题，并且会跳过中间的数据
+    df = pd.read_csv(fn, sep=" ", header=[0,2])
+    print "pd.read_csv(fn, sep=" ", header=[0,2])**********************"
+    print df
+    # 使用第0列作为行名
+    df = pd.read_csv(fn, sep=" ", index_col=0)
+    print "pd.read_csv(fn, sep=" ", index_col=0)***********************"
+    print df
 
+    # 读入指定列
+    df = pd.read_csv(fn, sep=" ", index_col=0, usecols=["name", "passwd"])
+    print df
+
+    # 要读入的列名可以是 callable 的
+    df = pd.read_csv(fn, sep=" ", usecols = lambda x : x in ["name", "passwd"])
+    print df
+
+    # squeeze=True，如果读入一列，则返回 Series
+    se = pd.read_csv(fn, sep=" ", squeeze=True, usecols=["name"])
+    print type(se)
+    df = pd.read_csv(fn, sep=" ",usecols=["name"])
+    print type(df)
+
+    df = pd.read_csv(fn, sep=" ", prefix="preX", header=2)
+    print df
 
 def apply():
     df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
@@ -117,7 +146,7 @@ def apply():
         x['a'] = x['c'] 
     print df.apply(fun, axis=1)
 
-apply()
+#apply()
 #cumsum()
 #groupby()
 #constructDataFrame()
@@ -126,4 +155,4 @@ apply()
 #print df2array(df)
 #join()
 #diff()
-#read_from_file()
+read_from_file()
