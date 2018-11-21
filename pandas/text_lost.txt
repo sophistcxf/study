@@ -1,5 +1,5 @@
 name age occupation passwd
-zhangsan 20 gongren 111
-lisi 30  shifen
-wangwu  getihu 222
-
+i1 zhangsan 20 gongren 111
+i2 name1 age1 occupation1 passwd1
+i3 lisi 30  shifen
+i4 wangwu  getihu 222

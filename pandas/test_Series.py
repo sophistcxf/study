@@ -77,11 +77,24 @@ def test_methods():
     print s.iloc[1:3]
 
 def test_combine():
-    d1 = ['a','b','c']
-    d2 = ['e','f','g','h']
+    d1 = [0, 4,10]
+    d2 = [1, 2, 9, 11]
     s1 = pd.Series(d1)
     s2 = pd.Series(d2)
-    print s1.append(s2)
+    print s1
+    print s2
+    s3 = s1.combine(s2, func=lambda x1, x2: x1 if x1 > x2 else x2, fill_value=20)
+    print s3
+
+def test_combine_first():
+    d1 = [0, 4,10]
+    d2 = [1, 2, 9, 11]
+    s1 = pd.Series(d1)
+    s2 = pd.Series(d2)
+    print s1
+    print s2
+    s3 = s1.combine_first(s2)
+    print s3
 
 def test_plot():
     d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5}
@@ -103,9 +116,74 @@ def test_hist():
     plt.show()
     '''
 
+def test_value_counts():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s
+    print s.value_counts() 
+    print s.value_counts(sort=True, ascending=True)
+    print s.value_counts(normalize=True)
+
+def test_transpose():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s
+    print s.transpose()
+
+def test_nunique():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s
+    print s.nunique()
+
+def test_item():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s
+    print s.item()
+
+def test_sort_index():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    s_sort_v = s.sort_values()
+    print s_sort_v
+    s_sort_i = s_sort_v.sort_index()
+    print s_sort_i
+
+def test_keys():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    keys = s.keys()
+    print keys
+    print list(keys)
+    values = s.values
+    print values
+
+def test_items():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    for index, value in s.items():
+        print index, value
+
+def to_frame():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    df = s.to_frame()
+    print df
+
+
 #test_construct()
 #test_plot()
-test_hist()
+#test_hist()
 #test_attributes()
 #test_methods()
 #test_combine()
+#test_value_counts()
+#test_transpose()
+#test_nunique()
+#test_item()
+#test_combine_first()
+#test_sort_index()
+#test_keys()
+#test_items()
+to_frame()
