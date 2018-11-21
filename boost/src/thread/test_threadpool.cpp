@@ -27,13 +27,6 @@ void getSocialUpdates(const void* p)
     std::cout << c << std::endl;
 }
 
-void redelivery(const void* p)
-{
-    // gunzip
-    // base64
-    // ...
-}
-
 struct TwoFactor
 {
     TwoFactor(double x, double y) : f1(x), f2(y) {}
@@ -81,7 +74,6 @@ int main()
     ioService.post(boost::bind(getSocialUpdates, "twitter,gmail,facebook,tumblr,reddit"));
     TwoFactor f(2.5, 10.8);
     ioService.post(boost::bind(add, &f));
-    std::string content = "solocar_info";
 
     /*
      * This will stop the ioService processing loop. Any tasks
