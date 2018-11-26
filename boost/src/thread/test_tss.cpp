@@ -32,10 +32,14 @@ public:
 };
 
 boost::thread_specific_ptr<C> value;
+boost::thread_specific_ptr<time_t> tss_time;
 
 void thread_proc(int index)
 {
-    value.reset(new C(index)); // initialize the thread's storage
+    if (value.get() == NULL)
+    {
+        value.reset(new C(index)); // initialize the thread's storage
+    }
     //delete value.get(); 不能显式的 delete value，线程退出时会释放
     for (int i = 0; i < 10; ++i)
         value.get()->v++;
