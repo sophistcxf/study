@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 // 在x两边加上双引号 
@@ -33,9 +34,22 @@ string get_version()
 #error I will be printed as well.
 #endif
 
+#define identifier  \
+do  \
+{   \
+    static std::ostringstream oss; \
+    if (oss.str().empty())  \
+    {   \
+        oss << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__;  \
+    }   \
+    std::cout << oss.str() << std::endl;  \
+} while(false)
+
 void f1()
 {
-	std::cout << __FUNCTION__ << std::endl;
+    std::cout << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << std::endl;
+    identifier;
+    identifier;
 }
 
 int main()
