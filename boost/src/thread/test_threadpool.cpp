@@ -9,10 +9,10 @@
 #include <boost/thread.hpp>
 
 
-void myTask(const void* p)
+void myTask(int i)
 {
-    char* c = (char*)p;
-    std::cout << c << std::endl;
+    std::cout << i << std::endl;
+    sleep(5);
 }
 
 void clearCache(const void*p)
@@ -95,17 +95,20 @@ int main()
      * This will assign tasks to the thread pool. 
      * More about boost::bind: "http://www.boost.org/doc/libs/1_54_0/libs/bind/bind.html#with_functions"
      */
-    while (true)
+    for (int i = 0; i < 10000000; ++i)
     {
-        io_service.post(boost::bind(myTask, "Hello World!"));
+        io_service.post(boost::bind(myTask, i));
+        /*
         io_service.post(boost::bind(clearCache, "./cache"));
         io_service.post(boost::bind(getSocialUpdates, "twitter,gmail,facebook,tumblr,reddit"));
         TwoFactor f(2.5, 10.8);
         io_service.post(boost::bind(add, &f));
         io_service.post(boost::bind(add, 1, 2));
         sleep(5);
+        */
     }
-
+    
+    threadpool.join_all();
     /*
      * This will stop the io_service processing loop. Any tasks
      * you add behind this point will not execute.

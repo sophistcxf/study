@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 // 在x两边加上双引号 
@@ -33,15 +34,53 @@ string get_version()
 #error I will be printed as well.
 #endif
 
+#define identifier  \
+do  \
+{   \
+    static std::ostringstream oss; \
+    if (oss.str().empty())  \
+    {   \
+        oss << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__;  \
+    }   \
+    std::cout << oss.str() << std::endl;  \
+} while(false)
+
+#define identifier_pretty \
+do  \
+{   \
+    static std::ostringstream oss; \
+    if (oss.str().empty())  \
+    {   \
+        std::string s = std::string(__FILE__);  \
+        oss << s.substr(s.rfind("/")+1, std::string::npos)  << ":" << __LINE__ << ":" << __PRETTY_FUNCTION__;  \
+    }   \
+    std::cout << oss.str() << std::endl;  \
+} while(false)
+
+class A
+{
+public:
+    void f1()
+    {
+        identifier;
+        identifier_pretty;
+    }
+};
+
 void f1()
 {
-	std::cout << __FUNCTION__ << std::endl;
+    std::cout << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << std::endl;
+    identifier;
+    identifier;
+    identifier_pretty;
 }
 
 int main()
 {
 	std::cout << __FUNCTION__ << std::endl;
 	f1();
+    A a;
+    a.f1();
   cout << POUND_SIGN(hello world) << endl;
 #ifdef WIN32
   char ch = POUND_AT(a);
@@ -55,3 +94,4 @@ int main()
   paster(10);
   return 0;
 }
+
