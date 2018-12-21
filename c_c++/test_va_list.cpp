@@ -11,6 +11,15 @@
 using namespace std;
 
 
+#define PRINT(format, ...) \
+    do  \
+    {   \
+        char buffer[256] = {0}; \
+        snprintf(buffer, 255, format, ##__VA_ARGS__);   \
+        printf("%s", buffer);   \
+    }   \
+    while (false)
+
 void diy_printf(const char* format, ...)
 {
     va_list vl;
@@ -25,5 +34,6 @@ int main(int argc, char* argv[])
 {
     printf("my name is %s, my age is %d\n", "cxxxxf", 30); 
     diy_printf("my name is %s, my age is %d\n", "cxxxxf", 30); 
+    PRINT("my name is %s, my age is %d\n", "cxxxxf", 30);
     return 0;
 }
