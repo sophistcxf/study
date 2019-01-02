@@ -14,7 +14,8 @@ def test1():
     size = gb.size()
     print size
 
-    gb.hist()
+    #gb.hist()
+    print "groupby describe"
     print gb.describe()
 
     # gb.count 并不是计算每个 group 有多少条记录，在每个 group 下其他元素有多少个有效的(非 np.nan)
@@ -40,6 +41,9 @@ def test1():
 
     print "groupby 0"
     print gb.nth(0)
+
+    print "groupby sum"
+    print gb.sum()
 
 if __name__ == "__main__":
     test1()
