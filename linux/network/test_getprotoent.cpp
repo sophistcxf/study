@@ -14,10 +14,11 @@ int main()
 {
     while (true)
     {
+        /* getprotoent 会打开 /etc/protocols */
         struct protoent* proto = getprotoent();
-        std::cout << proto->p_name << "\t" << proto->p_proto << std::endl;
         if (proto == NULL)
             break;
+        std::cout << proto->p_name << "\t" << proto->p_proto << std::endl;
     }
     return 0;
 }
