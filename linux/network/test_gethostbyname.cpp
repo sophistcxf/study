@@ -15,6 +15,11 @@ extern int h_errno;
 
 int main(int argc, char* argv[])
 {
+    if (argc <= 1)
+    {
+        std::cerr << "exe hostname" << std::endl;
+        return 1;
+    }
     struct hostent* hptr = gethostbyname(argv[1]);
     if (hptr == NULL)
     {
@@ -45,3 +50,8 @@ int main(int argc, char* argv[])
     }
     return 0;
 }
+
+/*!
+ * 测试
+ * 
+ */
