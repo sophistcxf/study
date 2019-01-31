@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     int    socket_fd, connect_fd;
-    struct sockaddr_in     servaddr;
+    struct sockaddr_in servaddr;
     char    buff[4096];
     int     n;
     //初始化Socket
@@ -29,12 +29,12 @@ int main()
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(DEFAULT_PORT);
 
-    if( bind(socket_fd, (struct sockaddr*)&servaddr, sizeof(servaddr)) == -1)
+    if(bind(socket_fd, (struct sockaddr*)&servaddr, sizeof(servaddr)) == -1)
     {
         printf("bind socket error: %s(errno: %d)\n",strerror(errno),errno);
         exit(0);
     }
-    if( listen(socket_fd, 10) == -1)
+    if(listen(socket_fd, 10) == -1)
     {
         printf("listen socket error: %s(errno: %d)\n",strerror(errno),errno);
         exit(0);
