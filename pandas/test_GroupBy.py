@@ -1,6 +1,7 @@
 #! -*- coding=utf-8 -*-
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 def test1():
     df = pd.DataFrame({'a': [1, 1, 3, 2, 5, 6], 'b': [1, 1, 2, 3, 2, 8], 'c': [1, 4, 9, np.nan, 25, 36], \
@@ -10,10 +11,12 @@ def test1():
     gb = df.groupby(['b'])
     print type(gb)
     print gb
+
     print "groupby size"
     # gb.size() return Series
     size = gb.size()
     print size
+    print size.shape
 
     #gb.hist()
     print "groupby describe"

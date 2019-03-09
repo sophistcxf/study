@@ -12,7 +12,9 @@ many plotting functions, which we demonstrate below.
 """
 import matplotlib.pyplot as plt
 
-data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
+#data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
+data = {'1': 10, '2': 15, '3': 5, '4.5': 20}
+#data = {1: 10, 2: 15, 3: 5, 4.5: 20}
 names = list(data.keys())
 values = list(data.values())
 
