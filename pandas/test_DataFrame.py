@@ -30,9 +30,10 @@ def ddlDataFrame():
 
     # [:,1]和[:,[2,4]]的输出结果的“格式”是不一样的
     df.iloc[:,1]
-    # 取出c,e列
-    df.iloc[:,[2,3]]
-    df.iloc[:, lambda df:[1,2]]
+    # 取出第2,3列
+    print df.iloc[:,[1,2]]
+    print df.iloc[:,[1:-1]]
+    print df.iloc[:, lambda df:[1,2]]
 
     # 取出a>5的行
     print df[df.a>5]
@@ -150,9 +151,9 @@ def apply():
 #cumsum()
 #groupby()
 #constructDataFrame()
-#ddlDataFrame()
+ddlDataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
 #diff()
-read_from_file()
+#read_from_file()

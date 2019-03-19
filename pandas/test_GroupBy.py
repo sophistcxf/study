@@ -13,7 +13,7 @@ def test1():
     print gb
 
     print "groupby size"
-    # gb.size() return Series
+    # gb.size() 返回 Series
     size = gb.size()
     print size
     print size.shape
@@ -55,12 +55,12 @@ def test1():
     print s
 
     # 遍历 pandas.core.groupby.DataFrameGroupBy
-    # i 是一个拥有 2 个元素的 tuple
+    # i 是一个拥有 2 个元素的 tuple，i[0]是以tuple形式表示的groupby的列，i[1]是属于此groupby下的记录，以
+    # pandas.core.frame.DataFrame形式表示
     print "iterate pandas.core.groupby.DataFrameGroupBy"
     for i in df.groupby(['a', 'b']):
         print type(i)
         print len(i)
-        # i[0] 是一个 tuple，i[1] 是一个 pandas.core.frame.DataFrame
         print type(i[0])
         print type(i[1])
 
