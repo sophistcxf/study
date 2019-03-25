@@ -19,33 +19,60 @@ print(__doc__)
 import numpy as np
 from sklearn.tree import DecisionTreeRegressor
 import matplotlib.pyplot as plt
+from sklearn import tree
+import graphviz
+import pandas as pd
 
-# Create a random dataset
-rng = np.random.RandomState(1)
-X = np.sort(5 * rng.rand(80, 1), axis=0)
-y = np.sin(X).ravel()
-y[::5] += 3 * (0.5 - rng.rand(16))
 
-# Fit regression model
-regr_1 = DecisionTreeRegressor(max_depth=2)
-regr_2 = DecisionTreeRegressor(max_depth=5)
-regr_1.fit(X, y)
-regr_2.fit(X, y)
+def tree_attr(regr):
+    print regr.n_features_
+    tree = regr.tree_
+    print tree.max_depth
 
-# Predict
-X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
-y_1 = regr_1.predict(X_test)
-y_2 = regr_2.predict(X_test)
+def visualize(clt, idx):
+    dot_str = tree.export_graphviz(clt)
+    s = graphviz.Source(dot_str)
+    s.render(filename='tree_image/image_%d' % idx, format='png')
 
-# Plot the results
-plt.figure()
-plt.scatter(X, y, s=20, edgecolor="black",
+def test_decision_tree():
+    # Create a random dataset
+    rng = np.random.RandomState(1)
+    X = np.sort(5 * rng.rand(80, 1), axis=0)
+    y = np.sin(X).ravel()
+    y[::5] += 3 * (0.5 - rng.rand(16))
+
+    # Fit regression model
+    regr_1 = DecisionTreeRegressor(max_depth=2)
+    regr_2 = DecisionTreeRegressor(max_depth=5)
+    regr_1.fit(X, y)
+    regr_2.fit(X, y)
+
+    s = pd.Series(y)
+    print s.describe()
+
+    #visualize(regr_1, 1)
+    #visualize(regr_2, 2)
+    #exit(0)
+
+    tree_attr(regr_1)
+
+    # Predict
+    X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
+    y_1 = regr_1.predict(X_test)
+    y_2 = regr_2.predict(X_test)
+
+    # Plot the results
+    plt.figure()
+    plt.scatter(X, y, s=20, edgecolor="black",
             c="darkorange", label="data")
-plt.plot(X_test, y_1, color="cornflowerblue",
+    plt.plot(X_test, y_1, color="cornflowerblue",
          label="max_depth=2", linewidth=2)
-plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
-plt.xlabel("data")
-plt.ylabel("target")
-plt.title("Decision Tree Regression")
-plt.legend()
-plt.show()
+    plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
+    plt.xlabel("data")
+    plt.ylabel("target")
+    plt.title("Decision Tree Regression")
+    plt.legend()
+    plt.show()
+
+if __name__ == "__main__":
+    test_decision_tree()
