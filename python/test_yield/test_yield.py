@@ -34,6 +34,8 @@ def endless_generate_object():
     p = foo()
     for i in range(0, 100):
         print p.next() 
+    for i in p:
+        print i
   
 def generate_obj_send():
     def foo():
@@ -56,5 +58,5 @@ def generate_obj_send():
         print p.next()
 
 #simple_test()
-#endless_generate_object()
-generate_obj_send()
+endless_generate_object()
+#generate_obj_send()
