@@ -21,24 +21,62 @@ def constructDataFrame():
 
     print df2.join(df3)
 
-def ddlDataFrame():
-    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36],
+def dml_DataFrame():
+    '''
+    对 DataFrame 进行数据管理
+    '''
+    print 'DataFrame的样子'
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6],
+                       'b': [1, 1, 2, 3, 5, 8],
+                       'c': [1, 4, 9, 16, 25, 36],
                        'd': [11,22,33,44,55,66]})
     print df
-    # 这个取列的方法挺奇怪
-    df2 = df[['a','b']] 
 
-    # [:,1]和[:,[2,4]]的输出结果的“格式”是不一样的
-    df.iloc[:,1]
+    # 取出 index
+    print '取出 index'
+    print 'index 的类型: ', type(df.index)
+    print df.index
+
+    # 取出 column names
+    print '取出 column names'
+    print 'column name 的类型: ', type(df.columns)
+    print df.columns
+
+    # 转置行/列
+    print '转置行/列'
+    print df.T
+
     # 取出第2,3列
+    print '取出第2,3列'
     print df.iloc[:,[1,2]]
-    print df.iloc[:,[1:-1]]
     print df.iloc[:, lambda df:[1,2]]
 
-    # 取出a>5的行
-    print df[df.a>5]
+    # 取出列 b 的第 3 行元素
+    print '取出列 b 的第 3 行元素'
+    print df.at[3, 'b']
+    print 'at 不仅可以访问，还可以修改'
+    df.at[3, 'b'] = 4
+    print df.at[3, 'b']
 
-    df['a'] = df['a'] * 10
+    # df 的中括号里的值其实是 bool 型的 pandas.Series
+    # 取出a>5的行
+    print '取出a>5的行'
+    print df[df.a>5]
+    # 取出 a>=3 且 b < 5 的行
+    print '取出 a>=3 且 b < 5 的行'
+    cond = (df.a>=3) & (df.b<5)
+    print 'cond 的类型: ', type(cond)
+    print 'cond 的值: \n', cond
+    print df[cond]
+
+    # 取出 a<3 || b>=5 的行，即上一个条件的反
+    print '取出 a<3 || b>=5 的行，即上一个条件的反'
+    print df[cond.apply(lambda x: not x)]
+
+    # 修改列a的值
+    print '对列a乘100后，添加为列a_multi100'
+    df['a_multi100'] = df['a'] * 10
+    df['a_multi100'] = df['a_multi100'].apply(lambda x: x*10)
 
     print df
 
@@ -151,7 +189,7 @@ def apply():
 #cumsum()
 #groupby()
 #constructDataFrame()
-ddlDataFrame()
+dml_DataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
