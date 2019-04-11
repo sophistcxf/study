@@ -12,8 +12,9 @@ def figure_with_axes():
     fig.suptitle('with 4 axes')
     x = np.arange(0, 10, 0.2)
     y = np.sin(x)
-    ax_list[0][0].plot(x, y)
+    l = ax_list[0][0].plot(x, y)
     ax_list[0][0].set_title('sin')
+    print l
     plt.show()
 
 figure_with_axes()
