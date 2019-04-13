@@ -16,5 +16,12 @@ def figure_with_axes():
     ax_list[0][0].set_title('sin')
     print l
     plt.show()
+    
+def axes_text():
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.text(1.0, 1.0, s='This is axes_text test')
+    plt.show()
 
-figure_with_axes()
+#figure_with_axes()
+axes_text()
