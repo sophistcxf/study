@@ -63,6 +63,20 @@ def test_category_line():
     plt.plot(x, y)
     plt.show()
 
+def test_sharex_in_one_axes():
+    """
+    在同一个 axes 中画多次，共用 x
+    """
+    x = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    y1 = [1, 2, 3, 4, 3, 2, 1]
+    y2 = [2, 3, 4, 5, 4, 3, 2]
+    ax = plt.plot(x, y1, y2)
+    ax[0].set_label('y1')
+    ax[1].set_label('y2')
+    plt.legend()
+    plt.show()
+
 if __name__ == "__main__":
     #test_plot_return()
-    test_category_line()
+    #test_category_line()
+    test_sharex_in_one_axes()
