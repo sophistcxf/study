@@ -54,6 +54,15 @@ def test_plot_return():
 
     plt.show()
 
+def test_category_line():
+    """
+    测试画折线时，x 坐标是 category，而不是数值
+    """
+    x = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    y = [1, 2, 3, 4, 3, 2, 1]
+    plt.plot(x, y)
+    plt.show()
 
 if __name__ == "__main__":
-    test_plot_return()
+    #test_plot_return()
+    test_category_line()
