@@ -1,4 +1,4 @@
-<root>
+<root attr1="root_attr1" attr2="root_attr2" attr3="10">
   <a>hello</a>
   <b>b</b>
   <c>
@@ -6,6 +6,6 @@
     <c1>c12</c1>
   </c>
 </root>
-<b>b</b>
+<b attr1="attr1" attr2="attr2">b</b>
 <c>c1</c>
 <c>c2</c>
