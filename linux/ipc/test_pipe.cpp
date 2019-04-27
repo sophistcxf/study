@@ -1,10 +1,3 @@
-/*************************************************************************
-  > File Name: test_pipe.cpp
-  > Author: cxxxxf
-  > Mail: sophistcxf@gmail.com
-  > Created Time: Tue 19 Jul 2016 09:36:52 PM CST
- ************************************************************************/
-
 #define _GNU_SOURCE 
 
 #include <iostream>
@@ -33,10 +26,10 @@ int test1()
     read(pipefd[0], read_buf, sizeof(read_buf));
     printf("%s\n", read_buf);
 
-    buf = "I'm cxxxxf";
-    write(pipefd[0], buf, sizeof(buf));
-    read(pipefd[1], read_buf, sizeof(read_buf));
-    printf("%s\n", read_buf);
+    close(pipefd[0]);
+    ssize_t size = write(pipefd[1], buf, sizeof(buf));
+    if (size < 0)
+        std::cout << "write error, errno is " << errno << std::endl;
 }
 
 /*!
@@ -160,6 +153,42 @@ int test7()
     }
 }
 
+/*!
+ * 两个子进程间通信
+ */
+int test8()
+{
+    int pipefd[2];
+    if (pipe(pipefd) == -1)
+        return -1;
+    if (fork() > 0) {
+        // 子进程，关闭读描述符
+        close(pipefd[0]);
+        int i = 0;
+        while (true) {
+            char write_buf[128] = {0};
+            snprintf(write_buf, 127, "I'm child1, This is %d\n", i++); 
+            write(pipefd[1], write_buf, strlen(write_buf) + 1);
+            sleep(1);
+        }
+    }
+    else {
+        // 再 fork 一个子进程
+        if (fork() > 0) {
+            // 第二个子进程，关闭读描述符
+            close(pipefd[1]);
+            while (true) {
+                char read_buf[128] = {0};
+                read(pipefd[0], read_buf, sizeof(read_buf));
+                printf("I'm child2, read msg: %s", read_buf);
+            }
+        }
+        else {
+            /* 父进程直接退出 */
+        }
+    }
+}
+
 // pipe size
 /*
 int test5()
@@ -178,9 +207,11 @@ int test5()
 
 int main()
 {
+    test1();
     //test2();
     //test6();
     //test4();
-    test7();
+    //test7();
+    //test8();
     return 0;
 }
