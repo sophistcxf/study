@@ -70,9 +70,11 @@ def test_sharex_in_one_axes():
     x = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     y1 = [1, 2, 3, 4, 3, 2, 1]
     y2 = [2, 3, 4, 5, 4, 3, 2]
-    ax = plt.plot(x, y1, y2)
+    y3 = [3, 4, 5, 6, 5, 4, 3]
+    ax = plt.plot(x, y1, x, y2, x, y3)
     ax[0].set_label('y1')
     ax[1].set_label('y2')
+    ax[2].set_label('y3')
     plt.legend()
     plt.show()
 

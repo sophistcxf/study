@@ -3,10 +3,13 @@ import pandas as pd
 import numpy as np
 
 def constructDataFrame():
-    # 通过numpy ndarray构造
-    #通过dict构造，每一列的元素个数必须一样，否则抛异常ValueError('arrays must all be same length')
-    #index的大小要与行数一致，否则抛异常ValueError: Shape of passed values is (4, 2), indices imply (4, 1)，这个提示
-    #信息很奇怪，先列后行
+    '''
+    构造 DataFrame
+    * 通过numpy ndarray构造
+    * 通过dict构造，每一列的元素个数必须一样，否则抛异常ValueError('arrays must all be same length')
+    index的大小要与行数一致，否则抛异常ValueError: Shape of passed values is (4, 2), indices imply (4, 1)，这个提示
+    信息很奇怪，先列后行
+    '''
     d = {'col1':[1,2], 'col2':[3,4], 'col3':[5,6], 'col4':["str",8]}
     df = pd.DataFrame(data=d, index=["row1", "row2"])
 
@@ -45,6 +48,12 @@ def dml_DataFrame():
     # 转置行/列
     print '转置行/列'
     print df.T
+
+    # 取出 'a'
+    print type(df[['a']])   # 这样取出是 DataFrame
+    print type(df['a'])     # 这样取出是 Series
+    # 取出 'a','b'
+    print type(df[['a', 'b']])  # 这样取出是 DataFrame
 
     # 取出第2,3列
     print '取出第2,3列'
@@ -174,6 +183,9 @@ def read_from_file():
     print df
 
 def apply():
+    '''
+    测试 apply 函数
+    '''
     df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
     print df
     sum = df.apply(lambda x : x.sum())
