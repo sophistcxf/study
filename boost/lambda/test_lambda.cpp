@@ -18,13 +18,20 @@ void test_2();
 
 int main()
 {
-  return 0;
+    test_1();
+    return 0;
 }
 
 void test_1()
 {
-  using namespace boost::lambda;
-  (std::cout << _1 << " " << _2 << " " << _3 << " ")("Hello", "friend", "my");
+  (std::cout << boost::lambda::_1<< " " 
+             << boost::lambda::_2 << " " 
+             << boost::lambda::_3 << " "<<std::endl)("Hello", "friend", "my");
+  boost::function<void(const std::string&, const std::string&, const std::string&)> f = (std::cout << boost::lambda::_1 << " "
+                                                                               << boost::lambda::_2 << " "
+                                                                               << boost::lambda::_3 << " "
+                                                                               << std::endl);
+  f("Hello", "friend", "my");
 } 
 
 class C
@@ -33,6 +40,7 @@ class C
     C(int n) : num(n) {}
     int num;
 };
+/*
 void test_2()
 {
   std::vector<C> vec;
@@ -44,3 +52,4 @@ void test_2()
   boost::function<void(const C&, const C&)> f = return _1.num < _2.num;
   std::stable_sort(vec.begin(), vec.end(), boost::lambda::_1.num > boost::lambda::_2.num);
 }
+*/

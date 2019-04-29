@@ -78,21 +78,23 @@ int test4()
 }
 
 // pipe size
+/*
 int test5()
 {
     int pipefd[2];
     if (pipe(pipefd) == -1) return -1;
     struct utsname kernel_info;
-    if (uname(&kernell_info) < 0) return -1;
+    if (uname(&kernel_info) < 0) return -1;
 
     int ret = fcntl(pipefd[1], F_GETPIPE_SZ);  
     if (ret < 0) return -1;
     printf("PIPESIZE: %d\n", ret);
     return 0;
 }
+*/
 
 int main()
 {
-    test5();
+    test1();
     return 0;
 }
