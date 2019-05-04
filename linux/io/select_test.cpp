@@ -63,7 +63,7 @@ void test2()
 {
     fd_set fds;
     FD_ZERO(&fds);
-    FD_SET(0, &fds);
+    FD_SET(STDIN_FILENO, &fds);
     int maxfd = 1;
     while (true) {
         int ret = select(maxfd, &fds, NULL, NULL, NULL);
