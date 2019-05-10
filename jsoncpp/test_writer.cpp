@@ -18,10 +18,15 @@ int main()
     vec.append(Json::Value(2));
     vec.append(Json::Value(3));
 
+    unsigned long long ull = 1234;
+
     event["competitors"]["home"]["name"] = "Liverpool";
     event["competitors"]["away"]["code"] = 89223;
     event["competitors"]["away"]["name"] = "Aston Villa";
     event["competitors"]["away"]["code"]=vec;
+
+    /* Json::Value 没有对 unsigned long long 的构造函数 */
+    //event["ull"] = ull;
 
     std::cout << event << std::endl;
 
