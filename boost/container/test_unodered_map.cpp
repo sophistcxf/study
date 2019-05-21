@@ -13,20 +13,6 @@
 #include <vector>
 using namespace std;
 
-void test_1();
-void test_2();
-
-int main()
-{
-    typedef boost::unordered_map<int, std::vector<int> > unordered_map;
-    unordered_map m;
-    for (int i = 0; i < 10; ++i)
-      m.insert(make_pair(i, std::vector<int>()));
-    m.insert(make_pair(9, std::vector<int>()));
-    for (unordered_map::iterator it = m.begin(); it != m.end(); ++it)
-      cout << it->first << endl;
-}
-
 void test_1()
 {
   typedef boost::unordered_map<std::string, int> unordered_map;
@@ -71,3 +57,15 @@ void test_2()
   }
   cout << time(NULL) - b << endl;
 }
+
+/*!
+ * 测试 std::map 和 boost::unordered_map 性能差多少
+ */
+void test3
+{
+}
+
+int main()
+{
+}
+
