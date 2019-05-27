@@ -1,0 +1,7 @@
+# 《统计学习方法》表5.1 货款申请样本数据表
+id,age,work,house,credit,consent
+1,youth,n,n,ordinary,n
+2,youth,n,n,good,n
+3,youth,y,n,good,y
+4,youth,y,y,ordinary,y
+5,youth,n,n,ordinary,n
