@@ -5,3 +5,13 @@ id,age,work,house,credit,consent
 3,youth,y,n,good,y
 4,youth,y,y,ordinary,y
 5,youth,n,n,ordinary,n
+6,middle,n,n,common,n
+7,middle,n,n,good,n
+8,middle,y,y,good,y
+9,middle,n,y,verygood,y
+10,middle,n,y,verygood,y
+11,old,n,y,verygood,y
+12,old,n,y,good,y
+13,old,y,n,good,y
+14,old,y,n,verygood,y
+15,old,n,n,common,n
