@@ -171,6 +171,16 @@ def to_frame():
     df = s.to_frame()
     print df
 
+def test_unique():
+    '''
+    unique 的返回值是 numpy.ndarray 类型
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    u = s.unique()
+    print u
+    print type(u)
+
 
 #test_construct()
 #test_plot()
@@ -186,4 +196,5 @@ def to_frame():
 #test_sort_index()
 #test_keys()
 #test_items()
-to_frame()
+#to_frame()
+test_unique()

@@ -96,6 +96,7 @@ def write_to_file(df):
 
 def df2array(df):
     arr = df.values 
+    print type(arr)
     return arr
 
 def join():
@@ -187,21 +188,32 @@ def apply():
     测试 apply 函数
     '''
     df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
+    print '原始表'
     print df
-    sum = df.apply(lambda x : x.sum())
-    print sum 
+
+    print 'sum每列'
+    print df.apply(lambda x : x.sum())
     
+    print 'sum 每行'
     print df.apply(lambda x : x.sum(), axis=1)
 
+    print '在 apply 中对一列赋值'
     def fun(x):
         x['a'] = x['c'] 
+        return x
     print df.apply(fun, axis=1)
 
-#apply()
+    print '在 apply 中对 dataframe 添加新列'
+    def fun1(x):
+        x['d'] = x['c']
+        return x
+    print df.apply(fun1, axis=1)
+
+apply()
 #cumsum()
 #groupby()
 #constructDataFrame()
-dml_DataFrame()
+#dml_DataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
