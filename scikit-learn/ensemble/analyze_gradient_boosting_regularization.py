@@ -8,6 +8,8 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 import graphviz
 
+help(tree)
+
 def analyze_clf(clf):
     for idx, i in enumerate(clf.estimators_):
         sub_estimator = i[0]
