@@ -119,10 +119,20 @@ def groupby():
     d = {'color':['red','blue','red','blue','black','red'], 'count':[1,2,3,3,2,1], 'age':[20,25,25,20,30,30]}
     df = pd.DataFrame(data=d)
     for key, grp in df.groupby(["color"]):
+        '''
+        当 groupby 只按一列时，key 是元素
+        '''
+        print type(key)
+        print type(grp)
         print key
         print grp
 
     for key, grp in df.groupby(['color','count']):
+        '''
+        当 groupby 按多列时，key 是元组
+        '''
+        print type(key)
+        print type(grp)
         print key
         print grp
 
@@ -209,9 +219,9 @@ def apply():
         return x
     print df.apply(fun1, axis=1)
 
-apply()
+#apply()
 #cumsum()
-#groupby()
+groupby()
 #constructDataFrame()
 #dml_DataFrame()
 #write_to_file(df)
