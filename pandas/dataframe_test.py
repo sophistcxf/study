@@ -1,6 +1,8 @@
 #! -*- coding=utf-8 -*-
 import pandas as pd
 import numpy as np
+from sklearn import datasets
+import matplotlib.pyplot as plt
 
 def constructDataFrame():
     '''
@@ -219,9 +221,20 @@ def apply():
         return x
     print df.apply(fun1, axis=1)
 
+def plot_scatter():
+    '''
+    根据两列画散点图
+    '''
+    iris_datas = datasets.load_iris() 
+    iris = pd.DataFrame(iris_datas.data, columns=['SpealLength', 'Spealwidth', 'PetalLength', 'PetalLength'])
+    print iris.shape
+    iris.plot(kind='scatter', x='SpealLength', y='PetalLength')
+    plt.show()
+
+
 #apply()
 #cumsum()
-groupby()
+#groupby()
 #constructDataFrame()
 #dml_DataFrame()
 #write_to_file(df)
@@ -229,3 +242,4 @@ groupby()
 #join()
 #diff()
 #read_from_file()
+plot_scatter()
