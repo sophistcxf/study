@@ -25,18 +25,22 @@ int get_msg(const char* path, key_t& key)
     return id;
 }
 
-void recs_msg(int msgid)
+void recs_msg(int msgid, int mtype)
 {
     while (true) {
         mymesg mesg;
         memset(&mesg, 0, sizeof(mesg));
-        msgrcv(msgid, &mesg, sizeof(mesg.mtext), 0, 0);
+        msgrcv(msgid, &mesg, sizeof(mesg.mtext), mtype, 0);
         print_mesg(&mesg);
     }
 }
 
 int main(int argc, char* argv[])
 {
+    int mtype = 0;
+    if (argc > 1) {
+        mtype = atoi(argv[1]);
+    }
     char* path = getcwd(NULL, 0);
     std::cout << "path: " << path << std::endl;
     key_t key;
@@ -46,7 +50,7 @@ int main(int argc, char* argv[])
         return -1;
     }
     std::cout << "get msg queue successfully, id: " << id << " key: " << key <<
-    " path: " << path << std::endl;
-    recs_msg(id);
+    " path: " << path << "mtype " << mtype << std::endl;
+    recs_msg(id, mtype);
     return 0;
 }
