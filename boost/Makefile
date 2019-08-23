@@ -24,5 +24,8 @@ $(TUTORIAL_FMT_STREAM):
 $(TEST_TRIVIAL_LOGGING):
 	g++ -o $(TEST_TRIVIAL_LOGGING) $(INCLUDE_PATH) $(CFLAGS) $(TEST_TRIVIAL_LOGGING).cpp -L../lib -lboost_log -lboost_system -lboost_thread -lpthread -lrt
 
+test_lexicalcase:
+	g++ test_lexicalcase.cpp -I ../third/linux/include/boost/
+
 clean:
 	rm -f $(TARGETS)
