@@ -231,6 +231,19 @@ def plot_scatter():
     iris.plot(kind='scatter', x='SpealLength', y='PetalLength')
     plt.show()
 
+def plot_hist():
+    '''
+    画直方图 
+    '''
+    iris_data = datasets.load_iris()
+    iris = pd.DataFrame(iris_data.data, columns=['SpealLength', 'Spealwidth', 'PetalLength', 'PetalLength'])
+    print iris.describe()
+    iris.hist(column='SpealLength', bins=100)
+    # 下面的 hist 会再创建一个 figure
+    iris.hist(column=['SpealLength', 'Spealwidth'])
+    plt.show()
+    pass
+
 
 #apply()
 #cumsum()
@@ -242,4 +255,5 @@ def plot_scatter():
 #join()
 #diff()
 #read_from_file()
-plot_scatter()
+#plot_scatter()
+plot_hist()
