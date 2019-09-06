@@ -37,6 +37,11 @@ def dml_DataFrame():
                        'd': [11,22,33,44,55,66]})
     print df
 
+    print type(df)
+
+    # df.a 是一个 Series
+    print type(df.a)
+
     # 取出 index
     print '取出 index'
     print 'index 的类型: ', type(df.index)
@@ -249,11 +254,11 @@ def plot_hist():
 #cumsum()
 #groupby()
 #constructDataFrame()
-#dml_DataFrame()
+dml_DataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
 #diff()
 #read_from_file()
 #plot_scatter()
-plot_hist()
+#plot_hist()

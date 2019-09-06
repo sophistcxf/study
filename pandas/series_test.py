@@ -181,6 +181,33 @@ def test_unique():
     print u
     print type(u)
 
+def test_operator():
+    '''
+    测试 series 可以与哪些操作符混用
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+
+    print s
+
+    # t1 是一个 series
+    s_t = s>1
+    print type(s_t)
+    print s_t.describe()
+
+    s_t = s-1
+    print type(s_t)
+    print s_t
+
+    # 返回是一个 bool 型 false
+    s_t = 1 in s
+    print type(s_t)
+    print s_t
+
+    # 返回 bool 型 true
+    s_t = 'a' in s
+    print type(s_t)
+    print s_t
 
 #test_construct()
 #test_plot()
@@ -197,4 +224,5 @@ def test_unique():
 #test_keys()
 #test_items()
 #to_frame()
-test_unique()
+#test_unique()
+test_operator()
