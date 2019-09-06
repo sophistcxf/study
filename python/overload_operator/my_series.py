@@ -15,6 +15,13 @@ class Series():
     def __contains__(self, v):
         return v in self.buf
 
+
+    '''
+    支持 abs
+    '''
+    def __abs__(self):
+        return [ abs(v) for v in self.buf ]
+
     def to_string(self):
         return ','.join(map(str, self.buf))
 
@@ -28,3 +35,5 @@ print s.to_string()
 
 print 1 in s
 print 6 in s
+
+print abs(s)
