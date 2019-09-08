@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void test1()
 {
@@ -15,8 +16,26 @@ void test1()
     delete [] p;
 }
 
+/*
+ * 测试 sbrk 分配的内存
+ */
+void test2()
+{
+    char* p = (char*)sbrk(2048);
+    printf("%p\n", p);
+    getchar();
+}
+
+/*
+ * 什么都不调用
+ */
+void test3()
+{
+    getchar();
+}
+
 int main(int argc, char* argv[])
 {
-    test1();
+    test3();
     return 0;
 }
