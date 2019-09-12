@@ -15,7 +15,7 @@ def test_construct():
     # 如果有'f'返回s['f']，没有返回9999
     print s.get('f', 9999)
 
-    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5}
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
     s = pd.Series(d)
     print s
 
@@ -185,7 +185,7 @@ def test_operator():
     '''
     测试 series 可以与哪些操作符混用
     '''
-    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':0}
     s = pd.Series(d)
 
     print s
@@ -206,6 +206,15 @@ def test_operator():
 
     # 返回 bool 型 true
     s_t = 'a' in s
+    print type(s_t)
+    print s_t
+
+    s_t = abs(s)
+    print type(s_t)
+    print s_t
+
+    #s_t = not s
+    s_t = s_t.apply(lambda x: not x)
     print type(s_t)
     print s_t
 
