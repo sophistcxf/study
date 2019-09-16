@@ -120,6 +120,7 @@ def test_value_counts():
     d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
     s = pd.Series(d)
     print s
+    print 'series value_counts type: ', type(s.value_counts())
     print s.value_counts() 
     print s.value_counts(sort=True, ascending=True)
     print s.value_counts(normalize=True)
@@ -233,7 +234,7 @@ def to_dict():
 #test_attributes()
 #test_methods()
 #test_combine()
-#test_value_counts()
+test_value_counts()
 #test_transpose()
 #test_nunique()
 #test_item()
@@ -244,4 +245,4 @@ def to_dict():
 #to_frame()
 #test_unique()
 #test_operator()
-to_dict()
+#to_dict()
