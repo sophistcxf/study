@@ -238,6 +238,13 @@ def test_cumsum():
     s = pd.Series(d)
     print s.cumsum()
 
+    '''
+    如果遇到 np.nan，则当前元素的 cumsum 是 NaN
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':np.nan, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s.cumsum()
+
 def test_cummax():
     '''
     cummax 得到当前行与前面行的最大值
@@ -281,7 +288,7 @@ def test_cumprod():
 #test_unique()
 #test_operator()
 #to_dict()
-#test_cumsum()
+test_cumsum()
 #test_cummax()
 #test_cummin()
-test_cumprod()
+#test_cumprod()
