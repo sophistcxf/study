@@ -144,10 +144,15 @@ def test_item():
     print s.item()
 
 def test_sort_index():
+    '''
+    按 index 或 value 排序
+    '''
     d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
     s = pd.Series(d)
+    # 按 value 排序
     s_sort_v = s.sort_values()
     print s_sort_v
+    # 按 index 排序
     s_sort_i = s_sort_v.sort_index()
     print s_sort_i
 
@@ -228,13 +233,34 @@ def to_dict():
     to_d = dict(s)
     print to_d
 
+def test_cumsum():
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s.cumsum()
+
+def test_cummax():
+    '''
+    cummax 得到当前行与前面行的最大值
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s.cummax()
+
+def test_cummin():
+    '''
+    cummax 得到当前行与前面行的最小值
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s.cummin()
+
 #test_construct()
 #test_plot()
 #test_hist()
 #test_attributes()
 #test_methods()
 #test_combine()
-test_value_counts()
+#test_value_counts()
 #test_transpose()
 #test_nunique()
 #test_item()
@@ -246,3 +272,6 @@ test_value_counts()
 #test_unique()
 #test_operator()
 #to_dict()
+#test_cumsum()
+#test_cummax()
+test_cummin()
