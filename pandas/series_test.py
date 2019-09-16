@@ -218,6 +218,15 @@ def test_operator():
     print type(s_t)
     print s_t
 
+def to_dict():
+    '''
+    Series 是否可以转为列名为 key 的 dict
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    to_d = dict(s)
+    print to_d
+
 #test_construct()
 #test_plot()
 #test_hist()
@@ -234,4 +243,5 @@ def test_operator():
 #test_items()
 #to_frame()
 #test_unique()
-test_operator()
+#test_operator()
+to_dict()

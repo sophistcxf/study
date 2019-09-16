@@ -216,6 +216,9 @@ def apply():
 
     print '在 apply 中对一列赋值'
     def fun(x):
+        # x 的 type 是一个 Series，把 data frame 的一行作为一个 Series，row name 是 data frame 的列名
+        print 'x type: ', type(x)
+        print x
         x['a'] = x['c'] 
         return x
     print df.apply(fun, axis=1)
@@ -249,12 +252,27 @@ def plot_hist():
     plt.show()
     pass
 
+def iter_rows():
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
 
-#apply()
+def test_in():
+    '''
+    测试 for i in df
+    '''
+    df = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 1, 2, 3, 5, 8], 'c': [1, 4, 9, 16, 25, 36]})
+    print df
+    for i in df:
+        print 'i type: ', type(i)
+        print i
+        # df[i] 的类型是 Series
+        print 'df[i] type: ', type(df[i])
+        print df[i]
+
+apply()
 #cumsum()
 #groupby()
 #constructDataFrame()
-dml_DataFrame()
+#dml_DataFrame()
 #write_to_file(df)
 #print df2array(df)
 #join()
@@ -262,3 +280,4 @@ dml_DataFrame()
 #read_from_file()
 #plot_scatter()
 #plot_hist()
+#test_in()
