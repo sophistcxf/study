@@ -254,6 +254,15 @@ def test_cummin():
     s = pd.Series(d)
     print s.cummin()
 
+def test_cumprod():
+    '''
+    cumprod 得到累积的积
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s.cumprod()
+
+
 #test_construct()
 #test_plot()
 #test_hist()
@@ -274,4 +283,5 @@ def test_cummin():
 #to_dict()
 #test_cumsum()
 #test_cummax()
-test_cummin()
+#test_cummin()
+test_cumprod()
