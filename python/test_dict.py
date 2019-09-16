@@ -42,6 +42,19 @@ def test_asterisk():
     d = {'a':1, 'c':2, 'e':3}
     func(**d)
 
+def test_max():
+    d = {'a':1, 'b':2, 'c':3, 'd':-1, 'e':2, 'f':100, 'g':-20}
+    # 对 dict 用 max 得到的是 key 的最大值和最小值
+    print max(d)
+    print min(d)
+
+    # 得到的是 value 最大值、最小值对应的 key
+    print max(d, key=d.get)
+    print min(d, key=d.get)
+    print d.get
+
+
 if __name__ == "__main__":
     #test_view()
-    test_asterisk()
+    #test_asterisk()
+    test_max()
