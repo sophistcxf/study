@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn import datasets
 import matplotlib.pyplot as plt
+import copy
 
 def constructDataFrame():
     '''
@@ -26,7 +27,7 @@ def constructDataFrame():
 
     print df2.join(df3)
 
-def dml_DataFrame():
+def dml():
     '''
     对 DataFrame 进行数据管理
     '''
@@ -84,6 +85,25 @@ def dml_DataFrame():
     print 'cond 的类型: ', type(cond)
     print 'cond 的值: \n', cond
     print df[cond]
+    rlt = df[cond]
+    # rlt 与 df 是否是同一个 id？———— 不同的 id
+    # 修改 rlt 是否会修改 df？————
+    print 'df id: ', id(df)
+    print 'rlt id: ', id(rlt)
+    '''
+    这句是非法的 A value is trying to be set on a copy of a slice from a DataFrame
+    See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+    '''
+    rlt['a'] = rlt.a + 10
+    print df.a
+    print rlt.a
+
+
+
+    rlt = copy.deepcopy(df[cond])
+    rlt['a'] = rlt.a + 10
+    print df.a
+    print rlt.a
 
     # 取出 a<3 || b>=5 的行，即上一个条件的反
     print '取出 a<3 || b>=5 的行，即上一个条件的反'
@@ -268,11 +288,11 @@ def test_in():
         print 'df[i] type: ', type(df[i])
         print df[i]
 
-apply()
+#apply()
 #cumsum()
 #groupby()
 #constructDataFrame()
-#dml_DataFrame()
+dml()
 #write_to_file(df)
 #print df2array(df)
 #join()

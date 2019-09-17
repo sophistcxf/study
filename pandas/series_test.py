@@ -38,24 +38,37 @@ def test_construct():
     print s
 
 def test_attributes():
-    d = [['a','b','c'], ['a1','b1', 'c1'], ['a2','b2','c2']]
+    d = [['a','b','c'], ['a1','b1', 'c1'], ['a2','b2','c2'], ['a3', 'b3', 'c3']]
     s = pd.Series(d)
     print s
     
     print s.T
-    print s.asobject
-    print s.axes
+    #print s.asobject   DEPRECATED
+    print 's.axes: ', s.axes
     # type是buffer
-    print type(s.data)
-    print s.iat
-    print s.index
-    print s.ix
-    print s.loc
-    print s.ndim
-    print s.shape
-    print s.size
-    print s.strides
+    #print type(s.data) DEPRECATED
+    print 's.iat: ', s.iat
+    print 's.iloc: ', s.iloc
+    print 's.index: ', s.index
+    print 's.ix: ', s.ix
+    print 's.loc: ', s.loc
+    print 's.ndim: ', s.ndim
+    print 's.shape: ', s.shape
+    print 's.size: ', s.size
+    #print s.strides    DEPRECATED
     print s.values
+    print 's.name: ', s.name
+    print 's.real: ', s.real
+
+    '''
+    is_unique 这个属性很诡异
+    print 's.is_unique: ', s.is_unique
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print s
+    print 'type(s.is_unique): ', type(s.is_unique)
+    print 's.is_unique: ', s.is_unique
+    '''
 
 def test_methods():
     d = [['1','2','3'], ['-1','-2', '-3'], ['4','5','6']]
@@ -138,10 +151,19 @@ def test_nunique():
     print s.nunique()
 
 def test_item():
+    '''
+    直接遍历 Series，遍历的是 value
+    '''
     d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
     s = pd.Series(d)
     print s
     print s.item()
+
+def test_get():
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    print s.get('a')
+    print s.get(4)
 
 def test_sort_index():
     '''
@@ -170,6 +192,16 @@ def test_items():
     s = pd.Series(d)
     for index, value in s.items():
         print index, value
+
+def test_iter():
+    '''
+    遍历一个 Series
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
+    s = pd.Series(d)
+    for i in s:
+        print type(i)
+        print i
 
 def to_frame():
     d = {'a':1, 'b':2, 'c':3, 'd':2, 'e':5, 'f':10, 'g':1, 'h':1}
@@ -269,11 +301,31 @@ def test_cumprod():
     s = pd.Series(d)
     print s.cumprod()
 
+def test_max():
+    '''
+    测试 max
+    '''
+    d = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':0}
+    s = pd.Series(d)
+    print max(s) 
+
+def select_by_index():
+    '''
+    按 index 筛选
+    '''
+    d = ['a', 'c', 'e', 'b', 'f', 'i', 'h']
+    s = pd.Series(d)
+    print s
+    print 'type(s.index): ', type(s.index)
+    select_index = s.index[s.index>3]
+    print 'select index type: ', type(select_index)
+    print 'loc type: ', type(s.loc[select_index])
+    print s.loc[select_index]
 
 #test_construct()
 #test_plot()
 #test_hist()
-#test_attributes()
+test_attributes()
 #test_methods()
 #test_combine()
 #test_value_counts()
@@ -288,7 +340,11 @@ def test_cumprod():
 #test_unique()
 #test_operator()
 #to_dict()
-test_cumsum()
+#test_cumsum()
 #test_cummax()
 #test_cummin()
 #test_cumprod()
+#test_max()
+#test_iter()
+#test_get()
+#select_by_index()
