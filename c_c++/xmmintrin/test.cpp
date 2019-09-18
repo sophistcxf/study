@@ -1,10 +1,3 @@
-/*************************************************************************
-  > File Name: test.cpp
-  > Author: xiangfei.cui
-  > Mail: xiangfei.cui@alibaba-inc.com
-  > Created Time: Wed 01 Aug 2018 10:26:02 PM CST
- ************************************************************************/
-
 #include <iostream>
 #include <stdlib.h>
 #include <xmmintrin.h>
