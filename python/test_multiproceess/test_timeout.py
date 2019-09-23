@@ -10,14 +10,16 @@ import time
 
 def sleep(sec):
     print >> sys.stderr, 'sleep %d secs' % sec
-    #time.sleep(sec)
-    while True:
-        time.sleep(1)
+    time.sleep(sec)
 
 def test():
-    p = Process(target=sleep, args=(1000,))
+    p = Process(target=sleep, args=(5,))
+    p.daemon = True
     p.start()
     print 'pid: ', p.pid
     p.join(1)
+    if p.is_alive():
+        print >> sys.stderr, 'timeout'
+        p.terminate()
 
 test()
