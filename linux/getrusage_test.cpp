@@ -6,6 +6,7 @@
  ************************************************************************/
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #include <sys/resource.h>
@@ -34,6 +35,14 @@ void test1()
 {
     struct rusage ru;
     int rlt = getrusage(RUSAGE_SELF, &ru);
+    output_rusage(&ru);
+    std::vector<int> v(1024*1024*400);
+    rlt = getrusage(RUSAGE_SELF, &ru);
+    output_rusage(&ru);
+    int sum = 0;
+    for (int i = 0; i < v.size(); ++i)
+        sum += v[i];
+    rlt = getrusage(RUSAGE_SELF, &ru);
     output_rusage(&ru);
 }
 
