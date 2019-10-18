@@ -21,14 +21,8 @@ def test_gzip():
     f.write(s.getvalue())
     f.close()
 
-    # 直接从上面的 StringIO 读是不行的，必须要重新 copy 一份
-    print "read from StringIO directly: ",
-    gzipper_2 = gzip.GzipFile(mode="rb", fileobj=s)
-    data = gzipper_2.read()
-    print data
-
-    # 从 StringIO 中读
-    s = StringIO.StringIO(s.getvalue())
+    # 从 StringIO 中读压缩后的数据
+    s.seek(0)
     print "read from StringIO: ",
     gzipper_2 = gzip.GzipFile(mode="rb", fileobj=s)
     data = gzipper_2.read()
@@ -42,6 +36,7 @@ def test_gzip():
     gzipper_2 = gzip.GzipFile(mode="rb", fileobj=s)
     data = gzipper_2.read()
     print data
+
 
 if __name__ == "__main__":
     test_gzip()
