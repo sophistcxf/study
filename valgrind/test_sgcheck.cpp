@@ -11,13 +11,10 @@
  *http://valgrind.org/docs/manual/sg-manual.html#sg-manual.cmp-w-memcheck
  */
 
-#include <iostream>
-using namespace std;
-
 int main()
 {
     int i, a[10];
-    for (i = 0; i <= 10; ++i)
+    for (i = 0; i <= 8; ++i)
     {
         a[i] = 10;
     }
