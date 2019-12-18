@@ -1,0 +1,22 @@
+<route Vers="4.0" SdkVer="10.21.0.34" Type="4" Flag="8786106" ContentOptions="8601790" Uuid="863559034830928" Source="amap" Invoker="navi" Reroute="1" Silence="0" Plate="%E4%BA%ACLE9727" NaviID="123da194994e79f2f4cb4451c48c6436" ThreeD="1" PlayStyle="2" SoundType="9" RouteMode="14" RequestIndex="1" RerouteIndex="0">
+  <vehicle type="0" vehicleFlag="0"/>
+  <location Type="0"/>
+  <destination Name="%E5%A4%A9%E7%AB%BA%E8%8A%B1%E5%9B%AD(%E5%8C%973%E9%97%A8)" ParentID="B000A81JEL" ParentRel="101" POIID="B000A84Q0H" Typecode="991401" NaviExtCode="2"/>
+  <StartAngle>
+    <Angle type="4" gps="311.299988" comp="4.074852" radius="-1.000000" sigType="4" fittingDir="-1.000000" matchingDir="311.855896">265.872833</Angle>
+    <Credibility gps="0.921881" fitting="0.000000">1.000000</Credibility>
+    <Speed>12</Speed>
+  </StartAngle>
+  <StartLocate Precision="13.653000" Speed="0"/>
+  <jump type="0" sa=""/>
+  <startpoint Type="0">
+    <x>116.334045</x>
+    <y>39.970715</y>
+  </startpoint>
+  <endpoint Type="2">
+    <x>116.566643</x>
+    <y>40.061897</y>
+  </endpoint>
+  <roadlinks IDType="3" id="3794002939" updateType="0">5121407334049906747;264;284;1622;-1;-1994;1766;-1;-1490;84;-1;1224;78;-1;2;-8589934329;-1;-1578;25;-1;1535;-2;1;-1886;956;556;1;-539;-870;5;-1;-340;242;-1;4294968504;-1447;239;1408;734439405981;55;170;-1;662;-1;4;1013;-1;-1014;5;-1;4294966694;4;1;-4;-123;131;1;1;38;-1;-35;-257;12884902310;-1;1725;-1713;-185;195;1386;4294965588;-1;816;-810;1;6;1;690;1;-681;516;55834574342;576;-785;5;2;1;-2;60;-1;687;-4294967662;-82;2;-369367186251;1;-1456;40;4294967201;25;1;95;-25769803842;4294967218;157;1;176093659091;1;-14;3;270;4294966953;-23;-94489280449;1;-40;1;131;79;-1;-116;255;-1;-257;-62;336;-1;-198;1;-8589934701;-1;91;4;1;39;-25769803694;21;1;498;-1;-712;933;-1;-1;77;1</roadlinks>
+  <PrevPath time="4533" distance="30027"/>
+</route>
