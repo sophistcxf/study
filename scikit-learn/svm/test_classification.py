@@ -77,6 +77,38 @@ def test2():
         Z = Z.reshape(xx.shape)
         sub_ax.contourf(xx, yy, Z, alpha=0.5)
 
+    '''
+    以上例子，模型的C=1，rbf和poly未完全拟合，得分是0.87
+    通过修改C，增大分类错误的惩罚，能更好的拟合训练样本
+    '''
+    fig, ax = plt.subplots(2,2)
+    ax = ax.flatten()
+
+    ax[0].scatter(X[y==0][:,0], X[y==0][:, 1], color="red")
+    ax[0].scatter(X[y==1][:,0], X[y==1][:, 1], color="green")
+    for i, kernel in enumerate(["linear", "rbf", "poly"]):
+        sub_ax = ax[i+1]
+        sub_ax.scatter(X[y==0][:,0], X[y==0][:, 1], color="red")
+        sub_ax.scatter(X[y==1][:,0], X[y==1][:, 1], color="green")
+        clf = svm.SVC(kernel=kernel, C=100)
+        clf.fit(X, y)
+        print "support vectors:"
+        print clf.support_vectors_
+        print "indices of support vectors: ", clf.support_
+        print "number of support vectors for each class: ", clf.n_support_
+        if kernel == "linear":
+            print "coef_: ", clf.coef_
+        print "dual_coef_: ", clf.dual_coef_
+        print "score: ", clf.score(X, y)
+        print clf.predict([[2., 2.], [-1., -1.]])
+
+        xx, yy = make_meshgrid(X[:,0], X[:,1])
+
+        Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+        Z = Z.reshape(xx.shape)
+        sub_ax.contourf(xx, yy, Z, alpha=0.5)
+
+
     plt.show()
 
 test2()
