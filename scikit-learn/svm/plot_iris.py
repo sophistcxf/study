@@ -33,10 +33,11 @@ kernel and its parameters.
    more realistic high-dimensional problems.
 
 """
-print(__doc__)
+#print(__doc__)
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn import svm, datasets
 
 
@@ -83,6 +84,8 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]
 y = iris.target
 
+df = pd.DataFrame(X)
+
 # we create an instance of SVM and fit out data. We do not scale our
 # data since we want to plot the support vectors
 C = 1.0  # SVM regularization parameter
@@ -109,6 +112,7 @@ for clf, title, ax in zip(models, titles, sub.flatten()):
     plot_contours(ax, clf, xx, yy,
                   cmap=plt.cm.coolwarm, alpha=0.8)
     ax.scatter(X0, X1, c=y, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
+    printf('%s, score %.2f' % (title, clf.score(X, y)))
     ax.set_xlim(xx.min(), xx.max())
     ax.set_ylim(yy.min(), yy.max())
     ax.set_xlabel('Sepal length')
