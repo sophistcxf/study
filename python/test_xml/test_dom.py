@@ -31,20 +31,29 @@ def test1():
         print (subElementObj1[i].firstChild.data)  #显示标签对之间的数据
 
 def test2():
+    '''
+    解析文本的 xml 内容
+    '''
     con = open('test.xml', 'r').read()
 
     print 'xml is'
     print con
 
-    # 得到文档对象
+    '''
+    domobj 是 Document 对象
+    '''
     domobj = xmldom.parseString(con)
     print("xmldom.parse:", type(domobj))
-    # 得到元素对象
+
+    '''
+    elementobj 是 Element 对象
+    '''
     elementobj = domobj.documentElement
     print ("domobj.documentElement:", type(elementobj))
 
-    #获得子标签
-    # subElementObj 是一个 xml.dom.minicompat.NodeList
+    '''
+    subElementObj 是一个 xml.dom.minicompat.NodeList
+    '''
     subElementObj = elementobj.getElementsByTagName("login")
     print ("getElementsByTagName:", type(subElementObj))
 
@@ -68,5 +77,10 @@ def test2():
     subElementObj = elementobj.getElementsByTagName("login")
     login_caption = subElementObj[0].getElementsByTagName('caption')
     help(login_caption[0])
+
+def insight_dom():
+    '''
+    探究 dom 内部
+    '''
 
 test2()
