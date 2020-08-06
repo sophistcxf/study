@@ -18,7 +18,6 @@ void* thread_cb2(void* param);
 
 int main()
 {
-  pthread_cond_wait(&cond_handle, &wait_mutex);
   pthread_t p2;
   pthread_create(&p2, NULL, thread_cb2, NULL);
   pthread_t p1;
