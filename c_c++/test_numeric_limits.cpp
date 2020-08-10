@@ -10,14 +10,34 @@
 #include <time.h>
 using namespace std;
 
+template <typename C>
+void output_range(std::string desc)
+{
+    cout << desc << "\t"
+         << std::numeric_limits<C>::max() << "\t"
+         << std::numeric_limits<C>::min() << "\t"
+         << std::numeric_limits<C>::lowest() << "\t"
+         << std::numeric_limits<C>::epsilon() << "\t"
+         << std::numeric_limits<C>::denorm_min() << "\t"
+         << std::numeric_limits<C>::round_error() << "\t"
+         << std::endl;
+}
+
 void test1()
 {
-  cout << std::numeric_limits<int>::max() << "\t" << std::numeric_limits<int>::min() << endl;
-  cout << std::numeric_limits<unsigned>::max() << "\t" << std::numeric_limits<unsigned>::min() << endl;
-  cout << std::numeric_limits<float>::max() << "\t" << std::numeric_limits<float>::min() << endl;
-  cout << std::numeric_limits<double>::max() << "\t" << std::numeric_limits<double>::min() << endl;
-  if (std::numeric_limits<float>::min() < 0)
-  cout << "dd";
+    output_range<char>("char");
+    output_range<unsigned char>("unsigned char");
+    output_range<short>("short");
+    output_range<unsigned short>("unsigned short");
+    output_range<int>("int");
+    output_range<unsigned>("unsigned");
+    output_range<long>("long");
+    output_range<unsigned long>("unsigned long");
+    output_range<long long>("long long");
+    output_range<unsigned long long>("unsigned long long");
+    output_range<float>("float");
+    output_range<double>("double");
+    output_range<long double>("long double");
 }
 
 // 测试max的性能
@@ -41,6 +61,6 @@ void test2()
 
 int main()
 {
-//	test1();
-	test2();
+	test1();
+	//test2();
 }
