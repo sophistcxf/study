@@ -27,21 +27,43 @@ public:
     {
         std::cout << "People " << name_ << " destruct!" << std::endl;
     }
+    People& operator = (const People& p)
+    {
+        name_ = p.name_;
+        std::cout << "People " << name_ << " copy construct!" << std::endl;
+    }
 public:
     std::string name_;
 };
 
-void test1()
+/*!
+ * foo() 返回的是右值
+ */
+People foo()
 {
-    std::vector<People> myvector;
-    People p1("zhangsan");
-    People p2("lisi");
-    myvector.push_back(p1);                    // copies
-    myvector.push_back(std::move(p2));         // moves
+    People p("lisi");
+    std::cout << &p << std::endl;
+    return p;
+}
+
+void foo2(People& p)
+{
+    std::cout << "foo2 lvalue " << p.name_ << std::endl;
+}
+
+void foo2(People&& p)
+{
+    std::cout << "foo2 rvalue " << p.name_ << std::endl;
+    // p 与foo 中的局部变量 lisi 指向的是同一块内存
+    std::cout << &p << std::endl;
 }
 
 int main(int argc, char* argv[])
 {
-    test1();
+    People zhangsan("zhangsan");
+    // zhangsan 是左值，所以调用 foo2(People& p)
+    foo2(zhangsan);
+    // foo() 是右值，所以调用 foo2(People&& p)
+    foo2(foo());
     return 0;
 }
