@@ -1,0 +1,12 @@
+condition 涉及到的数据结构
+pthread_cond_t
+
+condition 涉及到的调用
+pthread_cond_init
+pthread_cond_destroy
+pthread_cond_wait
+pthread_cond_timedwait
+pthread_cond_signal
+pthread_cond_broadcast
+pthread_condattr_init
+pthread_condattr_destroy

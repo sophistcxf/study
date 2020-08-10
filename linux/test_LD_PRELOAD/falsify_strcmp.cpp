@@ -10,6 +10,7 @@ using namespace std;
 
 int strcmp(const char* c1, const char* c2)
 {
-  // do nothing, just return 0
-  return 0;
+    std::cout << "I'm falsify_strcmp" << std::endl;
+    // do nothing, just return 0
+    return 0;
 };
