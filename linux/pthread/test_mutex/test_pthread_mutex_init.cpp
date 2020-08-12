@@ -10,15 +10,18 @@
 #include <stdio.h>
 #include <unistd.h>
 
-pthread_cond_t cond_handle;
 pthread_mutex_t wait_mutex;
 
 void* thread_cb1(void* param);
 void* thread_cb2(void* param);
 
+void insight_pthread_mutexattr_t()
+{
+
+}
+
 int main()
 {
-  pthread_cond_wait(&cond_handle, &wait_mutex);
   pthread_t p2;
   pthread_create(&p2, NULL, thread_cb2, NULL);
   pthread_t p1;
@@ -30,19 +33,13 @@ int main()
 
 void* thread_cb1(void* param)
 {
-  int num = 0;
-  sleep(5);
   pthread_mutex_lock(&wait_mutex);
-  printf("I'm thread_cb1, %d\n", num++);
-  pthread_cond_signal(&cond_handle);
   pthread_mutex_unlock(&wait_mutex);
 }
 
 void* thread_cb2(void* param)
 {
-  int num = 0;
   pthread_mutex_lock(&wait_mutex);
-  pthread_cond_wait(&cond_handle, &wait_mutex);
   printf("I'm thread_cb2, %d\n", num++);
   pthread_mutex_unlock(&wait_mutex);
 }

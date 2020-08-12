@@ -1,16 +1,16 @@
 /*************************************************************************
-  > File Name: falsify_strcmp.cpp
+  > File Name: test.cpp
   > Author: cxxxxf
   > Mail: sophistcxf@gmail.com
-  > Created Time: Sat 06 Aug 2016 05:35:54 PM CST
+  > Created Time: 六  7/ 4 15:29:10 2020
  ************************************************************************/
 
 #include <iostream>
 using namespace std;
 
-int strcmp(const char* c1, const char* c2)
+
+int main()
 {
-    std::cout << "I'm falsify_strcmp" << std::endl;
-    // do nothing, just return 0
+    std::cout << "hello world!" << std::endl;
     return 0;
-};
+}
