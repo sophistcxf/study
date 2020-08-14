@@ -59,8 +59,60 @@ void test2()
 	std::cout << time(NULL) << std::endl;
 }
 
+void infinity()
+{
+    float f = std::numeric_limits<float>::max();
+    std::cout << f << std::endl;
+    std::cout << f + 1e30 << std::endl;
+    std::cout << f + 1e20 << std::endl;
+    std::cout << 2 * f << std::endl;    // 输出 inf
+    std::cout << 2 * (double)f << std::endl;    // 6.80565e+38
+    std::cout << (f + 1e20 > f ? 1 : 0) << std::endl;   // false
+    std::cout << (f + 1e30 > f ? 1 : 0) << std::endl;   // true
+    float f2 = f + 1e30;
+    std::cout << (f2 > f ? 1 : 0) << std::endl; // false
+    std::cout << (f2 == f ? 1 : 0) << std::endl; // true
+    // 逐渐累加 float，加到多少时变成 inf
+    float step = 1e25;  // step 小于 1e25 会很慢
+    float cum = step;
+    while (true) {
+        if (f + cum == std::numeric_limits<float>::infinity()) {
+            std::cout << "f + " << cum << " is inf" << std::endl;
+            break;
+        }
+        cum += step;
+    }
+
+    f2 = std::numeric_limits<float>::infinity();
+    std::cout << f2 << std::endl;
+
+    char* c = (char*)&f;
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << hex << (int)c[i] << std::endl;
+    }
+    std::cout << std::endl;
+    float f3 = f + 1e20;
+    c = (char*)&f3;
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << hex << (int)c[i] << std::endl;
+    }
+    float f4 = f + 1e30;
+    c = (char*)&f4;
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << hex << (int)c[i] << std::endl;
+    }
+    std::cout << (f4 == f ? 1 : 0) << std::endl;
+    std::cout << (f4 > f ? 1 : 0) << std::endl;
+    float f5 = 2 * f;
+    c = (char*)&f5;
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << hex << (int)c[i] << std::endl;
+    }
+}
+
 int main()
 {
-	test1();
+	//test1();
 	//test2();
+    infinity();
 }
