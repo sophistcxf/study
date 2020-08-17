@@ -1,14 +1,20 @@
 #include <map>
 #include <iostream>
 
-int main()
+void reset(std::map<std::string, int>& m)
 {
-    std::map<std::string, int> m;
+    std::map<std::string, int>().swap(m);
     m.insert(std::make_pair("zhangsan", 0));
     m.insert(std::make_pair("lisi", 1));
     m.insert(std::make_pair("wangwu", 2));
     m.insert(std::make_pair("zhuliu", 3));
     m.insert(std::make_pair("zhuoqi", 4));
+}
+
+int main()
+{
+    std::map<std::string, int> m;
+    reset(m);
 
     // 这时候，p 是 m 中元素的一个副本，并不真的是其引用
     // 修改 p2.first，并不会修改到 m 中的 key
@@ -25,6 +31,17 @@ int main()
     // 这时候，p 是 m 中元素的引用，修改 p.first，会修改到 key
     for (const auto& p : m) {
         std::string& key = const_cast<std::string&>(p.first);   // 强行修改 p
+        key = key + "_new";
+    }
+    for (const auto& p : m) {
+        std::cout << p.first << std::endl;
+    }
+
+    // 如下方法可以直接修改 key
+    reset(m);
+    for (std::map<std::string, int>::iterator it = m.begin();
+         it != m.end(); ++it) {
+        std::string& key = const_cast<std::string&>(it->first);   // 强行修改 p
         key = key + "_new";
     }
     for (const auto& p : m) {
