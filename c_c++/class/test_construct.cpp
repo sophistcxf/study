@@ -29,9 +29,8 @@ void test2()
     void* p = new A;
     delete p;   // delete void*，行为是未定义的，并且 gcc 不调用析构函数
 
-    A* p1 = new A;
-    delete p1;
-
+    p = new A;
+    delete ((A*)p);
 }
 
 int main()

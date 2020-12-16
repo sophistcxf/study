@@ -1,0 +1,18 @@
+mutex 涉及到的数据结构
+pthread_mutex_t
+pthread_mutexattr_t
+
+mutex 涉及到的调用
+pthread_mutex_init
+pthread_mutex_destroy
+pthread_mutex_lock
+pthread_mutex_unlock
+pthread_mutex_trylock
+pthread_mutexattr_init
+pthread_mutexattr_destroy
+pthread_mutexattr_gettype
+pthread_mutexattr_settype
+pthread_mutexattr_getprotocol
+pthread_mutexattr_setprotocol
+pthread_mutexattr_getprioceiling
+pthread_mutexattr_setprioceiling
