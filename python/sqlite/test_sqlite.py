@@ -33,5 +33,20 @@ def test2():
     d = c.execute('select * from tbl_student')
     print d.fetchall()
 
+def test3():
+    '''
+    合并两个数据库
+    '''
+    fn1 = 'school_manage.db'
+    fn2 = 'school_manage_bk.db'
+    c = sqlite3.connect(fn1)
+    c.execute('attach \'%s\' as db' % fn2)
+    for row in c.execute("SELECT * FROM db.sqlite_master WHERE type='table'"):
+        combine = 'insert into %s select * from db.%s' % (row[1], row[1])
+        c.execute(combine)
+    c.commit()
+    c.execute('detach database db')
+
 #test1()
-test2()
+#test2()
+test3()

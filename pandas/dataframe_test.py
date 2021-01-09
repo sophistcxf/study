@@ -288,11 +288,19 @@ def test_in():
         print 'df[i] type: ', type(df[i])
         print df[i]
 
+def test_sort():
+    df = pd.DataFrame([[1, 2],[12,31],[23,12],[543,43],[234,1]], index=[100, 29, 234, 1, 150], columns=['B', 'A'])
+    print df
+    print df.sort_index()
+    print df.sort_index(axis=1)
+    print df.sort_values(by='A')
+    print df.sort_values(by='B')
+
 #apply()
 #cumsum()
 #groupby()
 #constructDataFrame()
-dml()
+#dml()
 #write_to_file(df)
 #print df2array(df)
 #join()
@@ -301,3 +309,4 @@ dml()
 #plot_scatter()
 #plot_hist()
 #test_in()
+test_sort()
