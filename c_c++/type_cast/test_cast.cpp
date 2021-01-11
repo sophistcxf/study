@@ -41,6 +41,18 @@ public:
     virtual void foo() { std::cout << "I'm E::foo" << std::endl; }
 };
 
+class G
+{
+public:
+    virtual void foo() = 0;
+};
+
+class H : public G
+{
+public:
+    virtual void foo() {}
+};
+
 void test1()
 {
     A* pa = new A();
@@ -109,8 +121,21 @@ void test1()
     p3 = dynamic_cast<C*>(pd);
 }
 
+void test2()
+{
+    G* p = new H();
+
+    H* p2 = dynamic_cast<H*>(p);
+    p2 = static_cast<H*>(p);
+
+    G& r = *p;
+    H& r2 = dynamic_cast<H&>(r);
+    H& r3 = static_cast<H&>(r);
+}
+
 int main()
 {
-    test1();
+    //test1();
+    test2();
     return 0;
 }
