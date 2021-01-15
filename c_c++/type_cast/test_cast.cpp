@@ -41,16 +41,41 @@ public:
     virtual void foo() { std::cout << "I'm E::foo" << std::endl; }
 };
 
+/**
+ * 第四种类
+ */
 class G
 {
 public:
     virtual void foo() = 0;
+    virtual void foo1() = 0;
 };
 
 class H : public G
 {
 public:
+    virtual void foo2() = 0;
+};
+
+class I : public H
+{
+public:
     virtual void foo() {}
+    virtual void foo1() {}
+    virtual void foo2() {}
+};
+
+/**
+ * 第五种类
+ */
+class J
+{
+public:
+    virtual void foo() {}
+};
+
+class K : virtual public J
+{
 };
 
 void test1()
@@ -123,19 +148,39 @@ void test1()
 
 void test2()
 {
-    G* p = new H();
+    G* p = new I();
 
     H* p2 = dynamic_cast<H*>(p);
     p2 = static_cast<H*>(p);
+
+    // 基类转为派生类
+    H* p3 = dynamic_cast<H*>(p);
+    p3 = static_cast<H*>(p);
+    
+    G* p4 = dynamic_cast<G*>(p3);
 
     G& r = *p;
     H& r2 = dynamic_cast<H&>(r);
     H& r3 = static_cast<H&>(r);
 }
 
+void test3()
+{
+    J* p = new K();
+
+    K* p1 = dynamic_cast<K*>(p);
+
+    // error: cannot cast 'J *' to 'K *' via virtual base 'J'
+    // 由于 K 是虚继承于 J，所以对象*p 实际上没有存储基类 J 的实例
+    // 而是存储了一个指向 J 实例的指针（所有 K 的实例都是这样），
+    // 而这个地址在编译期是无法确定的，所以不能使用 static_cast
+    //p1 = static_cast<K*>(p);
+}
+
 int main()
 {
     //test1();
-    test2();
+    //test2();
+    test3();
     return 0;
 }
