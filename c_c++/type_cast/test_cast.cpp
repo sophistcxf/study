@@ -14,7 +14,10 @@ public:
 
 class B2 : public A
 {
+public:
     virtual void foo() { std::cout << "This is B2::foo" << std::endl; }
+public:
+    int a[100];
 };
 
 class F : public B
@@ -177,10 +180,34 @@ void test3()
     //p1 = static_cast<K*>(p);
 }
 
+void test4()
+{
+    int temp = 0;
+    B b;
+    A* p = &b;
+    B2* p2 = static_cast<B2*>(p);
+    std::cout << "各变量地址: " << std::endl;
+    std::cout << "&temp: " << &temp << std::endl
+              << "&b: " << &b << std::endl
+              << "&p: " << &p << std::endl
+              << "&p2: " << &p2 << std::endl
+              << "&p2->a[0]: " << &(p2->a[0]) << std::endl
+              << "&p2->a[0]: " << &(p2->a[1]) << std::endl;
+    std::cout << "sizeof(B): " << sizeof(B) << std::endl;
+    // 这里调用的是 B::foo()
+    p2->foo();
+    p2->a[0] = 10;
+    p2->a[1] = 11;
+    std::cout << p2->a[0] << std::endl;
+    // 对 a[1] 的赋值污染了 temp
+    std::cout << temp << std::endl;
+}
+
 int main()
 {
     //test1();
     //test2();
-    test3();
+    //test3();
+    test4();
     return 0;
 }
