@@ -51,6 +51,7 @@ void foo2(People& p)
     std::cout << "foo2 lvalue " << p.name_ << std::endl;
 }
 
+// p是一个左值，但是具有右值引用的类型
 void foo2(People&& p)
 {
     std::cout << "foo2 rvalue " << p.name_ << std::endl;
@@ -64,6 +65,7 @@ int main(int argc, char* argv[])
     // zhangsan 是左值，所以调用 foo2(People& p)
     foo2(zhangsan);
     // foo() 是右值，所以调用 foo2(People&& p)
+    People&& rp = foo();
     foo2(foo());
     return 0;
 }
