@@ -17,6 +17,20 @@ using namespace std;
 #define POUND_AT(x) (#@x)
 #endif
 
+#if defined(__LP64__) || (__aarch64__)
+#define FROM_HERE ((uint64_t)__FILE__ | (uint64_t)__LINE__ << 48)
+inline const char * getFromHere(uint64_t from_here, int& line) {
+    line = from_here >> 48;
+    return (const char *)(from_here & 0xffffffffffff);
+}
+#else
+#define FROM_HERE ((uint64_t)__LINE__<<32 | (uint64_t)(uint32_t)__FILE__)
+inline const char * getFromHere(uint64_t from_here, int& line) {
+    line = from_here >> 32;
+    return (const char *)(from_here & 0xffffffff);
+}
+#endif
+
 string get_version()
 {
 #ifdef DEBUG
@@ -87,8 +101,14 @@ int main()
 #endif
 
   // predefined macros
-  cout << __FILE__ << endl;
+  cout << "__FILE__: " << __FILE__ << endl;
+  cout << "__LINE__: " << __LINE__ << endl;
+
   cout << __cplusplus << endl;
+
+  std::cout << "FROM_HERE: " << FROM_HERE << std::endl;
+  int line;
+  std::cout << "GET_FROM_HERE: " << getFromHere(FROM_HERE, line) << "\t" << line << std::endl;
 
   int token10 = 10;
   paster(10);
