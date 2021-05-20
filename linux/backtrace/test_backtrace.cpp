@@ -37,8 +37,9 @@ void myfunc3(void)
     nptrs = backtrace(buffer, BT_BUF_SIZE);
 
     printf("backtrace without backtrace_symbols\n");
-    for (unsigned i = 0; i < nptrs; ++i)
-        printf("%s\n", buffer[i]);
+    for (unsigned i = 0; i < nptrs; ++i) {
+        printf("%p\n", buffer[i]);
+    }
     printf("==============================\n");
 
     printf("backtrace() returned %d addresses\n", nptrs);
@@ -52,8 +53,9 @@ void myfunc3(void)
         exit(EXIT_FAILURE);
     }
 
-    for (j = 0; j < nptrs; j++)
+    for (j = 0; j < nptrs; j++) {
         printf("%s\n", strings[j]);
+    }
 
     free(strings);
 }
@@ -64,8 +66,7 @@ static void myfunc2(void)
     myfunc3();
 }
 
-    void
-myfunc(int ncalls)
+void myfunc(int ncalls)
 {
     if (ncalls > 1)
         myfunc(ncalls - 1);
@@ -73,8 +74,7 @@ myfunc(int ncalls)
         myfunc2();
 }
 
-    int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 2) {
         fprintf(stderr, "%s num-calls\n", argv[0]);
