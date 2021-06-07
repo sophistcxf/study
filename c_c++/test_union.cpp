@@ -8,20 +8,27 @@
 #include <iostream>
 using namespace std;
 
+struct C
+{
+    short ui;
+};
+
 union
 {
  int ui;
  char c[4];
  bool ub;
+ C struct_c;
 } u1;
 
 
 int main()
 {
-  cout << sizeof(u1) << endl;
-  u1.ui = 10;
-  cout << u1.ui << endl;
-  cout << u1.ub << endl;
-  cout << u1.c[0] << endl;
+  cout << sizeof(u1) << endl;   // 4
+  u1.ui = 0x41ffff42;
+  cout << u1.ui << endl;    // 1107296066
+  cout << u1.ub << endl;    // 0
+  cout << u1.c[0] << endl;  // 'B'
+  cout << u1.struct_c.ui << endl;   // -190
   return 0;
 }
