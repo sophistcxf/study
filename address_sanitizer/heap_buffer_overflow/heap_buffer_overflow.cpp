@@ -11,6 +11,13 @@ void test1()
     std::cout << res << std::endl;
 }
 
+void test2()
+{
+    int a = 10;
+    double* p = new double[10];
+    std::cout << p[-1] << std::endl;
+}
+
 int main(int argc, char **argv) {
-    test1();
+    test2();
 }
