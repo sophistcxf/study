@@ -25,11 +25,12 @@ void test1()
     // std::for_each(a, a+sizeof(a)/sizeof(int), [&, sum](int x) { sum += x; product *= x; });
 }
 
-void sumArray(int* a, int size) {
+int sumArray(int* a, int size) {
     int sum = 0;
     for (int i = 0; i < size; ++i) {
         sum += a[i];
     }
+    return sum;
 }
 
 /**
@@ -45,30 +46,40 @@ void test2()
     struct timeval tv_beg;
     struct timeval tv_end;
 
+    int t = 0;
+
     gettimeofday(&tv_beg, NULL);
+    t = 0;
     for (int i = 0; i < times; ++i) {
         int sum = 0;
         std::for_each(a, a+sizeof(a)/sizeof(int), [&] (int x) { sum += x; }); // OK
+        t += sum;
     }
     gettimeofday(&tv_end, NULL);
     std::cout << (tv_end.tv_sec - tv_beg.tv_sec) * 1e6 + (tv_end.tv_usec - tv_beg.tv_usec) << std::endl;
+    std::cout << t << std::endl;
 
     gettimeofday(&tv_beg, NULL);
+    t = 0;
     for (int i = 0; i < times; ++i) {
-        sumArray(a, sizeof(a)/sizeof(int));
+        t += sumArray(a, sizeof(a)/sizeof(int));
     }
     gettimeofday(&tv_end, NULL);
     std::cout << (tv_end.tv_sec - tv_beg.tv_sec) * 1e6 + (tv_end.tv_usec - tv_beg.tv_usec) << std::endl;
+    std::cout << t << std::endl;
 
     gettimeofday(&tv_beg, NULL);
+    t = 0;
     for (int i = 0; i < times; ++i) {
         int sum = 0;
         for (int j = 0; j < sizeof(a)/sizeof(int); ++j) {
             sum += a[j];
         }
+        t += sum;
     }
     gettimeofday(&tv_end, NULL);
     std::cout << (tv_end.tv_sec - tv_beg.tv_sec) * 1e6 + (tv_end.tv_usec - tv_beg.tv_usec) << std::endl;
+    std::cout << t << std::endl;
 }
 
 int main()
