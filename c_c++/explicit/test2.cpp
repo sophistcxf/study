@@ -35,7 +35,8 @@ void print(const MyString2 str)
 
 int main()
 {
-    // 调用会歧义，不知道调用哪个 print
+    // 不能通过编译，调用会歧义，不知道调用哪个 print
+    // 如果其中一个的构造函数加上 explicit，则可编译过
     print(10);
     return 0;
 }
