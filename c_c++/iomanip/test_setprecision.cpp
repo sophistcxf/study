@@ -10,17 +10,17 @@
 
 void test1()
 {
-    double f =3.14159;
+    double f =3.141592654;
     std::cout << f << "\n";
     // 3.1416
     std::cout << std::setprecision(5) << f << '\n';
     // 3.14159
-    std::cout << std::setprecision(9) << f << '\n';
+    std::cout << std::setprecision(10) << f << '\n';
     std::cout << std::fixed;
     // 3.14159
     std::cout << std::setprecision(5) << f << '\n';
     // 3.141590000
-    std::cout << std::setprecision(9) << f << '\n';
+    std::cout << std::setprecision(10) << f << '\n';
 }
 
 int main()
