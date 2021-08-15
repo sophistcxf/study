@@ -1,0 +1,4 @@
+FOO {
+      global: bar; baz; # explicitly list symbols to be exported
+                    local: *;         # hide everything else
+};

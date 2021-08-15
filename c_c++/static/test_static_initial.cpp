@@ -19,13 +19,32 @@ static A a(1);
 
 void test1()
 {
+    /**
+     * &a1 与 &a 的接近
+     * &j 比 &i 小 20 字节
+     */
+    int i = 0;
     static A a1(2);
+    int j = 0;
+    printf("%x,%x,%x,%d\n", &i, &a1, &j, (char*)&i-(char*)&j);
+}
+
+void test2()
+{
+    /**
+     * &j 比 &i 小 4 字节
+     */
+    int i = 0;
+    int j = 0;
+    printf("%x,%x,%d\n", &i, &j, (char*)&i-(char*)&j);
 }
 
 int main()
 {
     std::cout << "main" << std::endl;
+    printf("%x\n", &a);
     test1();
     test1();
+    test2();
     return 0;
 }
