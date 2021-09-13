@@ -14,7 +14,11 @@ int main(int argc, char *argv[])
 
     // 从文件执行 python
     FILE* fp = fopen("test.py", "rb");
-    PyRun_InteractiveLoop(fp, "test.py");
+    int rc = PyRun_InteractiveLoop(fp, "test.py");
+    fclose(fp);
+    if (rc != 0) {
+        std::cout << "PyRun_InteractiveLoop error" << std::endl;
+    }
 
     if (Py_FinalizeEx() < 0) {
         exit(120);

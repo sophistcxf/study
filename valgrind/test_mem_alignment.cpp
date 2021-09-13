@@ -14,11 +14,18 @@ struct Message
 	double value;
 };
 
+/**
+ * 如果 msg 未初始化，则会报错
+ * valgrind --tool=memcheck --track-origins=yes
+ */
 int main(int argc, char* argv[])
 {
 	Message msg;
 	//msg.type = 'a';
 	//msg.value = 10.0;
-	std::cout << msg.type << "," << msg.value << endl;
+	std::cout << msg.type;
+    std::cout << ",";
+    std::cout << msg.value;
+    std::cout << endl;
 	return 0;
 }
