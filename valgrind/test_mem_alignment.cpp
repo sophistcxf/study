@@ -32,6 +32,17 @@ public:
 	double value;
 } __attribute__((packed));
 
+#pragma pack(push,1)
+class Message_2
+{
+public:
+    Message_2() : type('a'), value(0) {}
+	char type;
+	double value;
+};
+
+#pragma pack(pop)
+
 /**
  * 这里valgrind会报错，虽然Message构造函数已经初始化了成员变量，但是没有初始化
  * type和value之间padding的数据，所以也会报错
@@ -64,11 +75,19 @@ void test3() {
     fwrite(&msg, sizeof(msg), 1, pf);
     fclose(pf);
 }
+
+void test4() {
+    std::cout << sizeof(Message_2) << std::endl;
+    Message_1 msg;
+    FILE* pf = fopen("msg.dat", "wb");
+    fwrite(&msg, sizeof(msg), 1, pf);
+    fclose(pf);
+}
 /**
  * valgrind --tool=memcheck --track-origins=yes
  */
 int main(int argc, char* argv[])
 {
-    test3();
+    test4();
 	return 0;
 }

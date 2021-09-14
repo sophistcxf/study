@@ -58,6 +58,31 @@ void test4() {
     std::cout << msg->value << std::endl;
 }
 
+/**
+ * 也会报错
+ */
+void test6() {
+    int n;
+    if (n > 0) {
+        std::cout << 10 << std::endl;
+    }
+}
+
+/**
+ * 这里判断 n>0时也会报错，即使输出的output在test7中并没有打印
+ */
+void test7_1(int cond, int& output) {
+    if (cond > 0) {
+        output = 10;
+    }
+}
+
+void test7() {
+    int n;
+    int cond;
+    test7_1(cond, n);
+}
+
 int main() {
-    test2();
+    test7();
 }
