@@ -7,39 +7,68 @@
 
 #include <iostream>
 #include <string.h>
+#include <stdio.h>
 using namespace std;
 
 /**
  * Message是16字节，type后面会被padding
  */
-struct Message
+class Message
 {
+public:
+    Message() : type('a'), value(0) {}
 	char type;
 	double value;
 };
 
-void test1(Message msg) {
-    std::cout << msg.type << std::endl;
+/**
+ * 取消了padding，所以sizeof(Message_1)=9
+ */
+class Message_1
+{
+public:
+    Message_1() : type('a'), value(0) {}
+	char type;
+	double value;
+} __attribute__((packed));
+
+/**
+ * 这里valgrind会报错，虽然Message构造函数已经初始化了成员变量，但是没有初始化
+ * type和value之间padding的数据，所以也会报错
+ */
+void test1() {
+    Message msg;
+    FILE* pf = fopen("msg.dat", "wb");
+    fwrite(&msg, sizeof(Message), 1, pf);
+    fclose(pf);
 }
 
+/**
+ * 先使用memset整体初始化后，padding的数据也会被初始化，则没有问题
+ */
+void test2() {
+    Message msg;
+    memset(&msg, 0, sizeof(Message));
+    FILE* pf = fopen("msg.dat", "wb");
+    fwrite(&msg, sizeof(Message), 1, pf);
+    fclose(pf);
+}
+
+/**
+ * valgrind不报错，Message_1取消了padding
+ */
+void test3() {
+    std::cout << sizeof(Message_1) << std::endl;
+    Message_1 msg;
+    FILE* pf = fopen("msg.dat", "wb");
+    fwrite(&msg, sizeof(msg), 1, pf);
+    fclose(pf);
+}
 /**
  * valgrind --tool=memcheck --track-origins=yes
  */
 int main(int argc, char* argv[])
 {
-    std::cout << sizeof(Message) << std::endl;
-	Message* msg = new Message();
-    std::cout <<
-	//msg->type = 'a';
-	//msg->value = 10.0;
-
-    Message* msg1 = new Message();
-    std::cout << msg1->value << std::endl;
-    memcpy(msg1, msg, sizeof(Message));
-    test1(*msg1);
-
-    delete msg;
-    delete msg1;
-
+    test3();
 	return 0;
 }
