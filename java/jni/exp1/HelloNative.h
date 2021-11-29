@@ -4,6 +4,7 @@
 
 #ifndef _Included_HelloNative
 #define _Included_HelloNative
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -12,8 +13,7 @@ extern "C" {
  * Method:    sayHello
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_HelloNative_sayHello
-  (JNIEnv *, jclass);
+JNIEXPORT void JNICALL Java_HelloNative_sayHello(JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }
