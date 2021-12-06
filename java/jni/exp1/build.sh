@@ -12,9 +12,9 @@ include_abi_dir="$ndk""toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/includ
 
 kernel_name=`uname -s`
 if [ $kernel_name == "Darwin" ]; then
-    gcc -I./ -I"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework//Versions/A/Headers/" -I ${include_dir} -I ${include_abi_dir} -fPIC -shared -o libHelloNative.dylib HelloNative.c
+    gcc -I./ -I ${include_dir} -I ${include_abi_dir} -fPIC -shared -o libHelloNative.dylib HelloNative.c
 elif [ $kernel_name == "Linux" ]; then
-    gcc -I./ -I"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework//Versions/A/Headers/" -fPIC -shared -o libHelloNative.o HelloNative.c
+    gcc -I./ -fPIC -shared -o libHelloNative.o HelloNative.c
 fi
 
 javac HelloNative.java
