@@ -7,6 +7,9 @@ ndk="/Users/xiangfei.cui/workspace/android-ndk-r21e/"
 include_dir="$ndk""toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/"
 include_abi_dir="$ndk""toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/arm-linux-androideabi/"
 
+# 下面的命令会生成native方法的头文件，即HelloNative.h
+# java -h . HelloNative.java
+
 kernel_name=`uname -s`
 if [ $kernel_name == "Darwin" ]; then
     gcc -I./ -I"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework//Versions/A/Headers/" -I ${include_dir} -I ${include_abi_dir} -fPIC -shared -o libHelloNative.dylib HelloNative.c
