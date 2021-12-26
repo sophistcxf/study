@@ -5,6 +5,7 @@ public class HelloNative
         System.loadLibrary("HelloNative");
     }
       
+    // sayHello() 由 jni 提供
     public static native void sayHello();
       
     @SuppressWarnings("static-access")

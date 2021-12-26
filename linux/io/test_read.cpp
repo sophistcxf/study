@@ -32,9 +32,19 @@ void test_blocking()
     std::cout << read_buf << std::endl;
 }
 
+void read_from_file()
+{
+    int fd = open("test.txt", O_RDONLY);
+    char buf[128] = {};
+    read(fd, buf, sizeof(buf));
+    std::cout << buf << std::endl;
+    close(fd);
+}
+
 int main()
 {
-    test_nonblocking();
-    //test_blocking();
+    //test_nonblocking();
+    test_blocking();
+    //read_from_file();
     return 0;
 }

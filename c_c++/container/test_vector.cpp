@@ -45,7 +45,34 @@ void test_compare()
     cout << vec[i] << endl;
 }
 
+class Message {
+public:
+    Message() {
+        std::cout << "Message::Message()" << std::endl;
+    }
+    Message(const Message& msg) {
+        std::cout << "Message copy constructor" << std::endl;
+        type = msg.type;
+        value = msg.value;
+    }
+    char type;
+    double value;
+};
+void test1() {
+    std::vector<Message> v;
+    v.reserve(10);
+    std::cout << v.capacity() << "," << v.size() << std::endl;
+
+    std::vector<Message> v1;
+    // 只调用一次无参数的构造函数，10次调用的是拷贝构建函数
+    v1.resize(10);
+
+    std::vector<Message> v2;
+    v2.resize(10, Message());
+}
+
 int main()
 {
-  test_erase();
+    test1();
+    //test_erase();
 }
