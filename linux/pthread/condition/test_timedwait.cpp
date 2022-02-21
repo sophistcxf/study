@@ -29,6 +29,10 @@ int main()
   return 0;
 }
 
+/**
+ * 这种用法有问题，因为对wait_mutex lock了，所以thread_cb2即使到了
+ * 3秒，也不会退出pthread_cond_timedwait，因为无法获得wait_mutex
+ */
 void* thread_cb1(void* param)
 {
   int num = 0;
@@ -47,10 +51,13 @@ void* thread_cb2(void* param)
   struct timespec ts;
   memset(&ts, 0, sizeof(ts));
   clock_gettime(CLOCK_REALTIME, &ts);
-  ts.tv_sec += 2;
+  ts.tv_sec += 3;
   int rlt = pthread_cond_timedwait(&cond_handle, &wait_mutex, &ts);
   if (rlt == 0) {
       printf("I'm thread_cb2, signaled\n");
+  }
+  else if (rlt == ETIMEDOUT) {
+      printf("I'm thread_cb2, timeout\n");
   }
   else {
       printf("I'm thread_cb2, errno %d\n", rlt);
