@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
 
 pthread_cond_t cond_handle;
 pthread_mutex_t wait_mutex;
@@ -33,6 +34,7 @@ void* thread_cb1(void* param)
   int num = 0;
   sleep(1);
   pthread_mutex_lock(&wait_mutex);
+  printf("thread_1 lock\n");
   sleep(5);
   printf("I'm thread_cb1, %d\n", num++);
   pthread_cond_signal(&cond_handle);
@@ -43,14 +45,15 @@ void* thread_cb2(void* param)
 {
   pthread_mutex_lock(&wait_mutex);
   struct timespec ts;
-  timespec_get(&ts, TIME_UTC);
+  memset(&ts, 0, sizeof(ts));
+  clock_gettime(CLOCK_REALTIME, &ts);
   ts.tv_sec += 2;
   int rlt = pthread_cond_timedwait(&cond_handle, &wait_mutex, &ts);
-  if (rlt == ETIMEDOUT) {
-      printf("I'm thread_cb2, timeout\n");
+  if (rlt == 0) {
+      printf("I'm thread_cb2, signaled\n");
   }
   else {
-      printf("I'm thread_cb2\n");
+      printf("I'm thread_cb2, errno %d\n", rlt);
   }
   pthread_mutex_unlock(&wait_mutex);
 }

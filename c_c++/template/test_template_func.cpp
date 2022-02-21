@@ -18,7 +18,7 @@ class Operator
 public:
 	T operator() (const T& v1, const T& v2)
 	{
-		func(v1, v2);
+		return func(v1, v2);
 	}
 private:
 	Func func;
