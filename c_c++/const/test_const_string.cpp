@@ -18,14 +18,17 @@ void test1() {
     char str1[] = "hello";
     printf("%c\n", str1[0]);
     str1[0] = 'a';
-    printf("%x,%x\n", &str1, &str1[0]);
+    printf("&str1,&str1[0],&str1[1]: %x,%x,%x,%x\n", &str1, &str1[0], &str1[1]);
 
     char* str = "hello";
-    printf("%x,%x\n", &str, &str[0]);
+    printf("&str,&str[0]: %x,%x\n", &str, &str[0]);
     printf("%c\n", str[0]);
 
-    printf("%x,%x\n", &g_str, &g_str[0]);
-    printf("%x,%x\n", &g_ro_str, &g_ro_str[0]);
+    char str2[] = "world";
+    printf("&str2: %x\n", &str2);
+
+    printf("&g_str,&g_str[0]: %x,%x\n", &g_str, &g_str[0]);
+    printf("&g_ro_str,&g_ro_str[0]: %x,%x\n", &g_ro_str, &g_ro_str[0]);
 
     /**
      * 对str[0]进行修改，会导致SIGSEGV
