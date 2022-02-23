@@ -21,6 +21,9 @@ void test2(const int& i) {
 
 int main() {
     std::cout << sizeof(Integer) << std::endl;
+    /**
+     * 10是一个rvalue，test1的参数必须是const的引用
+     */
     test1(10);
     test1(10);
     test2(10);
