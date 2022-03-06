@@ -203,11 +203,17 @@ void test4()
     std::cout << temp << std::endl;
 }
 
+void test5() {
+    const B* p = new B();
+    const A* pA = p;
+}
+
 int main()
 {
     //test1();
     //test2();
     //test3();
-    test4();
+    //test4();
+    test5();
     return 0;
 }

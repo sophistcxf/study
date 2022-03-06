@@ -7,6 +7,9 @@ ndk="/Users/xiangfei.cui/workspace/android-ndk-r21e/"
 include_dir="$ndk""toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/"
 include_abi_dir="$ndk""toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/arm-linux-androideabi/"
 
+include_dir="/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home/include/"
+include_abi_dir=""
+
 # 下面的命令会生成native方法的头文件，即HelloNative.h
 # java -h . HelloNative.java
 

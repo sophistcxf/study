@@ -43,12 +43,10 @@ void test2() {
     /**
      * requested alignment is less than minimum alignment of 4 for type
      */
-    /*
     struct alignas(1) struct_a1 {
-        int i;
         char a;
+        int i;
     };
-    */
 
     // the array "cacheline" will be aligned to 64-byte boundary:
     alignas(64) char cacheline[64];

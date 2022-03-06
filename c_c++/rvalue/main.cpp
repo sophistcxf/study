@@ -31,6 +31,7 @@ public:
     {
         name_ = p.name_;
         std::cout << "People " << name_ << " copy construct!" << std::endl;
+        return *this;
     }
 public:
     std::string name_;
@@ -59,13 +60,30 @@ void foo2(People&& p)
     std::cout << &p << std::endl;
 }
 
-int main(int argc, char* argv[])
-{
+void test1() {
     People zhangsan("zhangsan");
     // zhangsan 是左值，所以调用 foo2(People& p)
     foo2(zhangsan);
     // foo() 是右值，所以调用 foo2(People&& p)
     People&& rp = foo();
     foo2(foo());
+}
+
+void test2() {
+    int&& n = 10;   // ok, n的类型是右值引用
+    //int& n2 = 10; 错误
+    std::cout << n << std::endl;
+    n = 20;
+    std::cout << n << std::endl;
+    
+    //int&& n2 = n;   // error, n是一个左值
+    int&& n2 = std::move(n);    // ok, 将n强转为左值
+    std::cout << n2 << std::endl;
+    std::cout << &n << "," << &n2 << std::endl;
+}
+
+int main(int argc, char* argv[])
+{
+    test2();
     return 0;
 }
