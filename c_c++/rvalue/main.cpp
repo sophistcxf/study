@@ -67,6 +67,10 @@ void test1() {
     // foo() 是右值，所以调用 foo2(People&& p)
     People&& rp = foo();
     foo2(foo());
+
+    //People& p = People("zs"); // error，非const引用不能引用临时对象
+    const People& p = People("zs"); // ok
+    People&& p2 = People("zs"); // 右值引用，可以引用临时对象
 }
 
 void test2() {
@@ -82,8 +86,15 @@ void test2() {
     std::cout << &n << "," << &n2 << std::endl;
 }
 
+void test3() {
+    std::vector<People> v;
+    v.push_back(std::move(People("zs")));
+}
+
 int main(int argc, char* argv[])
 {
-    test2();
+    test1();
+    //test2();
+    //test3();
     return 0;
 }
