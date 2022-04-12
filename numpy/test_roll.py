@@ -5,8 +5,11 @@ import numpy as np
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
 
 print arr
+# 左移一位
 print np.roll(arr, 1)
+# 左移3位
 print np.roll(arr, 3)
+# 右移2位
 print np.roll(arr, -2)
 
 print '二维数组'
