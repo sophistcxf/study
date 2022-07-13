@@ -12,8 +12,7 @@ using namespace std;
 #include <stdio.h>      /* printf, scanf, NULL */
 #include <stdlib.h>     /* calloc, exit, free */
 
-int main ()
-{
+void test1() {
   // calloc set memory to 0
   int* p = (int*)calloc(10, sizeof(int)); 
   for (int i = 0; i < 10; ++i)
@@ -24,5 +23,14 @@ int main ()
   for (int i = 0; i < 100; ++i)
     printf("%d\t", p[i]);
   printf("\n");
-  return 0;
+}
+
+void test2() {
+    char* sz = (char*)malloc(0);
+    std::cout << sz << std::endl;
+}
+
+int main () {
+    //test1();
+    test2();
 }
