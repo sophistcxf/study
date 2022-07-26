@@ -12,8 +12,7 @@ using namespace std;
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char *argv[])
-{
+void test1() {
     char *str = "123汉ABC";
     char *p;
 
@@ -21,7 +20,31 @@ int main(int argc, char *argv[])
     for(p=str; *p; p++) {
         printf(" %.2X", (unsigned char)(*p));
     }
-    printf(" | %s\n", str);
+    printf(" | %s", str);
 
-    return 0;
+    std::cout << std::endl;
+    uint16_t* s = (uint16_t*)"123汉ABC";
+    for(p=(char*)s; *p; p++) {
+        printf(" %.2X", (unsigned char)(*p));
+    }
+
+
+    std::cout << std::endl;
+    uint16_t* s2 = (uint16_t*)L"123汉ABC";
+    for(p=(char*)s2; *p; p++) {
+        printf(" %.2X", (unsigned char)(*p));
+    }
+    std::cout << std::endl;
+}
+
+void test2() {
+    wchar_t c = 'a';
+    std::cout << c << std::endl;
+    char c2 = 'a';
+    std::cout << c2 << std::endl;
+}
+
+int main(int argc, char *argv[]) {
+    //test1();
+    test2();
 }

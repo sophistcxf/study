@@ -27,6 +27,7 @@ void test1() {
 
 void test2() {
     char* sz = (char*)malloc(0);
+    *sz = 'a';
     std::cout << sz << std::endl;
 }
 
