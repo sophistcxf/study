@@ -11,9 +11,9 @@ using namespace std;
 
 int test2()
 {
-    std::function<void(int)> f1;
-    void (*f1_target)(int) = f1.target<void(*)(int)>();
-    if (f1_target == NULL) { std::cout << "f1_target == NULL" << std::endl; }
+    //std::function<void(int)> f1;
+    //void (*f1_target)(int) = f1.target<void(*)(int)>();
+    //if (f1_target == NULL) { std::cout << "f1_target == NULL" << std::endl; }
 }
 
 void test_plus()
@@ -22,8 +22,19 @@ void test_plus()
     std::cout << p(10,15) << std::endl;
 }
 
+void test3(std::function<void(int)> f, int param) {
+    f(param);
+}
+
+void foo(int n) {
+    std::cout << n << std::endl;
+}
+
 int main(int argc, char* argv[])
 {
-    test_plus();
+    //test_plus();
+    //test3(foo, 10);
+    std::function<void(int)> f;
+    std::cout << (f ? 1 : 0);
     return 0;
 }
