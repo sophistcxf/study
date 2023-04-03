@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <functional>
-using namespace std;
 
 int test2()
 {
@@ -22,19 +21,17 @@ void test_plus()
     std::cout << p(10,15) << std::endl;
 }
 
-void test3(std::function<void(int)> f, int param) {
-    f(param);
+void test3(std::function<void(int, int)> f, int a, int b) {
+    f(a, b);
 }
 
-void foo(int n) {
-    std::cout << n << std::endl;
+void plus(int a, int b) {
+    std::cout << a + b << std::endl;
 }
 
 int main(int argc, char* argv[])
 {
     //test_plus();
-    //test3(foo, 10);
-    std::function<void(int)> f;
-    std::cout << (f ? 1 : 0);
+    test3(plus, 10, 12);
     return 0;
 }
