@@ -12,7 +12,7 @@ struct MyPair {
   double multiply() {return a*b;}
 };
 
-int main () {
+void test1() {
   // binding functions:
   auto fn_five = std::bind (my_divide,10,3);               // returns 10/2
   std::cout << fn_five() << '\n';                          // 3.3333
@@ -41,6 +41,20 @@ int main () {
 
   auto bound_member_data = std::bind (&MyPair::a,ten_two); // returns ten_two.a
   std::cout << bound_member_data() << '\n';                // 10
+}
 
-  return 0;
+void increment(int& value) {
+    value++;
+}
+
+void test2() {
+    auto incre = std::bind(increment, sph::_1);
+
+    int value = 0;
+    incre(value);
+    std::cout << value << std::endl;
+}
+
+int main() {
+    test2();
 }
