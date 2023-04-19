@@ -21,7 +21,7 @@ with tf.Session() as sess:
 
     while True:
         k,v = sess.run([key, value])
-        print k,v
+        print(k,v)
 
     for i in range(1200):
         # Retrieve a single instance:
