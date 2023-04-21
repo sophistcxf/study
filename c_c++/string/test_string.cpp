@@ -18,7 +18,7 @@ void test1()
     std::cout << strlen(sz_hello) << "\t" << sizeof(sz_hello) << std::endl;
 }
 
-void test2()
+void test_binary()
 {
     std::ostringstream oss;
     oss << (char)0xff;
@@ -26,9 +26,31 @@ void test2()
     std::cout << str.data() << "\t" << str.size() << std::endl;
 }
 
+void test_trailing_zero() {
+    const char sz[] = "hello world";
+    std::string str1 = sz;
+    std::string str2;
+    str2.assign(sz);
+    std::string str3;
+    str3.assign(sz, strlen(sz));
+    std::cout << strlen(sz) << std::endl;
+    std::cout << sizeof(sz) << std::endl;
+    std::cout << "str1 " << str1.size() << "\n";
+    std::cout << "str2 " << str2.size() << "\n";
+    std::cout << "str3 " << str3.size() << "\n";
+
+    std::string str4;
+    str4.assign(sz, sizeof(sz));
+    std::cout << "str4 " << str4.size() << "\n";
+
+    str4.push_back('c');
+    std::cout << "str4 " << str4 << "\n";   // 无法输出'c'
+}
+
 int main()
 {
     //test1();
-    test2();
+    //test_binary();
+    test_trailing_zero();
     return 0;
 }
