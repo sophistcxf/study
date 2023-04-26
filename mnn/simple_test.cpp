@@ -23,7 +23,7 @@ int main() {
     netConfig.numThread = 1;
     MNN::Session* session = interpreter->createSession(netConfig);
     std::cout << "create session successfully" << std::endl;
-    MNN::Tensor* pos = interpreter->getSessionInput(session, "pos");;
+    MNN::Tensor* pos = interpreter->getSessionInput(session, "pos");
     MNN::Tensor* prj_pos = interpreter->getSessionInput(session, "prj_pos");
     double pos_arr[2] = {1.0, 2.0};
     double prj_pos_arr[2] = {3.0, 10.0};
