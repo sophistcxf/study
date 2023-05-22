@@ -2,6 +2,13 @@
 #include <algorithm>
 #include <sys/time.h>
 
+class A {
+public:
+    void foo() {
+        std::cout << "A" << std::endl;
+    }
+};
+
 void test1()
 {
     int sum = 0;
@@ -29,6 +36,12 @@ void test1()
     // [&, product] 表示除了 product，可以修改其他外部变量
     auto f3 = [&, product](int x, int y) { sum = x + y; return sum; };   // OK
     std::cout << f3(10 ,20) << std::endl;
+
+    A* a = new A();
+    // 当传入的是指标，a本身是const，而非*a是const
+    // 即相当于是 A* const a，而不是 const A*
+    auto f4 = [a]() { a->foo(); };   // OK
+    f4();
 }
 
 int sumArray(int* a, int size) {
