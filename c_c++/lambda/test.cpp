@@ -4,25 +4,31 @@
 
 void test1()
 {
-    int a[] = {1, 2, 3, 4, 5};
-    std::for_each(a, a+sizeof(a)/sizeof(int), [=] (int x) { std::cout << x << std::endl;});
-
     int sum = 0;
+
+    // 使用外部变量
+
+    // 默认不能使用外部变量
+    auto f = [](int x, int y) { return x + y; };
+    f(10, 20);
+
     // cannot assign to a variable captured by copy in a non-mutable lambda
     // [=] 表示lambda外部值不可被修改，[&] 表示lambda外部值可以被修改
-    // std::for_each(a, a+sizeof(a)/sizeof(int), [=] (int x) { total += x; });
-    std::for_each(a, a+sizeof(a)/sizeof(int), [&] (int x) { sum += x; }); // OK
-    std::cout << sum << std::endl;
+    // f = [=](int x, int y) { sum = x + y; return sum; }       // ERROR
+    auto f1 = [&](int x, int y) { sum = x + y; return sum; };   // OK
+    std::cout << f1(10 ,20) << std::endl;
 
-    int product = 1;
     // cannot assign to a variable captured by copy in a non-mutable lambda
     // [=, &sum] 表示除了 sum，不可修改其他外部变量
-    // std::for_each(a, a+sizeof(a)/sizeof(int), [=, &sum](int x) { sum += x; product *= x; });
+    auto f2 = [=, &sum](int x, int y) { sum = x + y; return sum; };   // OK
+    std::cout << f2(10 ,20) << std::endl;
     
+    int product = 1;
     
     // cannot assign to a variable captured by copy in a non-mutable lambda
-    // [=, sum] 表示除了 sum，可以修改其他外部变量
-    // std::for_each(a, a+sizeof(a)/sizeof(int), [&, sum](int x) { sum += x; product *= x; });
+    // [&, product] 表示除了 product，可以修改其他外部变量
+    auto f3 = [&, product](int x, int y) { sum = x + y; return sum; };   // OK
+    std::cout << f3(10 ,20) << std::endl;
 }
 
 int sumArray(int* a, int size) {
@@ -84,7 +90,7 @@ void test2()
 
 int main()
 {
-    //test1();
-    test2();
+    test1();
+    //test2();
     return 0;
 }
