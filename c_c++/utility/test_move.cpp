@@ -83,8 +83,18 @@ void test3() {
         v.push_back(i);
     }
     std::vector<int> v2 = std::move(v);
-    // v.size() will be 0, v2.size() will be 10
     std::cout << v.size() << "," << v2.size() << std::endl;
+
+
+    std::vector<int> v3 = v2;
+    std::vector<std::vector<int> > v4;
+    v4.push_back(std::move(v3));
+    std::cout << v3.size() << "," << v4[0].size() << std::endl;
+
+
+    std::string str1 = "zhangsan";
+    std::string str2 = std::move(str1);
+    std::cout << str1 << "\t" << str2 << std::endl;
 }
 
 int main()
