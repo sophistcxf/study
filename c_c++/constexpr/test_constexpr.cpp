@@ -15,6 +15,13 @@ public:
 
 int A::n1 = 10;
 
+
+// 强行在运行时改变n2的值
+void test3() {
+    std::cout << A::n2 << ::std::endl;
+    const int* p = &(A::n2);
+}
+
 void test1()
 {
     const int i = 10;
@@ -62,7 +69,8 @@ void test2()
 int main()
 {
     //test1();
-    std::cout << factorial(10) << std::endl;
+    //std::cout << factorial(10) << std::endl;
     //test2();
+    test3();
     return 0;
 }
