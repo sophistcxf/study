@@ -1,7 +1,9 @@
+#include <iostream>
+
 typedef long data_t;
 
-#define IDENT 1
-#define OP *
+#define IDENT 0
+#define OP +
 
 typedef struct {
     long len;
@@ -42,5 +44,16 @@ void combine4(vec_ptr v, data_t* dest) {
 }
 
 int main() {
+    vec_rec v;
+    v.len = 1024;
+    v.data = new data_t[v.len];
+    for (int i = 0; i < v.len; ++i) {
+        v.data[i] = 1;
+    }
+    data_t dest;
+    combine3(&v, &dest);
+    data_t* dest2 = &v.data[v.len-1];
+    combine3(&v, dest2);
+    std::cout << dest << "\t" << *dest2 << std::endl;
     return 0;
 }
