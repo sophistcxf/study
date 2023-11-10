@@ -3,6 +3,16 @@
                         //
 namespace spf = std::placeholders;
 
+class A {
+public:
+    virtual void foo() = 0;
+};
+
+class B : public A {
+public:
+    virtual void foo() {}
+};
+
 void test1() {
   int a(10),b(20),c(30);
 
@@ -49,6 +59,10 @@ void test2() {
     std::cout << ref_fun(10, 20) << std::endl;
 }
 
+void test3() {
+    std::reference_wrapper<int*> n((int*)nullptr);
+}
+
 int main() {
-    test2();
+    test3();
 }
