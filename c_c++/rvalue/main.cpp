@@ -75,13 +75,17 @@ void test1() {
 
 void test2() {
     int&& n = 10;   // ok, n的类型是右值引用
-    //int& n2 = 10; 错误
+    std::string&& str = std::string("hello");   // ok
+    //int& n2 = 10; //错误
+    //std::string& str3 = std::string("hello");   // error
+    const int& n3 = 10; // ok
+    const std::string& str2 = std::string("hello");     // ok
     std::cout << n << std::endl;
     n = 20;
     std::cout << n << std::endl;
     
     //int&& n2 = n;   // error, n是一个左值
-    int&& n2 = std::move(n);    // ok, 将n强转为左值
+    int&& n2 = std::move(n);    // ok, 将n强转为右值
     std::cout << n2 << std::endl;
     std::cout << &n << "," << &n2 << std::endl;
 }
@@ -93,8 +97,8 @@ void test3() {
 
 int main(int argc, char* argv[])
 {
-    test1();
-    //test2();
+    //test1();
+    test2();
     //test3();
     return 0;
 }
