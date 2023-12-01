@@ -9,23 +9,22 @@ public:
     int value = 0;
 };
 
-void test1(const Integer& i) {
-    printf("%x\n", &i);
-    std::cout << i.value << std::endl;
-}
+void test1() {
+    int n = 10;
+    int& lr = n;
+    
+    // 不能用一个左值引用向一个右值引用赋值
+    // int&& rr1 = lr;
 
-void test2(const int& i) {
-    printf("%x\n", &i);
-    std::cout << i << std::endl;
+    int&& rr = std::move(n);
+
+    int&& rr2 = 10;
+    int& lr3 = rr2;
+    lr3 = 20;
+    std::cout << lr3 << "\t" << rr2 << std::endl;
 }
 
 int main() {
-    std::cout << sizeof(Integer) << std::endl;
-    /**
-     * 10是一个rvalue，test1的参数必须是const的引用
-     */
-    test1(10);
-    test1(10);
-    test2(10);
+    test1();
     return 0;
 }
