@@ -81,6 +81,19 @@ class K : virtual public J
 {
 };
 
+void test_static_cast() {
+    A* pa = new A();
+    B* pb = static_cast<B*>(pa);
+    pb->foo();
+
+    pb = new B();
+    pa = static_cast<A*>(pb);
+    pa->foo();
+
+    B b;
+    pa = static_cast<A*>(b);
+}
+
 void test1()
 {
     A* pa = new A();
@@ -100,7 +113,7 @@ void test1()
     // p = static_cast<A*>(pc);
 
     // compile OK
-    // 这里 E 与 A 没有继承关系，但因为是多态，也可以通过编译，也可以转换
+    // 这里 E 与 A 没有继承关系，但因为是多态，也可以通过编译运行，但是p == NULL
     p = dynamic_cast<A*>(pe);
     if (p != NULL) {
         p->foo();
@@ -211,9 +224,10 @@ void test5() {
 int main()
 {
     //test1();
+    test_static_cast();
     //test2();
     //test3();
     //test4();
-    test5();
+    //test5();
     return 0;
 }
