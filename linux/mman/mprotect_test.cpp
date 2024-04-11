@@ -1,63 +1,69 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdio.h>
-#include <malloc.h>
+//#include <malloc.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/mman.h>
+#include <assert.h>
 
 #define handle_error(msg) \
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
+	do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 char *buffer;
+long buffer_beg = 0;
+long buffer_end = 0;
+int pagesize = 0;
 
-static void handler(int sig, siginfo_t *si, void *unused)
+static void handler(int sig, siginfo_t *si, void* unused)
 {
-    printf("Got SIGSEGV at address: 0x%lx\n",
-            (long) si->si_addr);
-    exit(EXIT_FAILURE);
+	assert(buffer_beg + 2*pagesize == (long)si->si_addr);
+	printf("Got SIGSEGV at address: 0x%lx\n", (long) si->si_addr);
+	exit(EXIT_FAILURE);
 }
 
-int man_example(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    char *p;
-    int pagesize;
-    struct sigaction sa;
+	pagesize = sysconf(_SC_PAGE_SIZE);
+	if (pagesize == -1)
+		handle_error("sysconf");
 
-    sa.sa_flags = SA_SIGINFO;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_sigaction = handler;
-    if (sigaction(SIGSEGV, &sa, NULL) == -1)
-        handle_error("sigaction");
+	printf("page size is %d\n", pagesize);
 
-    pagesize = sysconf(_SC_PAGE_SIZE);
-    if (pagesize == -1)
-        handle_error("sysconf");
+    int rlt = posix_memalign((void**)&buffer, 8, 4 * pagesize);
+    if (rlt != 0) {
+		handle_error("memalign");
+    }
 
-    printf("page size %d\n", pagesize);
+	if (buffer == NULL)
+		handle_error("memalign");
 
-    /* Allocate a buffer aligned on a page boundary;
-     *               initial protection is PROT_READ | PROT_WRITE */
+	buffer_beg = (long)buffer;
+	buffer_end = (long)buffer + 4*pagesize;
 
-    buffer = (char*)memalign(pagesize, 4 * pagesize);
-    if (buffer == NULL)
-        handle_error("memalign");
+	printf("Start of region:        0x%lx\n", (long) buffer);
+	printf("End of region:        0x%lx\n", (long) buffer+4*pagesize);
 
-    printf("Start of region:        0x%lx\n", (long) buffer);
+	struct sigaction sa;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_sigaction = handler;
 
-    if (mprotect(buffer + pagesize * 2, pagesize,
-                PROT_READ) == -1)
-        handle_error("mprotect");
+	if (sigaction(SIGSEGV, &sa, NULL) == -1)
+		handle_error("sigaction for SIGSEGV");
 
-    for (p = buffer ; ; )
-        *(p++) = 'a';
+    // 使用 mprotect 保护起来的页
+    // 当与权限冲突时，Linux只发送SIGSEGV消息，MAC会发送SIGBUS消息
+    if (sigaction(SIGBUS, &sa, NULL) == -1)
+        handle_error("sigaction for SIGBUS");
 
-    printf("Loop completed\n");     /* Should never happen */
-    exit(EXIT_SUCCESS);
-}
+	// 将第3页保护起来
+	if (mprotect(buffer + pagesize * 2, pagesize,
+				PROT_READ) == -1)
+		handle_error("mprotect");
 
-int main(int argc, char* argv[])
-{
-    man_example(argc, argv);
-    return 0;
+	for (char* p = buffer ; ; )
+		*(p++) = 'a';
+
+	exit(EXIT_SUCCESS);
 }
