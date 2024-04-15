@@ -28,6 +28,7 @@ int main()
 {
     std::vector<President> elections;
     std::cout << "emplace_back:\n";
+    
     elections.emplace_back("Nelson Mandela", "South Africa", 1994);
  
     std::vector<President> reElections;
