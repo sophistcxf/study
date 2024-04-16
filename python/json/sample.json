@@ -1,0 +1,10 @@
+{
+  "name": "Alice",
+  "age": 25,
+  "is_student": false,
+  "hobbies": ["reading", "cycling"],
+  "education": {
+    "highschool": "Springfield High",
+    "university": null
+  }
+}

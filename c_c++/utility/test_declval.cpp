@@ -34,6 +34,39 @@ void test1() {
     std::cout << has_less_than_operator<int>() << std::endl;
 }
 
+struct C {
+    int foo() { 
+        std::cout << "C::foo()" << std::endl;
+        return 10;
+    }
+
+    int foo2(int n) {
+        std::cout << "C::foo2()" << std::endl;
+        return 10;
+    }
+};
+
+struct D {
+    double foo() {
+        std::cout << "D::foo()" << std::endl;
+        return 10.0f;
+    }
+
+    double foo2(int n) {
+        std::cout << "D::foo2()" << std::endl;
+        return 10.0f;
+    }
+};
+
+template <typename T>
+void test2() {
+    decltype(std::declval<T>().foo()) n;
+    decltype(std::declval<T>().foo2(10)) n2;
+}
+
 int main() {
-    test1();
+    //test1();
+
+    test2<C>();
+    test2<D>();
 }
