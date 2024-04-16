@@ -1,5 +1,6 @@
 #include <any>
 #include <iostream>
+#include <vector>
  
 void test1()
 {
@@ -44,7 +45,19 @@ void test1()
     std::cout << *i << '\n';
 }
 
+void test2() {
+    std::vector<std::any> v;
+    v.push_back(1);
+    v.push_back("hello");
+    v.push_back(std::vector<int>());
+    for (auto& e : v) {
+        std::cout << e.type().name() << ",";
+    }
+    std::cout << "\n";
+}
+
 int main() {
-    test1();
+    //test1();
+    test2();
     return 0;
 }
