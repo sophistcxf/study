@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <deque>
  
 struct A
 {
@@ -31,25 +32,19 @@ int main()
 {
     std::list<A> container;
  
-    std::cout << "construct 2 times A:\n";
-    A two { "two" };
-    A three { "three" };
- 
+    // 只构造一次
     std::cout << "emplace:\n";
     container.emplace(container.end(), "one");
  
+    // 需要构造两次
     std::cout << "emplace with A&:\n";
+    A two { "two" };
     container.emplace(container.end(), two);
  
-
-    std::cout << "before move construct " << three.s << std::endl;
     std::cout << "emplace with A&&:\n";
+    A three { "three" };
+    std::cout << "before move construct " << three.s << std::endl;
     container.emplace(container.end(), std::move(three));
     // 经过移动构造之后，three的状态不再可用
     std::cout << "after move construct " << three.s << std::endl;
- 
-    std::cout << "content:\n";
-    for (const auto& obj : container)
-        std::cout << ' ' << obj.s;
-    std::cout << '\n';
 }
