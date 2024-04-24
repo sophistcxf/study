@@ -39,9 +39,9 @@ CData* Creator2(T&& t) { // 利用&&万能引用，引用折叠： T&& && -> T&&
 int main(void) {
     std::string str1 = "hello";  
     std::string str2 = " world";
-    CData* p1 = Creator(str1);         // 参数折叠为左值引用，调用CData构造函数
-    CData* p2 = Creator(str1 + str2);  // 参数折叠为右值引用，但在Creator函数中t仍为左值，调用CData构造函数！！！
-    CData* p3 = Creator2(str1 + str2); // 调用移动构造函数
+    CData* p1 = Creator(str1);         // 参数折叠为左值引用，调用CData构造函数;CData(const std::string& str)
+    CData* p2 = Creator(str1 + str2);  // 参数折叠为右值引用，但在Creator函数中t仍为左值，调用CData构造函数！！！CData(const std::string& str)
+    CData* p3 = Creator2(str1 + str2); // 调用移动构造函数;CData(std::string&& str)
 
     delete p2;
     delete p1;
