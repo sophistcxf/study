@@ -25,6 +25,11 @@ void test1() {
     }
     std::cout << 4 << std::endl;
     {
+        void* p = new A();
+        //下句编译不过，不能够传void*给shared_ptr
+        //std::shared_ptr<void> p2(*p);
+    }
+    {
         // 如果 std::static_pointer_cast 转失败了，编译期会报错
         // std::shared_ptr<A> p(new A);
         // std::shared_ptr<int> p2 = std::static_pointer_cast<int>(p);
