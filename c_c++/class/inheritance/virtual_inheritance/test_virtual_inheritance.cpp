@@ -9,7 +9,7 @@ public:
     unsigned long long l;
 };
 
-class B1 : public virtual A
+class B1 : public A 
 {
 public:
     virtual void foo() { std::cout << "I'm foo()" << std::endl; }
