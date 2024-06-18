@@ -16,6 +16,7 @@ public:
 };
 
 static A a(1);
+A a3(3);
 
 void test1()
 {

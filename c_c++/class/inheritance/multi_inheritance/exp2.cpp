@@ -56,5 +56,8 @@ int main()
     Base2* p2 = p;
     std::cout << p << "\t" << p1 << "\t" << p2 << std::endl;
     std::cout << sizeof(Base1) << "\t" << (void*)((char*)p1 + sizeof(Base1)) << std::endl;
+
+    A* pa = new Derived();
+
     return 0;
 }
