@@ -1,0 +1,2 @@
+/Users/xiangfei.cui/workspace/codes/github/study/cmake/commands/option/CMakeFiles/rebuild_cache.dir
+/Users/xiangfei.cui/workspace/codes/github/study/cmake/commands/option/CMakeFiles/edit_cache.dir

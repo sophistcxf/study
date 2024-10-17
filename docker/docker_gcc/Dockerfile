@@ -7,6 +7,7 @@ FROM ubuntu:latest
 # 更新包索引并安装 GCC
 RUN apt-get update \
   && apt-get install -y gcc \
+  && apt-get install -y vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
