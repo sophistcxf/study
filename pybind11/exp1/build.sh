@@ -1,0 +1,1 @@
+g++ -std=c++11 -O3 -Wall -shared -std=c++11 -fPIC $(python3.10 -m pybind11 --includes) exp1.cpp /usr/local/Cellar/python@3.10/3.10.14_1/Frameworks/Python.framework/Versions/3.10/lib/libpython3.10.dylib -o example$(python3.10-config --extension-suffix)
