@@ -32,7 +32,8 @@ int main()
         std::cout << product;
         std::cout << std::this_thread::get_id() << std::endl;
         mtx.unlock();
-        sync_point.arrive_and_wait();
+        // arrive，只会使计数减1，但不会停止
+        sync_point.arrive();
  
         product = "  " + name + " cleaned\n";
         mtx.lock();
