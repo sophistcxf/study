@@ -1,0 +1,11 @@
+table Item {
+  id: int;
+  name: string;
+}
+table Player {
+  id: int;
+  name: string;
+  hp: float;
+  inventory: [Item];
+}
+root_type Player;
