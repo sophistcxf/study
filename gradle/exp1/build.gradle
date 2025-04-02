@@ -1,0 +1,28 @@
+plugins {
+    id 'java'  // 必须的Java插件
+    id 'application' 
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8 // 指定源代码兼容的JDK版本
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral() // 从Maven中央仓库下载依赖
+}
+
+dependencies {
+    // 添加JUnit依赖用于测试
+    testCompile 'junit:junit:4.13.2'
+}
+
+application {
+    mainClassName = 'com.example.HelloWorld'
+}
+
+// 自定义jar包的位置，如果未指定，则jar包在build/libs/下面
+jar {
+    destinationDir = new File("$projectDir/custom_libs")
+}
