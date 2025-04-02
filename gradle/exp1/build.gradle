@@ -24,5 +24,6 @@ application {
 
 // 自定义jar包的位置，如果未指定，则jar包在build/libs/下面
 jar {
+    archivesBaseName = "hello_world"
     destinationDir = new File("$projectDir/custom_libs")
 }
