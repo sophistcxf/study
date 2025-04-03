@@ -26,4 +26,10 @@ application {
 jar {
     archivesBaseName = "hello_world"
     destinationDir = new File("$projectDir/custom_libs")
+    manifest {
+        attributes(
+            // 主类的类名
+            'Main-Class': 'com.example.HelloWorld'
+        )
+    }
 }
