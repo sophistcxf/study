@@ -1,0 +1,5 @@
+mcp>=1.9.3
+markitdown[all]
+pydantic
+fastapi
+uvicorn[standard]
