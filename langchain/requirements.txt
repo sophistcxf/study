@@ -1,0 +1,7 @@
+langchain
+langchain-deepseek
+python-dotenv
+openai
+langchain-community
+sentence-transformers
+langchain_huggingface
