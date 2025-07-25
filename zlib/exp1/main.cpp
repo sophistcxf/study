@@ -1,10 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <string>
- std::string decompressString(const std::vector<unsigned char>& compressedData, uLongf               originalSize) {
+#include <zlib.h>
+#include <vector>
+
+void createZipFile() {
+    FILE* fp = fopen("numbers.txt", "w");
+    for (int i = 0; i < 1024 * 1024; ++i) {
+        fprintf(fp, "%d\n", i);
+    }
+    fclose(fp);
+
+    system("zip -r compress.zip numbers.txt");
+}
+
+ std::string decompressString(const std::vector<unsigned char>& compressedData, uLongf originalSize) {
      std::vector<unsigned char> decompressedData(originalSize);
 
-     int rlt = uncompress(decompressedData.data(), &originalSize, compressedData.data(),             compressedData.size());
+     int rlt = uncompress(decompressedData.data(), &originalSize, compressedData.data(), compressedData.size());
      if (rlt != Z_OK) {
          std::cout << rlt << std::endl;
          throw std::runtime_error("Failed to decompress data");
@@ -14,9 +27,11 @@
  }
 
 int main() {
-    std::ifstream istrm("hello.zip", std::ios::in);
+    createZipFile();
+
+    std::ifstream istrm("compress.zip", std::ios::in);
     if (!istrm.is_open()) {
-        return;
+        return -1;
     }
     istrm.seekg(0, std::ios::end);
     std::streamsize size = istrm.tellg();
