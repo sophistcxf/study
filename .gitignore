@@ -2,3 +2,5 @@ a.out
 *xcuser*
 *idea
 .vscode
+.venv
+.ipynb_checkpoints
