@@ -2,11 +2,12 @@ import numpy as np
 import open3d as o3d
 import matplotlib.pyplot as plt
 from scipy.spatial import KDTree
+import copy
 
 def draw_registration_result(source, target, transformation=None, window_name="Registration Result"):
     """可视化配准结果"""
-    source_temp = source.clone()
-    target_temp = target.clone()
+    source_temp = copy.deepcopy(source)
+    target_temp = copy.deepcopy(target)
 
     # 为点云着色以便区分
     source_temp.paint_uniform_color([1, 0.706, 0])  # 源点云 - 橙色
@@ -52,6 +53,7 @@ def icp_point_to_point(source, target, max_iterations=50, tolerance=1e-6, distan
 
     prev_error = 0
     for i in range(max_iterations):
+        print(f"正在迭代 {i+1}/{max_iterations}")
         # 应用当前变换
         transformed_points = np.dot(
             np.hstack((source_points, np.ones((len(source_points), 1)))),
@@ -63,6 +65,7 @@ def icp_point_to_point(source, target, max_iterations=50, tolerance=1e-6, distan
 
         # 剔除距离过大的点对
         valid = distances < distance_threshold
+        print(f"有效点对数: {np.sum(valid)}/{len(source_points)}")
         if np.sum(valid) < 3:  # 至少需要3个点才能求解变换
             print("警告: 有效对应点太少")
             break
@@ -113,32 +116,43 @@ def icp_point_to_point(source, target, max_iterations=50, tolerance=1e-6, distan
         transformation = np.dot(current_transformation, transformation)
 
         # 每5次迭代可视化一次
-        if (i % 5 == 0) or (i == max_iterations - 1):
-            draw_registration_result(
-                source,
-                target,
-                transformation,
-                window_name=f"Iteration {i+1}"
-            )
+        if False:
+            if (i % 5 == 0) or (i == max_iterations - 1):
+                draw_registration_result(
+                    source,
+                    target,
+                    transformation,
+                    window_name=f"Iteration {i+1}"
+                )
 
     return transformation, history
 
 # 主程序
 if __name__ == "__main__":
     print("1. 加载点云数据...")
-    # 加载源点云和目标点云 (这里使用Open3D内置示例)
-    source = o3d.data.DemoICPPointClouds().point_clouds[0]
-    target = o3d.data.DemoICPPointClouds().point_clouds[1]
+
+    demo_icp_data = o3d.data.DemoICPPointClouds()
+    source = o3d.io.read_point_cloud(demo_icp_data.paths[0])
+    target = o3d.io.read_point_cloud(demo_icp_data.paths[1])
+
+    # 降采样
+    source = source.voxel_down_sample(voxel_size=0.05)
+    target = target.voxel_down_sample(voxel_size=0.05)
 
     print("2. 初始位置可视化...")
     draw_registration_result(source, target, np.identity(4), "Initial Position")
+
+    #transformation = np.identity(4)
+    #transformation[0, 3] = -0.5
+    #draw_registration_result(source, target, transformation, "Initial Position")
 
     print("3. 运行ICP算法...")
     transformation, history = icp_point_to_point(
         source,
         target,
-        max_iterations=30,
-        distance_threshold=0.05
+        max_iterations=100,
+        distance_threshold=0.5,
+        tolerance = 1e-8
     )
 
     print("4. 最终变换矩阵:")
