@@ -60,7 +60,7 @@ class BayesianFilter:
         # 计算观测似然 (高斯分布)
         likelihood = norm.pdf(self.state_space, observation, self.observation_std)
 
-        # 贝叶斯更新: 后验 ∝ 似然 × 先验
+        # 贝叶斯更新: 后验 ∝ 似然 × 先验，self.belief 是由 predict 获得的先验
         self.belief *= likelihood
         self.normalize_belief()
 
@@ -83,6 +83,7 @@ true_position = 50
 true_velocity = 0.5
 process_noise_std = 1.0
 measurement_noise_std = 5.0
+vel_noise_std = 0.1
 
 # 滤波器参数
 filter_transition_std = 1.2  # 滤波器对系统模型的不确定性
@@ -97,29 +98,32 @@ bf = BayesianFilter(state_space, initial_belief,
 
 # 存储结果用于可视化
 true_positions = []
+vel_measurements = []
 measurements = []
 map_estimates = []
 mean_estimates = []
 belief_history = []
 
 for step in range(num_steps):
-    # 1. 真实系统动态更新 (恒定速度模型 + 噪声)
-    true_velocity += np.random.normal(0, process_noise_std/5)
-    true_position += true_velocity + np.random.normal(0, process_noise_std)
+    # 生成位置的真值
+    true_velocity += np.random.normal(0, 0.2)
+    true_position += true_velocity;
     true_position = np.clip(true_position, state_min, state_max)
     true_positions.append(true_position)
 
-    # 2. 生成带噪声的观测
+    # 生成位置和速度的观测
     measurement = true_position + np.random.normal(0, measurement_noise_std)
     measurements.append(measurement)
+    vel_measurement = true_velocity + np.random.normal(0, vel_noise_std)
+    vel_measurements.append(vel_measurement)
 
-    # 3. 贝叶斯滤波预测步骤 (使用真实速度作为运动输入)
-    bf.predict(true_velocity)
+for step in range(num_steps):
+    vel_measurement = vel_measurements[step]
+    measurement = measurements[step]
 
-    # 4. 贝叶斯滤波更新步骤
+    bf.predict(vel_measurement)
     bf.update(measurement)
 
-    # 5. 记录结果
     map_estimates.append(bf.get_estimate())
     mean_estimates.append(bf.get_mean_estimate())
     belief_history.append(bf.belief.copy())
