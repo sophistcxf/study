@@ -76,18 +76,18 @@ class NewtonOptimizer:
         # 绘制等高线
         levels = np.logspace(-1, 3, 20)
         contour = ax.contour(X, Y, Z, levels=levels, cmap='viridis', alpha=0.6)
-        plt.colorbar(contour, ax=ax, label='函数值')
+        plt.colorbar(contour, ax=ax, label='function value')
 
         # 绘制全局最小值点
-        ax.plot(1, 1, 'r*', markersize=15, label='全局最小值')
+        ax.plot(1, 1, 'r*', markersize=15, label='global minimum')
 
         # 准备动画数据
         path = np.array(self.positions)
-        line, = ax.plot([], [], 'bo-', lw=1.5, markersize=6, label='优化路径')
+        line, = ax.plot([], [], 'bo-', lw=1.5, markersize=6, label='optimized path')
         point, = ax.plot([], [], 'ro', markersize=8)
 
         # 设置图表属性
-        ax.set_title('牛顿法优化过程')
+        ax.set_title('newton optimizer')
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.legend()
@@ -102,7 +102,7 @@ class NewtonOptimizer:
             # 更新路径
             line.set_data(path[:frame+1, 0], path[:frame+1, 1])
             # 更新当前点
-            point.set_data(path[frame, 0], path[frame, 1])
+            point.set_data([path[frame, 0]], [path[frame, 1]])
             return line, point
 
         ani = FuncAnimation(fig, update, frames=len(path),
@@ -122,10 +122,10 @@ if __name__ == "__main__":
 
     # 打印最终结果
     final_pos = optimizer.positions[-1]
-    print(f"\n优化结果: {'成功' if success else '失败'}")
-    print(f"起点: ({start_point[0]:.2f}, {start_point[1]:.2f})")
-    print(f"终点: ({final_pos[0]:.6f}, {final_pos[1]:.6f})")
-    print(f"函数值: {optimizer.func(*final_pos):.6f}")
+    print(f"\noptimized result: {'success' if success else 'failure'}")
+    print(f"start: ({start_point[0]:.2f}, {start_point[1]:.2f})")
+    print(f"end: ({final_pos[0]:.6f}, {final_pos[1]:.6f})")
+    print(f"function value: {optimizer.func(*final_pos):.6f}")
 
     # 可视化优化过程
     optimizer.visualize()
