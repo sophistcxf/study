@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单动画演示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .animation-container {
+            position: relative;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #animated-object {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff00cc, #333399);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: border-radius 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .code-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 600px) {
+            .animation-container {
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>简单JavaScript动画</h1>
+        <p class="subtitle">一个彩色弹跳方块的动画演示</p>
+        
+        <div class="animation-container">
+            <div id="animated-object">动画</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="bounce-count">0</div>
+                <div class="stat-label">弹跳次数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="color-change">0</div>
+                <div class="stat-label">颜色变化</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="speed-value">5</div>
+                <div class="stat-label">速度等级</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="start-btn">开始动画</button>
+            <button id="pause-btn">暂停动画</button>
+            <button id="speed-up">加速</button>
+            <button id="speed-down">减速</button>
+            <button id="reset-btn">重置</button>
+        </div>
+        
+        <div class="info">
+            <p>这个动画完全使用JavaScript和CSS实现。动画对象在容器内弹跳，碰到边界时会改变颜色和形状。使用按钮可以控制动画的播放。</p>
+        </div>
+        
+        <div class="code-container">
+            <pre><code>// 动画核心代码
+let positionX = 50;
+let positionY = 50;
+let speedX = 3;
+let speedY = 4;
+let animationId;
+let isPlaying = false;
+let bounceCount = 0;
+let colorChangeCount = 0;
+let speedLevel = 5;
+
+const object = document.getElementById('animated-object');
+const container = document.querySelector('.animation-container');
+const containerRect = container.getBoundingClientRect();
+const objectSize = 80;
+
+function updatePosition() {
+    // 更新位置
+    positionX += speedX;
+    positionY += speedY;
+    
+    // 边界检测
+    if (positionX <= 0 || positionX + objectSize >= containerRect.width) {
+        speedX = -speedX;
+        changeColor();
+        bounceCount++;
+        document.getElementById('bounce-count').textContent = bounceCount;
+    }
+    
+    if (positionY <= 0 || positionY + objectSize >= containerRect.height) {
+        speedY = -speedY;
+        changeShape();
+        bounceCount++;
+        document.getElementById('bounce-count').textContent = bounceCount;
+    }
+    
+    // 应用新位置
+    object.style.left = positionX + 'px';
+    object.style.top = positionY + 'px';
+    
+    // 继续动画
+    animationId = requestAnimationFrame(updatePosition);
+}
+
+function changeColor() {
+    const hue = Math.floor(Math.random() * 360);
+    object.style.background = `linear-gradient(45deg, hsl(${hue}, 100%, 60%), hsl(${(hue + 120) % 360}, 100%, 40%))`;
+    colorChangeCount++;
+    document.getElementById('color-change').textContent = colorChangeCount;
+}
+
+function changeShape() {
+    const isRound = Math.random() > 0.5;
+    object.style.borderRadius = isRound ? '50%' : '10px';
+    object.style.transform = `scale(${0.8 + Math.random() * 0.4})`;
+}
+
+function startAnimation() {
+    if (!isPlaying) {
+        isPlaying = true;
+        updatePosition();
+    }
+}
+
+function pauseAnimation() {
+    if (isPlaying) {
+        isPlaying = false;
+        cancelAnimationFrame(animationId);
+    }
+}
+
+function resetAnimation() {
+    pauseAnimation();
+    positionX = 50;
+    positionY = 50;
+    object.style.left = positionX + 'px';
+    object.style.top = positionY + 'px';
+    bounceCount = 0;
+    colorChangeCount = 0;
+    document.getElementById('bounce-count').textContent = bounceCount;
+    document.getElementById('color-change').textContent = colorChangeCount;
+    object.style.borderRadius = '50%';
+    object.style.transform = 'scale(1)';
+    object.style.background = 'linear-gradient(45deg, #ff00cc, #333399)';
+}
+
+function changeSpeed(direction) {
+    if (direction === 'up' && speedLevel < 10) {
+        speedLevel++;
+    } else if (direction === 'down' && speedLevel > 1) {
+        speedLevel--;
+    }
+    
+    const speedFactor = speedLevel / 5;
+    speedX = Math.sign(speedX) * (3 * speedFactor);
+    speedY = Math.sign(speedY) * (4 * speedFactor);
+    
+    document.getElementById('speed-value').textContent = speedLevel;
+}
+
+// 事件监听器
+document.getElementById('start-btn').addEventListener('click', startAnimation);
+document.getElementById('pause-btn').addEventListener('click', pauseAnimation);
+document.getElementById('reset-btn').addEventListener('click', resetAnimation);
+document.getElementById('speed-up').addEventListener('click', () => changeSpeed('up'));
+document.getElementById('speed-down').addEventListener('click', () => changeSpeed('down'));
+
+// 初始设置
+resetAnimation();</code></pre>
+        </div>
+    </div>
+
+    <script>
+        // 动画核心代码
+        let positionX = 50;
+        let positionY = 50;
+        let speedX = 3;
+        let speedY = 4;
+        let animationId;
+        let isPlaying = false;
+        let bounceCount = 0;
+        let colorChangeCount = 0;
+        let speedLevel = 5;
+
+        const object = document.getElementById('animated-object');
+        const container = document.querySelector('.animation-container');
+        const containerRect = container.getBoundingClientRect();
+        const objectSize = 80;
+
+        function updatePosition() {
+            // 更新位置
+            positionX += speedX;
+            positionY += speedY;
+            
+            // 边界检测
+            if (positionX <= 0 || positionX + objectSize >= containerRect.width) {
+                speedX = -speedX;
+                changeColor();
+                bounceCount++;
+                document.getElementById('bounce-count').textContent = bounceCount;
+            }
+            
+            if (positionY <= 0 || positionY + objectSize >= containerRect.height) {
+                speedY = -speedY;
+                changeShape();
+                bounceCount++;
+                document.getElementById('bounce-count').textContent = bounceCount;
+            }
+            
+            // 应用新位置
+            object.style.left = positionX + 'px';
+            object.style.top = positionY + 'px';
+            
+            // 继续动画
+            animationId = requestAnimationFrame(updatePosition);
+        }
+
+        function changeColor() {
+            const hue = Math.floor(Math.random() * 360);
+            object.style.background = `linear-gradient(45deg, hsl(${hue}, 100%, 60%), hsl(${(hue + 120) % 360}, 100%, 40%))`;
+            colorChangeCount++;
+            document.getElementById('color-change').textContent = colorChangeCount;
+        }
+
+        function changeShape() {
+            const isRound = Math.random() > 0.5;
+            object.style.borderRadius = isRound ? '50%' : '10px';
+            object.style.transform = `scale(${0.8 + Math.random() * 0.4})`;
+        }
+
+        function startAnimation() {
+            if (!isPlaying) {
+                isPlaying = true;
+                updatePosition();
+            }
+        }
+
+        function pauseAnimation() {
+            if (isPlaying) {
+                isPlaying = false;
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        function resetAnimation() {
+            pauseAnimation();
+            positionX = 50;
+            positionY = 50;
+            object.style.left = positionX + 'px';
+            object.style.top = positionY + 'px';
+            bounceCount = 0;
+            colorChangeCount = 0;
+            document.getElementById('bounce-count').textContent = bounceCount;
+            document.getElementById('color-change').textContent = colorChangeCount;
+            object.style.borderRadius = '50%';
+            object.style.transform = 'scale(1)';
+            object.style.background = 'linear-gradient(45deg, #ff00cc, #333399)';
+            speedLevel = 5;
+            document.getElementById('speed-value').textContent = speedLevel;
+            const speedFactor = speedLevel / 5;
+            speedX = 3 * speedFactor;
+            speedY = 4 * speedFactor;
+        }
+
+        function changeSpeed(direction) {
+            if (direction === 'up' && speedLevel < 10) {
+                speedLevel++;
+            } else if (direction === 'down' && speedLevel > 1) {
+                speedLevel--;
+            }
+            
+            const speedFactor = speedLevel / 5;
+            speedX = Math.sign(speedX) * (3 * speedFactor);
+            speedY = Math.sign(speedY) * (4 * speedFactor);
+            
+            document.getElementById('speed-value').textContent = speedLevel;
+        }
+
+        // 事件监听器
+        document.getElementById('start-btn').addEventListener('click', startAnimation);
+        document.getElementById('pause-btn').addEventListener('click', pauseAnimation);
+        document.getElementById('reset-btn').addEventListener('click', resetAnimation);
+        document.getElementById('speed-up').addEventListener('click', () => changeSpeed('up'));
+        document.getElementById('speed-down').addEventListener('click', () => changeSpeed('down'));
+
+        // 初始设置
+        resetAnimation();
+    </script>
+</body>
+</html>
