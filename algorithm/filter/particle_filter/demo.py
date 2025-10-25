@@ -23,7 +23,8 @@ class ParticleFilter:
         # 状态预测（恒定速度模型）
         self.particles[:, 1] += np.random.normal(0, self.process_noise, self.num_particles)  # 速度噪声
         self.particles[:, 0] += self.particles[:, 1] * dt  # 位置更新
-        self.particles[:, 0] += np.random.normal(0, self.process_noise, self.num_particles)  # 位置噪声
+        # 对系统模型，再加一个噪声
+        self.particles[:, 0] += np.random.normal(0, self.process_noise, self.num_particles)
 
     def update(self, measurement):
         '''
