@@ -7,11 +7,11 @@ using ceres::Problem;
 using ceres::Solver;
 using ceres::Solve;
 
-// 一个简单的代价函数，计算残差 r = 10 - x
+// 一个简单的代价函数，计算残差 r = x^2 - 20x + 102
 struct CostFunctor {
   template <typename T>
   bool operator()(const T* const x, T* residual) const {
-    residual[0] = T(10.0) - x[0];
+    residual[0] = pow(x[0],2) - T(20.0) * x[0] + T(102);
     return true;
   }
 };
