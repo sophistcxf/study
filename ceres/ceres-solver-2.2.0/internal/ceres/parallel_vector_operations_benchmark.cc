@@ -69,7 +69,7 @@ static void SetZero(benchmark::State& state) {
   }
   CHECK_EQ(x.squaredNorm(), 0.);
 }
-BENCHMARK(SetZero)->VECTOR_SIZES(1);
+BENCHMARK(static_cast<benchmark::internal::Function*>(SetZero))->VECTOR_SIZES(1);
 
 static void SetZeroParallel(benchmark::State& state) {
   const int kVectorSize = static_cast<int>(state.range(0));
@@ -239,7 +239,7 @@ static void Norm(benchmark::State& state) {
   }
   CHECK_GT(total, 0.);
 }
-BENCHMARK(Norm)->VECTOR_SIZES(1);
+BENCHMARK(static_cast<benchmark::internal::Function*>(Norm))->VECTOR_SIZES(1);
 
 static void NormParallel(benchmark::State& state) {
   const int kVectorSize = static_cast<int>(state.range(0));
@@ -268,7 +268,7 @@ static void Dot(benchmark::State& state) {
   }
   CHECK_NE(total, 0.);
 }
-BENCHMARK(Dot)->VECTOR_SIZES(1);
+BENCHMARK(static_cast<benchmark::internal::Function*>(Dot))->VECTOR_SIZES(1);
 
 static void DotParallel(benchmark::State& state) {
   const int kVectorSize = static_cast<int>(state.range(0));
@@ -300,7 +300,7 @@ static void Axpby(benchmark::State& state) {
   }
   CHECK_GT(z.squaredNorm(), 0.);
 }
-BENCHMARK(Axpby)->VECTOR_SIZES(1);
+BENCHMARK(static_cast<benchmark::internal::Function*>(Axpby))->VECTOR_SIZES(1);
 
 static void AxpbyParallel(benchmark::State& state) {
   const int kVectorSize = static_cast<int>(state.range(0));
