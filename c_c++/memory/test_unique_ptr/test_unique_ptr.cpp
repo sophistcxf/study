@@ -13,8 +13,14 @@ struct B {
 struct D : B
 {
     D() { std::cout << "D::D\n";  }
+    D(int age, const std::string& name) : age_(age), name_(name) {
+        std::cout << "D::D(int, string)" << std::endl;
+    }
     ~D() { std::cout << "D::~D\n";  }
     void bar() override { std::cout << "D::bar\n";  }
+private:
+    int age_ = 0;
+    std::string name_;
 };
 
 // a function consuming a unique_ptr can take it by value or by rvalue reference
@@ -30,7 +36,7 @@ int main()
 {
     std::cout << "unique ownership semantics demo\n";
     {
-        auto p = std::make_unique<D>(); // p is a unique_ptr that owns a D
+        auto p = std::make_unique<D>(10, "zhangsan"); // p is a unique_ptr that owns a D
         auto q = pass_through(std::move(p)); 
         assert(!p); // now p owns nothing and holds a null pointer
         q->bar();   // and q owns the D object
