@@ -79,14 +79,15 @@ estimates = []
 particles_history = []
 
 for step in range(num_steps):
-    # 真实状态更新（恒定速度 + 噪声）
     true_velocity += np.random.normal(0, process_noise)
     true_position += true_velocity + np.random.normal(0, process_noise)
     true_positions.append(true_position)
-
     # 生成带噪声的测量
     measurement = true_position + np.random.normal(0, measurement_noise)
     measurements.append(measurement)
+
+for step in range(num_steps):
+    measurement = measurements[step]
 
     # 粒子滤波步骤
     pf.predict()
@@ -163,4 +164,5 @@ def update(frame):
 
 # 创建动画
 ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=200, blit=True)
+ani.save('particle_filter_demo.gif', writer='pillow', fps=5)
 plt.show()
