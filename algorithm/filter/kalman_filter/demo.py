@@ -6,49 +6,52 @@ class KalmanFilter:
     def __init__(self, process_noise, measurement_noise):
         self.process_noise = process_noise
         self.measurement_noise = measurement_noise
-        
+
         # State vector: [position, velocity]
         self.state = np.zeros(2)
-        
+
         # State covariance matrix
         self.covariance = np.eye(2) * 10  # Large initial uncertainty
-        
-        # State transition matrix (constant velocity model)
+
+        # 状态转移矩阵
         self.F = np.array([[1, 1],  # position += velocity
                            [0, 1]]) # velocity remains
-        
-        # Process noise covariance
+
+        # 系统模型的协方差
         self.Q = np.eye(2) * process_noise
-        
-        # Measurement matrix (we only measure position)
+
+        # 观测矩阵
         self.H = np.array([[1, 0]])
-        
-        # Measurement noise covariance
+
+        # 观测噪声的协方差
         self.R = np.array([[measurement_noise]])
 
     def predict(self, dt=1.0):
+        '''
+        计算先验分布，(state, convariance)
+        '''
         # Update state transition matrix with dt
         self.F[0, 1] = dt
-        
+
         # Predict state
         self.state = self.F @ self.state
-        
+
         # Predict covariance
         self.covariance = self.F @ self.covariance @ self.F.T + self.Q
 
     def update(self, measurement):
         # Measurement residual
         y = measurement - self.H @ self.state
-        
+
         # Residual covariance
         S = self.H @ self.covariance @ self.H.T + self.R
-        
+
         # Kalman gain
         K = self.covariance @ self.H.T @ np.linalg.inv(S)
-        
+
         # Update state estimate
         self.state = self.state + K @ y
-        
+
         # Update covariance estimate
         self.covariance = (np.eye(2) - K @ self.H) @ self.covariance
 
