@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TCP Port Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input {
+            padding: 8px;
+            width: 100px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #output {
+            border: 1px solid #ddd;
+            padding: 10px;
+            min-height: 200px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TCP Port Monitor</h1>
+        <div class="form-group">
+            <label for="port">Port Number:</label>
+            <input type="number" id="port" min="1" max="65535" placeholder="e.g. 8080">
+            <button id="connect">Start Listening</button>
+            <button id="disconnect" disabled>Stop Listening</button>
+        </div>
+        <div>
+            <h3>Received Data:</h3>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const portInput = document.getElementById('port');
+        const connectBtn = document.getElementById('connect');
+        const disconnectBtn = document.getElementById('disconnect');
+        
+        let ws = null;
+
+        function log(message) {
+            output.textContent += `${new Date().toLocaleTimeString()}: ${message}\n`;
+            output.scrollTop = output.scrollTop + 1000;
+        }
+
+        connectBtn.addEventListener('click', () => {
+            const port = parseInt(portInput.value);
+            
+            if (isNaN(port) || port < 1 || port > 65535) {
+                log('Please enter a valid port number (1-65535)');
+                return;
+            }
+
+            ws = new WebSocket(`ws://localhost:3000?port=${port}`);
+            
+            ws.onopen = () => {
+                log('Connected to WebSocket server');
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+                portInput.disabled = true;
+            };
+            
+            ws.onmessage = (event) => {
+                log(event.data);
+            };
+            
+            ws.onerror = (error) => {
+                log(`WebSocket error: ${error.message}`);
+            };
+            
+            ws.onclose = () => {
+                log('Disconnected from WebSocket server');
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+                portInput.disabled = false;
+            };
+        });
+
+        disconnectBtn.addEventListener('click', () => {
+            if (ws) {
+                ws.close();
+            }
+        });
+    </script>
+</body>
+</html>
