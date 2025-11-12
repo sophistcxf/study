@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <list>
+#include <set>
  
 void test1()
 {
@@ -40,6 +41,20 @@ void test2() {
         std::cout << q.front() << ' ';
     }
     std::cout << '\n';
+}
+
+void test3() {
+    std::queue<int, std::list<int> > q;
+    std::queue<float, std::vector<float> > q2;
+    std::queue<double, std::deque<double> > q3;
+
+}
+
+void test_set() {
+    // 只有q的定义这一句是，是可以编译的，但是加push，就会报错set没有push_back方法
+    std::queue<int, std::set<int> > q;
+    // q.push(1);
+    // q.push(2);
 }
 
 int main() {
