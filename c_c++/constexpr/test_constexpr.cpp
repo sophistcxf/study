@@ -6,7 +6,7 @@ const int g_n2 = 0;
 class A {
 public:
     static int n1;
-    static const int n2 = 10;
+    static constexpr int n2 = 10;
 
     // n1的值无法在编译期确定，n2的值可以在编译期确定
     //char arr[n1];
@@ -14,7 +14,6 @@ public:
 };
 
 int A::n1 = 10;
-
 
 // 强行在运行时改变n2的值
 void test3() {
