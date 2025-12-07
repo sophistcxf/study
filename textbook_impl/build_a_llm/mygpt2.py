@@ -326,9 +326,8 @@ def load_weights_into_gpt(gpt : GPTModel, params):
     gpt.final_norm.shift = assign(gpt.final_norm.shift, params["b"])
 
     # out_head 和 tok_embedding 共用参数
-    #gpt.out_head.weight = assign(gpt.out_head.weight, params["wte"])
-    gpt.out_head.weight = gpt.tok_emb.weight
-
+    gpt.out_head.weight = assign(gpt.out_head.weight, params["wte"])
+    
 load_weights_into_gpt(gpt, params)
 gpt.to(device)
 
