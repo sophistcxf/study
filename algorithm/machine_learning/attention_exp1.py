@@ -58,6 +58,7 @@ class RNNAttentionQKV(nn.Module):
         attn_weights = torch.softmax(scores, dim=-1)            # (B, T, T)
 
         O = torch.bmm(attn_weights, V)                          # (B, T, H)
+        # 平均池化
         context = O.mean(dim=1)                                 # (B, H)
         out = self.fc(context)                                  # (B, 1)
         return out, attn_weights
