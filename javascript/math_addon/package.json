@@ -1,0 +1,26 @@
+{
+  "name": "math-addon",
+  "version": "1.0.0",
+  "description": "Node.js原生数学计算扩展示例",
+  "main": "index.js",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "build": "node-gyp configure build",
+    "clean": "node-gyp clean",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "native-addon",
+    "math",
+    "c++",
+    "node-api"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.5.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^10.0.0"
+  }
+}

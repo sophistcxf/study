@@ -1,0 +1,62 @@
+# Node.js相关
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编译输出目录
+build/
+*.node
+
+# 构建工具生成的文件
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+# Makefile生成的文件
+Makefile
+*.mk
+
+# gyp生成的配置文件
+*.gypi
+config.gypi
+
+# 编译器和IDE相关
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.user
+*.opensdf
+*.sdf
+ipch/
+
+# macOS相关
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows相关
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 编辑器相关
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 日志文件
+*.log
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
