@@ -46,7 +46,7 @@
 
 ## 🚀 运行示例
 
-```bash
+``bash
 # 激活虚拟环境
 source .venv/bin/activate
 
@@ -113,3 +113,75 @@ python ch11_goal_setting_and_monitoring/exp1.py
 2. 示例使用了 `deepseek-chat` 模型
 3. JSON 模板中的花括号需要使用双花括号转义
 4. 所有时间相关的字段使用字符串格式以便序列化
+
+### 示例2：代码生成智能体（exp2.py）- **书中原始示例**
+
+这是**完全基于书中第11章的原始示例**，展示了一个代码生成智能体，能够根据指定的目标和用例自动生成和优化Python代码。
+
+#### 书中的场景：
+一个自主AI智能体被设计用来生成和优化Python代码。它的核心功能是：
+1. 接收一个编程任务（use case）和一组目标（goals）
+2. 生成初始代码
+3. 评估代码是否满足所有目标
+4. 如果不满足，进行迭代优化
+5. 持续监控进度直到所有目标达成
+
+#### 书中示例1：BinaryGap问题
+``python
+use_case = "Write code to find BinaryGap of a given positive integer"
+goals = "Code simple to understand, Functionally correct, 
+         Handles comprehensive edge cases, Takes positive integer input only,
+         prints the results with few examples"
+```
+
+**运行方式：**
+```bash
+python ch11_goal_setting_and_monitoring/exp2.py example1
+```
+
+**工作流程：**
+1. **目标设定**：将代码质量要求分解为5个具体目标
+   - 代码简单易懂
+   - 功能正确
+   - 处理全面的边界情况
+   - 只接受正整数输入
+   - 打印结果并包含示例
+
+2. **代码生成**：LLM根据用例和目标生成初始代码
+
+3. **目标监控**：逐个评估代码是否满足每个目标
+   - 使用LLM进行代码审查
+   - 提供详细的反馈意见
+   - 跟踪每个目标的达成状态
+
+4. **迭代优化**：针对未达成的目标优化代码
+   - 识别需要改进的地方
+   - 生成优化后的代码
+   - 重新评估
+
+5. **终止条件**：当所有目标都达成或达到最大迭代次数时停止
+
+6. **结果展示**：
+   - 最终代码
+   - 各目标的达成情况
+   - 迭代历史记录
+   - 总体进度
+
+#### 书中示例2：文件计数问题
+``python
+use_case = "Write code to count the number of files in a directory recursively"
+goals = "Code is efficient, Handles permission errors gracefully, 
+         Returns accurate count, Includes file type filtering option, 
+         Has clear documentation"
+```
+
+**运行方式：**
+```bash
+python ch11_goal_setting_and_monitoring/exp2.py example2
+```
+
+这个示例完美展示了书中强调的核心概念：
+- **明确的目标设定**：将抽象的质量要求转化为可衡量的具体目标
+- **持续的进度监控**：实时跟踪每个目标的达成状态
+- **基于反馈的动态调整**：根据评估结果不断优化
+- **清晰的终止条件**：知道何时完成任务
