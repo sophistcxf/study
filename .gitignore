@@ -4,3 +4,4 @@ a.out
 .vscode
 .venv
 .ipynb_checkpoints
+.env
