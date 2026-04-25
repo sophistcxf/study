@@ -4,6 +4,8 @@
 
 本项目用于编写 **Agentic Design Patterns** 的示例代码，使用 LangChain 系列 package 实现各种智能体设计模式。
 
+图书的pdf文件位于当前目录：Agentic_Design_Patterns_Complete.pdf
+
 ## 技术栈
 
 - **智能体框架**: LangChain / LangChain Community / LangChain OpenAI
@@ -45,3 +47,7 @@
 # 运行第1章示例
 uv run python ch1/exp1.py
 ```
+
+## 要求
+- 示例最好使用书中的例子
+- 书中使用的是 openai api，而我使用的是 deepseek
