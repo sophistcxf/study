@@ -1,0 +1,116 @@
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background: #f5f6f8;
+  color: #333;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 14px;
+}
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.desc {
+  color: #666;
+  font-size: 13px;
+}
+
+code {
+  background: #eef1f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #f0f4ff;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+ul#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+
+ul#todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+ul#todo-list li button {
+  background: #ef4444;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.sse-log {
+  max-height: 160px;
+  overflow-y: auto;
+  background: #f0fdf4;
+}
