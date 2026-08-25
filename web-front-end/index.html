@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>前后端交互示例</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>前端 ⇄ 后端 交互示例</h1>
+  <p class="subtitle">后端：原生 Node.js (server.js) &nbsp;|&nbsp; 前端：fetch API</p>
+
+  <!-- 示例 1：GET 请求 / 响应 -->
+  <section>
+    <h2>1. GET 请求（请求/响应模式）</h2>
+    <p class="desc">点击按钮 → 浏览器发送 <code>GET /api/time</code> → 后端返回 JSON。</p>
+    <button id="btn-time">获取后端时间</button>
+    <div class="result" id="time-result">（尚未请求）</div>
+  </section>
+
+  <!-- 示例 2：JSON CRUD -->
+  <section>
+    <h2>2. POST / DELETE（JSON 增删）</h2>
+    <p class="desc">
+      新增：发送 <code>POST /api/todos</code>，请求体为 JSON；
+      删除：发送 <code>DELETE /api/todos/:id</code>。
+    </p>
+    <form id="todo-form">
+      <input id="todo-input" type="text" placeholder="输入待办事项，回车或点按钮提交" autocomplete="off" />
+      <button type="submit">添加到后端</button>
+    </form>
+    <ul id="todo-list"></ul>
+    <p class="error" id="todo-error"></p>
+  </section>
+
+  <!-- 示例 3：SSE 服务端推送 -->
+  <section>
+    <h2>3. SSE 服务端推送（Server-Sent Events）</h2>
+    <p class="desc">建立连接后，后端每 2 秒主动推送一条消息（无需前端反复请求）。</p>
+    <button id="btn-sse-start">连接推送</button>
+    <button id="btn-sse-stop" disabled>断开连接</button>
+    <div class="result sse-log" id="sse-log">（尚未连接）</div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
